@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Home
+title: ContainerLabs
 nav_order: 1
 description: " Welcome To ContainerLabs "
 permalink: /
