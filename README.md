@@ -11,6 +11,10 @@ permalink: /
 
 ![img](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/containerlabs_banner.jpg)
 
+<span class="fs-8">
+[Join Containerlabs Community](https://discord.gg/rEvr7vq){: .btn }
+</span>
+
 
 The Ultimate Workshop Track Specially Designed For You - Select Learning Paths 
 {: .label .label-blue }
