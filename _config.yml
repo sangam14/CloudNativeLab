@@ -3,4 +3,9 @@ remote_theme: pmarsceill/just-the-docs
 logo: "/img/containerlabs_logo.png"
 # Enable support for hyphenated search words:
 search_tokenizer_separator: /[\s/]+/
+# Aux links for the upper right navigation
+aux_links:
+  "Just the Docs on GitHub":
+    - "//github.com/sangam14/ContainerLabs/"
+
 
