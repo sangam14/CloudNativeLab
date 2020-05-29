@@ -5,7 +5,7 @@ logo: "/img/containerlabs_logo.png"
 search_tokenizer_separator: /[\s/]+/
 # Aux links for the upper right navigation
 aux_links:
-  "Just the Docs on GitHub":
+  "ContainerLabs on GitHub":
     - "//github.com/sangam14/ContainerLabs/"
 
 
