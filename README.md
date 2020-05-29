@@ -9,4 +9,4 @@ permalink: /
 
 # Welcome To ContainerLabs
 
-![img](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/ContainerLabs.png)
+![img](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/containerlabs_banner.jpg)
