@@ -7,7 +7,5 @@ search_tokenizer_separator: /[\s/]+/
 aux_links:
   "ContainerLabs on GitHub":
     - "//github.com/sangam14/ContainerLabs/"
-# Color scheme currently only supports "dark" or nil (default)
-color_scheme: "dark"
 
 
