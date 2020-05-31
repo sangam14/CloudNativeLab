@@ -19,7 +19,8 @@ Metaphor: In the software world, the ship is your Server.
 
 Containers have been around for a very long time ? Did You Know That 
 
-First experimentations{: .label .label-blue }
+First experimentations
+{: .label .label-blue }
 
    -  [IBM VM/370 (1972)](https://en.wikipedia.org/wiki/VM_%28operating_system%29){: .btn .btn-outline }
    -  [FreeBSD jails (1999-2000)](https://www.freebsd.org/cgi/man.cgi?query=jail&sektion=8&manpath=FreeBSD+4.0-RELEASE){: .btn .btn-outline }
@@ -28,7 +29,8 @@ First experimentations{: .label .label-blue }
    -  [Open VZ (Open Virtuzzo)(2005)](https://www.virtuozzo.com/about/open-source.html){: .btn .btn-outline }
    -  [Process Containers (2006)](https://www.kernel.org/doc/ols/2007/ols2007v2-pages-45-58.pdf){: .btn .btn-outline }
    
-Stable experimentations after CGroups and NameSapces features{: .label .label-blue }
+Stable experimentations after CGroups and NameSapces features
+{: .label .label-blue }
    
    -  [LXC (2008) - First Linux container manager](https://github.com/lxc/lxc){: .btn .btn-outline }
    -  [ Warden (2011)/ CloudFoundry ](https://github.com/cloudfoundry-attic/warden){: .btn .btn-outline }
