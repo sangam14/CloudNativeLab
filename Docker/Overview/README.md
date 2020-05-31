@@ -17,4 +17,4 @@ For Understanding Docker see the concept of operating system first :
 
 we have above 4 component that all you need to run any application .. as moving forward from physical Computaion world we have moved forward to virtualization technology, but Why ?
 
-lets take simple anology where you have one host and top of that host you can run limited application and resource and infracost is to hight to mantain bigger application and thats where we moved to virtualization world . 
+lets take simple anology where you have one host and top of that host you can run limited application and resource and infra cost is to high to mantain bigger application and thats where we moved to virtualization world . 
