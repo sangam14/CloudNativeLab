@@ -28,6 +28,13 @@ Stable experimentations after CGroups and NameSapces features
    -  [ Warden (2011)/ CloudFoundry ](https://github.com/cloudfoundry-attic/warden){: .btn .btn-outline }
    -  [ LMCTFY (2013)/ Currently Part Of Open Container Foundation](https://github.com/opencontainers/runc/tree/master/libcontainer){: .btn .btn-outline }
    - [ Docker(2013) - Currently Docker is the #1 most wanted platform ](https://www.docker.com/){: .btn .btn-outline }
+   - [The Importance of Container Security Is Revealed  2016](https://blog.aquasec.com/dirty-cow-vulnerability-impact-on-containers){: .btn .btn-outline }
+   - [Container Tools Become Mature (2017)](){: .btn .btn-outline }
+   - [Adoption of rkt and Containerd by CNCF](https://www.cncf.io/news/2017/03/30/new-stack-cncf-accepts-dockers-containerd-coreos-rkt-incubation-projects/){: .btn .btn-outline }
+   - [ Kubernetes Grows Up (2017)](https://blog.aquasec.com/dockercon-eu-2017){: .btn .btn-outline }
+   - [The Gold Standard (2018)](https://github.com/kubernetes/kubernetes){: .btn .btn-outline }
+   - [ A Shifting Landscape(2019)](https://landscape.cncf.io/){: .btn .btn-outline }
+   - [Container Predictions(2020)](https://www.devopsdigest.com/2020-devops-containers-kubernetes-predictions-2){: .btn .btn-outline }
 
 
  
