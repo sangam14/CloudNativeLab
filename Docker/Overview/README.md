@@ -3,7 +3,7 @@
 
 For Understanding Docker see the concept of operating system first :
  {: .label .label-blue }
-![img](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/four-components-of-computer-system.png)
+![img](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/four-components-of-computer-system.png) <br>
 Hardware – provides basic computing resources - CPU, memory, I/O devices
  {: .label .label-blue }
  Operating system Controls and coordinates use of hardware among various applications and users
