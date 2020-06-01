@@ -25,5 +25,7 @@ we have above 4 component that all you need to run any application .. as moving 
 lets take simple anology where you have one host and top of that host you can run limited application and resource and infra cost is to high to mantain bigger application and thats where we moved to virtualization world . 
 
 
-# Three Kinds of Server Virtualization
+# Understanding Virtualization
+
+Virtualization is technology that lets you create useful IT services using resources that are traditionally bound to hardware. It allows you to use a physical machine’s full capacity by distributing its capabilities among many users or environments.
 
