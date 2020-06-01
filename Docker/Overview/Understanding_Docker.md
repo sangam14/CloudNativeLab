@@ -29,4 +29,4 @@ lets take simple anology where you have one host and top of that host you can ru
 ![img](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/Virtualization.png)
 
 Virtualization is technology that lets you create useful IT services using resources that are traditionally bound to hardware. It allows you to use a physical machine’s full capacity by distributing its capabilities among many users or environments.
-
+![img](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/virtualization%20vs%20containerlization.png)
