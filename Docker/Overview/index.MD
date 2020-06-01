@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Docker Fundamentak 
+title: Docker Fundamental 
 nav_order: 4
 has_children: true
-permalink: /Docker/Overview/
+permalink: /Docker/
 ---
 
 # Table Of Content 
