@@ -30,7 +30,7 @@ lets take simple anology where you have one host and top of that host you can ru
 
 Virtualization is technology that lets you create useful IT services using resources that are traditionally bound to hardware. It allows you to use a physical machine’s full capacity by distributing its capabilities among many users or environments.
 ![img](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/virtualizationvscontainerlization.png)
-VMs, however, can take up a lot of system resources. Each VM runs not just a full copy of an operating system, but a virtual copy of all the hardware that the operating system needs to run. This quickly adds up to a lot of RAM and CPU cycles. That’s still economical compared to running separate actual computers, but for some applications it can be overkill, which led to the development of containers.
+VMs, however, can take up a lot of system resources. Each VM runs not just a full copy of an operating system, but a virtual copy of all the hardware that the operating system needs to run. This quickly adds up to a lot of RAM and CPU cycles. That’s still economical compared to running separate actual computers, but for some applications it can be overkill, which led to the development of containers. check series [ Birth of Containerlization] for more details 
 # What’s the Diff: VMs vs Containers
 
 | Virtual Machine       | Containers       | 
@@ -42,4 +42,6 @@ VMs, however, can take up a lot of system resources. Each VM runs not just a ful
 | Startup time in minutes | Startup time in milliseconds |
 | Allocates required memory | Requires less memory space |
 | Fully isolated and hence more secure | Process-level isolation, possibly less secure |
+
+
 
