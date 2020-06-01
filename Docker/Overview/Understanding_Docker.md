@@ -45,6 +45,7 @@ VMs, however, can take up a lot of system resources. Each VM runs not just a ful
 
 # Why We Are Moving From Monolithic To Microservices   
 ![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/monolith.png)
+This kind of application is not responsible for a single task, but they need several tasks to complete a particular responsibility. In monolithic applications, all the services are bundled into one package and run as one process. The user interface, data access layer, and data store layers are tightly coupled in monolithic applications. Usually, large teams work with monolithic applications, and they are not suitable for container-based deployments.
 
 
 
