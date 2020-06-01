@@ -47,5 +47,19 @@ VMs, however, can take up a lot of system resources. Each VM runs not just a ful
 ![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/monolith.png)
 This kind of application is not responsible for a single task, but they need several tasks to complete a particular responsibility. In monolithic applications, all the services are bundled into one package and run as one process. The user interface, data access layer, and data store layers are tightly coupled in monolithic applications. Usually, large teams work with monolithic applications, and they are not suitable for container-based deployments.
 
+|  Pros:       | Cons      | 
+|:-------------|:------------------|
+| Monolithic applications are very simple to develop because of all the tools and IDEs support to that kind of application by default. |Very difficult to understand and create the patches for monolithic applications.|
+|Very easy to deploy because all components are packed into one bundle.| Adapting to new technology is very challengeable.|
+|Easy to scale the whole application|Very difficult to maintain CI/CD pipeline|
+| |Maintainability is very high and braking of one code line will stop the whole process| 
+| |Take a long time to startup because all the components need to get started | 
+| |One component failure will cause the whole system to fail | 
+
+
+
+
+
+
 
 
