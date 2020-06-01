@@ -44,6 +44,7 @@ VMs, however, can take up a lot of system resources. Each VM runs not just a ful
 | Fully isolated and hence more secure | Process-level isolation, possibly less secure |
 
 # Why We Are Moving From Monolithic To Microservices   
+![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/monolith.png)
 
 
 
