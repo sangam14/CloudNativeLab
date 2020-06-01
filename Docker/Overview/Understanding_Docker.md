@@ -30,3 +30,15 @@ lets take simple anology where you have one host and top of that host you can ru
 
 Virtualization is technology that lets you create useful IT services using resources that are traditionally bound to hardware. It allows you to use a physical machine’s full capacity by distributing its capabilities among many users or environments.
 ![img](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/virtualizationvscontainerlization.png)
+# What’s the Diff: VMs vs Containers
+
+| Virtual Machine       | Containers       | 
+|:-------------|:------------------|
+| Heavyweight  |   Lightweight     | 
+| Limited performance |   Native performance | 
+| Each VM runs in its own OS   |   All containers share the host OS  | 
+| Hardware-level virtualization   | OS virtualization |
+| Startup time in minutes | Startup time in milliseconds |
+| Allocates required memory | Requires less memory space |
+| Fully isolated and hence more secure | Process-level isolation, possibly less secure |
+
