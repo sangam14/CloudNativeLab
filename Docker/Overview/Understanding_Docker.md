@@ -111,6 +111,14 @@ The component on the host that does the work of building and running containers 
 # Docker Client / Docker Daemon / images / Container 
 ![img](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/Docker_Daemon.png)
 
+- Images might sound like guest operating systems for virtual machines, but they are much more lightweight and much more efficient. They rely on the shared Linux kernel of the host, so they only add the binaries and other resources needed by the application, and they don’t go through a virtualization layer for execution.
+
+- Images are actually composed of layers of images that are cached on the host and shared across containers, and they leverage the copy-on-write union file system for storage efficiency and performance (because the image doesn’t need to be copied for each new container, and unlike a guest OS, the image doesn’t need to boot since the shared kernel is already running).
+
+- You manage images and containers by communicating with the Docker Daemon from a client via the Docker REST API. For interactive sessions, the Docker command line interface (CLI) provides a convenient wrapper for the API. By default, the daemon can only accept local connections over a Unix domain socket.
+
+- For a computer to be a Docker host, it needs to be running Linux. If the computer (such as your laptop) happens to be running another operating system (like OS X and Windows), then it will be necessary to use a virtual machine that runs Linux.
+
 
 
 
