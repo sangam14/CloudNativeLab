@@ -104,6 +104,7 @@ In this way, Uber benefited by shifting its architecture from monolithic to micr
 # Docker Architecture
 
 ![img](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/DockerAchitecture.png)
+![img](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/Docker_Daemon.png)
 
 
 
