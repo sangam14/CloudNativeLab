@@ -55,6 +55,9 @@ This kind of application is not responsible for a single task, but they need sev
 | |Maintainability is very high and braking of one code line will stop the whole process| 
 | |Take a long time to startup because all the components need to get started | 
 | |One component failure will cause the whole system to fail | 
+<br>
+
+![img](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/microservice.png)
 
 
 
