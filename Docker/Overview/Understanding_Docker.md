@@ -57,7 +57,28 @@ This kind of application is not responsible for a single task, but they need sev
 | |One component failure will cause the whole system to fail | 
 <br>
 
+# Problem Statement 
+
+While Uber started expanding worldwide this kind of framework introduced various challenges. The following are some of the prominent challenges
+
+- All the features had to be re-built, deployed and tested again and again to update a single feature.
+- Fixing bugs became extremely difficult in a single repository as developers had to change the code again and again.
+- Scaling the features simultaneously with the introduction of new features worldwide was quite tough to be handled together.
+
+# Solution
+
+- To avoid such problems Uber decided to change its architecture and follow the other hyper-growth companies like Amazon, Netflix, Twitter and many others. Thus, Uber decided to break its monolithic architecture into multiple codebases to form a microservice architecture.
+Refer to the diagram below to look at Uber microservice architecture
+
 ![img](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/microservice.png)
+The major change that we observe here is the introduction of API Gateway through which all the drivers and passengers are connected. From the API Gateway, all the internal points are connected such as passenger management, driver management, trip management and others.
+   -  The units are individual separate deployable units performing separate functionalities.
+       -  For Example: If you want to change anything in the billing microservices, then you just have to deploy only billing microservices and don’t have to deploy the others.
+   -  All the features were now scaled individually i.e. The interdependency between each and every feature was removed.
+      - For Example, we all know that the number of people searching for cabs is more comparatively more than the people actually booking a cab and making payments. This gets us an inference that the number of processes working on the passenger management microservice is more than the number of processes working on payments.
+
+In this way, Uber benefited by shifting its architecture from monolithic to microservices.
+
 
 
 
