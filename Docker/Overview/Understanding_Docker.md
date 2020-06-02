@@ -104,6 +104,11 @@ In this way, Uber benefited by shifting its architecture from monolithic to micr
 # Docker Architecture
 
 ![img](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/DockerAchitecture.png)
+Docker Host:- A Docker host is a physical computer system or virtual machine running Linux. This can be your laptop, server or virtual machine in your data center, or computing resource provided by a cloud provider.
+
+The component on the host that does the work of building and running containers is the Docker Daemon. The daemon starts each container using a template for the container’s specific runtime environment called an image, which is retrieved from an image repository, like the public repositories hosted at Docker Hub. (You can search for image repositories using the official Docker registry.)
+
+# Docker Client / Docker Daemon / images / Container 
 ![img](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/Docker_Daemon.png)
 
 
