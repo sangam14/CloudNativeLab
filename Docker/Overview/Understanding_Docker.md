@@ -57,6 +57,19 @@ This kind of application is not responsible for a single task, but they need sev
 | |One component failure will cause the whole system to fail | 
 <br>
 
+# Key Concepts of Microservice Architecture
+
+Before you start building your own applications using microservices, you need to be clear about the scope and functionalities of your application.
+
+Following are some guidelines to be followed while discussing microservices.
+
+   -  As a developer, when you decide to build an application separate the domains and be clear with the functionalities.
+   -  Each microservice you design shall concentrate only on one service of the application.
+   -  Ensure that you have designed the application in such a way that each service is individually deployable.
+   -  Make sure that the communication between microservices is done via a stateless server.
+   -  Each service can be furthered refactored into smaller services, having their own microservices.
+
+
 # Problem Statement 
 
 While Uber started expanding worldwide this kind of framework introduced various challenges. The following are some of the prominent challenges
