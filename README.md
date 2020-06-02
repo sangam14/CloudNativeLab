@@ -6,7 +6,7 @@ description: " Welcome To ContainerLabs "
 permalink: /
 ---
 
-[Join Containerlabs Community](https://discord.gg/rEvr7vq){: .btn .btn-green .mr-4 }
+[Join Containerlabs Community](https://discord.gg/rEvr7vq){: .btn .btn-green .mr-4 }[![visits](https://github-visit-counter.herokuapp.com/{sangam14}/{ContainerLabs}/visits.svg)](#)
 
 ![img](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/containerlabs_banner.jpg)
 
