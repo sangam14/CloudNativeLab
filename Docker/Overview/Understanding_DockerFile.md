@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Installing Docker 
+title: Understanding DockerFile
 parent: Docker Fundamental
 nav_order: 3
 ---
