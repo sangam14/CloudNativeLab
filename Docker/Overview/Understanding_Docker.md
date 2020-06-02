@@ -103,7 +103,7 @@ Containers
 
 # Docker Architecture
 
-
+![img](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/Docker-Achitecture.png)
 
 
 
