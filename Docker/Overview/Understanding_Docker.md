@@ -93,7 +93,16 @@ The major change that we observe here is the introduction of API Gateway through
 In this way, Uber benefited by shifting its architecture from monolithic to microservices.
 
 
-# Docker Architecture Deep Drive 
+# Containers are just another option
+Virtual Machines
+- Each virtual machine (VM) includes the app, the necessary binaries and libraries and an entire guest operating system 
+Containers
+- Containers include the app & all of its dependencies, but share the kernel with other containers.
+- Run as an isolated process in userspaceon the hostOS
+- Not tied to any specific infrastructure – containers run on any computer, infrastructure and cloud.
+
+# Docker Architecture
+
 
 
 
