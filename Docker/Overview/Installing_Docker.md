@@ -8,10 +8,143 @@ nav_order: 2
 # Installing Docker 
 
 # Step 1 : Installing docker on Linux 
+   - For Debian :
+1. Install the packages necessary to add a new repository over HTTPS:
+   ```
+   sudo apt update
+   sudo apt install apt-transport-https ca-certificates curl software-properties-common gnupg2
+   ```
+2. Import the repository’s GPG key using the following curl command:  
+   ```
+   curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
 
+   ```
+On success, the command will return OK.
 
+3. Add the stable Docker APT repository to your system’s software repository list:
+```
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
+```
+`$(lsb_release -cs)` will return the name of the Debian distribution. In this case, that is buster.
+4. Update the apt package list and install the latest version of Docker CE (Community Edition):
+```
+$ sudo apt update
+$ sudo apt install docker-ce
+```
+5. Once the installation is completed the Docker service will start automatically. To verify it type in:
+```
+$ sudo systemctl status docker
 
+```
+output 
 
+```
+   ● docker.service - Docker Application Container Engine
+   Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)
+   Active: active (running) 
+    Docs: https://docs.docker.com
+```
+6. At the time of writing, the latest stable version of Docker is 19.03.1:
+```
+$ docker -v
+
+```
+output
+```
+Docker version 19.03.1, build 74b1e89
+```
+# Executing the Docker Command Without Sudo
+
+By default, only root and user with sudo privileges can execute Docker commands.
+
+If you want to execute Docker commands without prepending sudo you’ll need to add your user to the docker group which is created during the installation of the Docker CE package. To do that, type in:
+```
+sudo usermod -aG docker $USER
+```
+$USER is an environment variable that holds your username.
+Log out and log back in so that the group membership is refreshed.
+
+Once done to verify that you can run docker commands without sudo type in:
+```
+docker container run hello-world
+```
+output:
+```
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+0e03bdcc26d7: Pull complete 
+Digest: sha256:d58e752213a51785838f9eed2b7a498ffa1cb3aa7f946dda11af39286c3db9a9
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+```
+# For Ubuntu : Install Docker From a standard Ubuntu Repository  
+1. Use the apt command to install the docker.io package:
+```
+sudo apt install docker.io
+```
+2. Start docker and enable it to start after the system reboot: 
+```
+sudo systemctl enable --now docker
+
+```
+3. Optionally give any user administrative privileges to docker: 
+```
+sudo usermod -aG docker SOMEUSERNAME
+```
+You will need to log out and log in to apply the changes. 
+4. Check docker version: 
+```
+docker --version
+```
+5. Run docker test using the hello-world container: 
+```
+$ docker run hello-world
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+https://docs.docker.com/get-started/
+
+```
+  
+  
+   
 
 # Lightweight Linux for Docker
 
