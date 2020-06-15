@@ -166,23 +166,29 @@ https://docs.docker.com/get-started/
 
 ```
 # For RHEL 8 / CentOS 8 
-The latest release of the RHEL 8 / CentOS 8. Red Hat has built its own tools, buildah and podman, which aim to be compatible with existing docker images and work without relying on a daemon, allowing the creation of containers as normal users, without the need of special permissions (with some limitations: e.g. at the moment of writing, it's still not possible to map host ports to the container without privileges).
 
-Some specific tools, however, are still missing: an equivalent of docker-compose, for example does not exists yet. In this tutorial we will see how to install and run the original Docker CE on Rhel8 by using the official Docker repository for CentOS7.
+- The latest release of the RHEL 8 / CentOS 8. Red Hat has built its own tools, buildah and podman, which aim to be compatible with existing docker images and work without relying on a daemon, allowing the creation of containers as normal users, without the need of special permissions (with some limitations: e.g. at the moment of writing, it's still not possible to map host ports to the container without privileges).
+
+- Some specific tools, however, are still missing: an equivalent of docker-compose, for example does not exists yet. In this tutorial we will see how to install and run the original Docker CE on Rhel8 by using the official Docker repository for CentOS7.
 
 1.  Adding the external repository
 - Since Docker is not available on RHEL 8 / CentOS 8, we need to add an external repository to obtain the software. In this case we will use the official Docker CE CentOS repository: this is, at the moment of writing, the only way to install Docker CE on RHEL 8 / CentOS 8.
 
 - The `dnf config-manager` utility let us, among the other things, easily enable or disable a repository in our distribution. By default, only the `appstream `and `baseos` repositories are enabled on Rhel8; we need to add and enable also the `docker-ce `repo. All we need to do to accomplish this task, is to run the following command:
+
 ```
 $ sudo dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+
 ```
+
 2. We can verify that the repository has been enabled, by looking at the output of the following command:
+
 ```
 $ sudo dnf repolist -v
 
 ```
 The command above will return detailed information about all the enabled repositories. This is what you should see at this point:
+
 ```
 Repo-id      : docker-ce-stable
 Repo-name    : Docker CE Stable - x86_64
@@ -215,9 +221,11 @@ Repo-expire  : 86,400 second(s) (last: Mon 18 Feb 2019 10:23:56 AM CET)
 Repo-filename: /etc/yum.repos.d/redhat.repo
 Total packages: 6,310
 ```
+
 # Installing docker-ce
 
 The `docker-ce-stable` repository is now enabled on our system. The repository contains several versions of the docker-ce package, to display all of them, we can run:
+
 ```
 $ dnf list docker-ce --showduplicates | sort -r
 docker-ce.x86_64            3:19.03.2-3.el7                     docker-ce-stable
@@ -259,12 +267,14 @@ docker-ce.x86_64            17.03.0.ce-1.el7.centos             docker-ce-stable
   - Install the latest available containerd.io rpm manually;
 
 # Install a specific version of docker-ce
-``
+
+```
 $ sudo dnf install docker-ce-3:18.09.1-3.el7
-``
+```
 - Force the installation of docker-ce with the --nobest option:
 
     - Normally, when installing a package, the best available candidate is selected from a repository. In this case, for example, the installation of the latest version of `docker-ce `is attempted (and fails). By using the `--nobest` option, we can change this behavior so that the first version of `docker-ce` with satisfiable dependencies is selected as "fallback", in this case `3:18.09.1-3.el7`
+    
 ```
 $ sudo dnf install --nobest docker-ce
 Dependencies resolved.
@@ -304,14 +314,18 @@ Skip      1 Package
 Total download size: 85 M
 Installed size: 351 M
 Is this ok [y/N]: 
+
 ```
 # Install the latest available containerd.io package manually
 
 if we stricly need to install the latest version of docker-ce, we can install the required version of containerd.io manually, by running:
+
 ```
 $ sudo dnf install https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm
 ```
+
 After the package is installed, we can simply install the latest docker-ce:
+
 ```
 $ sudo dnf install docker-ce
 Dependencies resolved.
@@ -334,6 +348,7 @@ Installed size: 275 M
 Is this ok [y/N]:
 
 ```
+
 This option is less convenient since the containerd.io package is not installed as a dependency of docker-ce, therefore it will not be removed automatically when the latter is uninstalled from the system.
 
 Whatever method we use to install docker-ce, as said before, in order to make DNS resolution work inside Docker containers, we must disable firewalld (a system reboot may be also needed):
@@ -342,32 +357,44 @@ Whatever method we use to install docker-ce, as said before, in order to make DN
 $ sudo systemctl disable firewalld
 
 ```
+
 # Start and enable the docker daemon
+
 Once docker-ce is installed, we must start and enable the docker daemon, so that it will be also launched automatically at boot. The command we need to run is the following:
+
 ```
 $ sudo systemctl enable --now docker
 
 ```
+
 At this point, we can confirm that the daemon is active by running:
+
 ```
 $ systemctl is-active docker
 active
 
 ```
+
 Similarly, we can check that it is enabled at boot, by running:
+
 ```
 $ systemctl is-enabled docker
 enabled
 ```
+
 # Global installation - Docker Compose
+
 The way we should install docker-compose varies depending on whether we want to install it globally or just for a single user. At the moment of writing, the only way to install it globally is to download the binary from the github page of the project:
+
 ```
 $ curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o docker-compose
 ```
 Once the binary is downloaded, we move it into /usr/local/bin and we make it executable:
+
 ```
 $ sudo mv docker-compose /usr/local/bin && sudo chmod +x /usr/local/bin/docker-compose
 ```
+
 The `/usr/local` hierarchy is not chosen randomly. This directory structure is made to be used for files installed by the local administrator manually (for software compiled from source, for example), in order to ensure separation from the software installed with the system package manager.
 
 Although it's possible for a normal user to run docker-related commands if he is part of the docker group (the group is automatically created when we install docker-ce), by default they must be executed with root privileges for security reasons. When we need to do the latter, since the `/usr/local/bin` directory is not in the root user's PATH, we either need to call the binary specifying its location or add `/usr/local/bin` to the PATH itself. The first option is the one which I recommend in this case.
@@ -375,10 +402,12 @@ Although it's possible for a normal user to run docker-related commands if he is
 # Per-user installation
 
 If our user is part of the docker group, and thus it is allowed to run docker commands, and since docker-compose is available as a python package, we can also install it using pip, the python package manager. First, make sure pip itself is installed:
+
 ```
 $ sudo dnf install python3-pip
 ```
 To obtain docker-compose we run:
+
 ```
 $ pip3.6 install docker-compose --user
 ```
@@ -387,6 +416,7 @@ Please notice that even if would be possible to run pip as root to install a pac
 # Testing docker
 
 We installed docker and docker-compose, now to check that everything works as expected, we can try to build an image and run a container: in this case we will use the official httpd one. All we have to do is to launch the following command:
+
 ```
 sudo docker run --rm --name=linuxconfig-test -p 80:80 http
 ``` 
@@ -423,8 +453,6 @@ Here’s a look at the lightweight, Linux-based operating systems that have spru
 
 
 If you’ve ever tried to install Docker for Windows, you’ve probably came to realize that the installer won’t run on Windows 10 Home. Only Windows Pro, Enterprise or Education support Docker. Upgrading your Windows license is pricey, and also pointless, since you can still run Linux Containers on Windows without relying on Hyper-V technology, a requirement for Docker for Windows.
-
-
 
 
 ### Setting up your computer
