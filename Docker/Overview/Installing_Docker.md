@@ -9,6 +9,7 @@ nav_order: 2
 
 # Step 1 : Installing docker on Linux 
 - For Debian :
+{: .label .label-yellow }
 
 1. Install the packages necessary to add a new repository over HTTPS:
    
@@ -112,7 +113,8 @@ For more examples and ideas, visit:
  
 ```
 
-# For Ubuntu : Install Docker From a standard Ubuntu Repository  
+# For Ubuntu : Install Docker From a standard Ubuntu Repository
+{: .label .label-yellow }
 1. Use the apt command to install the docker.io package:
 
 ```
@@ -166,7 +168,7 @@ https://docs.docker.com/get-started/
 
 ```
 # For RHEL 8 / CentOS 8 
-
+{: .label .label-yellow }
 - The latest release of the RHEL 8 / CentOS 8. Red Hat has built its own tools, buildah and podman, which aim to be compatible with existing docker images and work without relying on a daemon, allowing the creation of containers as normal users, without the need of special permissions (with some limitations: e.g. at the moment of writing, it's still not possible to map host ports to the container without privileges).
 
 - Some specific tools, however, are still missing: an equivalent of docker-compose, for example does not exists yet. In this tutorial we will see how to install and run the original Docker CE on Rhel8 by using the official Docker repository for CentOS7.
@@ -423,13 +425,13 @@ sudo docker run --rm --name=linuxconfig-test -p 80:80 http
 Since the httpd image does not exists locally it will be automatically fetched and built. Finally, a container based on it will be launched in the foreground (it will be automatically removed when stopped). We should be able to see the It works! message when we reach our machine ip via browser.
 
 # Conclusions
-
+{: .label .label-yellow }
 Red Hat Enterprise Linux 8 does not support Docker: on this distribution it has been replaced by Red Hat own tools like buildah and podman, which are compatible with Docker but don't need a server/client architecture to run. Using native tools, where possible, is always the recommended way to go, but for a reason or another you may still want to install the original Docker. In this tutorial, we saw how it is possible to install Docker CE on Rhel8, by using the official Docker repository for CentOS7, which is a 100% compatible clone.
 
 This is not an ideal solution, and as we saw, at the moment, some workarounds are needed to make Docker work on RHEL8. If some new issues arises, or better solutions to the problems mentioned above are found, this article will be updated accordingly. Stay tuned.
 
 # Lightweight Linux for Docker
-
+{: .label .label-yellow }
 Here’s a look at the lightweight, Linux-based operating systems that have sprung up recently to cater to Docker:
 
   - Atomic Host:- Built using components from the Red Hat side of the Linux universe, this operating system was one of the earlier lightweight GNU/Linux distributions to appear with a focus on containers. Because it’s tied to Red Hat, it supports Red Hat-friendly container components of the container stack, such as Kubernetes.
@@ -439,7 +441,7 @@ Here’s a look at the lightweight, Linux-based operating systems that have spru
 
 
 # Docker’s Killing the Linux Distribution
-
+{: .label .label-yellow }
 - With Docker, however, these considerations are much less important. When you run an application inside a container, the application always will run in the same basic way, no matter which flavor of Linux is hosting it.
 
 - You also can run any container image on any type of Linux, and deploy it by following the same steps. That makes package managers and the size of package repositories unimportant.
