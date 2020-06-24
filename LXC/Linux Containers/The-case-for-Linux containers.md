@@ -29,3 +29,5 @@
     -  Start times in the millisecond range
 
    - Native kernel support
+   
+- It is worth mentioning that containers are not inherently as secure as having a hypervisor between the virtual machine and the host OS. However, in recent years, great progress has been made to narrow that gap using Mandatory Access Control (MAC) technologies such as SELinux and AppArmor, kernel capabilities, and cgroups, as demonstrated in later 
