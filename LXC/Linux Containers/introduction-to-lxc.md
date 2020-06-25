@@ -1,3 +1,10 @@
+---
+layout: default
+title: Introduction to Linux Containers
+parent: LXC - Linux Container
+nav_order: 1
+---
+
 # Introduction to Linux Containers
 
 Nowadays, deploying applications inside some sort of a Linux container is a widely adopted practice, primarily due to the evolution of the tooling and the 
