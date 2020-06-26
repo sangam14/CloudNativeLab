@@ -1,3 +1,11 @@
+---
+layout: default
+title: Mount namespaces
+parent: LXC Hands-On Workshop
+nav_order: 5
+---
+
+
 # Mount namespaces
 
 Mount namespaces first appeared in kernel 2.4.19 in 2002 and provided a separate view of the filesystem mount points for the process and its children. 
