@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Introduction to Linux Containers
-parent: LXC - Linux Container
+parent: LXC Hands-On Workshop
 nav_order: 1
 ---
 
