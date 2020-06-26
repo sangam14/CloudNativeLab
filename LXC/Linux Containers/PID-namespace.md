@@ -1,3 +1,11 @@
+---
+layout: default
+title: PID namespaces
+parent: LXC Hands-On Workshop
+nav_order: 7
+---
+
+
 # PID namespaces
 
 - The Process ID (PID) namespaces provide the ability for a process to have an ID that already exists in the default namespace, 
