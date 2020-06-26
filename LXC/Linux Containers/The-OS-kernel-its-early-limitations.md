@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Introduction to Linux Containers
+title: The OS kernel and its early limitations
 parent: LXC Hands-On Workshop
 nav_order: 2
 ---
