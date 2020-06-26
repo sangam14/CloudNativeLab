@@ -1,3 +1,11 @@
+---
+layout: default
+title: UTS namespaces
+parent: LXC Hands-On Workshop
+nav_order: 6
+---
+
+
 # UTS namespaces
 
 - Unix Timesharing (UTS) namespaces provide isolation for the hostname and domain name, so that each LXC container can maintain its own identifier as returned by the hostname `-f` command.
