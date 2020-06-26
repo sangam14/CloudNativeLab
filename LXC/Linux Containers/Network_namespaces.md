@@ -282,3 +282,82 @@ root@server:~#
 
 
 ```
+![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/ovs1bridge.jpg)
+
+
+With this, we established a connection between both ns1 and ns2 network namespaces through the Open vSwitch bridge. To confirm, let's use ping:
+
+```
+root@server:~# ip netns exec ns1 ping -c 3 192.168.0.2
+PING 192.168.0.2 (192.168.0.2) 56(84) bytes of data.
+64 bytes from 192.168.0.2: icmp_seq=1 ttl=64 time=0.414 ms
+64 bytes from 192.168.0.2: icmp_seq=2 ttl=64 time=0.027 ms
+64 bytes from 192.168.0.2: icmp_seq=3 ttl=64 time=0.030 ms
+--- 192.168.0.2 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 1998ms
+rtt min/avg/max/mdev = 0.027/0.157/0.414/0.181 ms
+root@server:~#
+root@server:~# ip netns exec ns2 ping -c 3 192.168.0.1
+PING 192.168.0.1 (192.168.0.1) 56(84) bytes of data.
+64 bytes from 192.168.0.1: icmp_seq=1 ttl=64 time=0.150 ms
+64 bytes from 192.168.0.1: icmp_seq=2 ttl=64 time=0.025 ms
+64 bytes from 192.168.0.1: icmp_seq=3 ttl=64 time=0.027 ms
+--- 192.168.0.1 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 1999ms
+rtt min/avg/max/mdev = 0.025/0.067/0.150/0.058 ms
+root@server:~#
+
+```
+
+- Open vSwitch allows for assigning VLAN tags to network interfaces, resulting in traffic isolation between namespaces. This can be helpful in a scenario where you have multiple namespaces and you want to have connectivity between some of them.
+
+- The following example demonstrates how to tag the virtual interfaces on the ns1 and ns2 namespaces, so that the traffic will not be visible from each of the two network namespaces:
+
+```
+root@server:~# ovs-vsctl set port veth-ns1 tag=100
+root@server:~# ovs-vsctl set port veth-ns2 tag=200
+root@server:~# ovs-vsctl show
+0ea38b4f-8943-4d5b-8d80-62ccb73ec9ec
+Bridge "OVS-1"
+    Port "OVS-1"
+        Interface "OVS-1"
+            type: internal
+    Port "veth-ns1"
+        tag: 100
+        Interface "veth-ns1"
+    Port "veth-ns2"
+        tag: 200
+        Interface "veth-ns2"
+ovs_version: "2.0.2"
+root@server:~#
+
+
+
+```
+Both the namespaces should now be isolated in their own VLANs and ping should fail:
+
+```
+root@server:~# ip netns exec ns1 ping -c 3 192.168.0.2
+PING 192.168.0.2 (192.168.0.2) 56(84) bytes of data.
+--- 192.168.0.2 ping statistics ---
+3 packets transmitted, 0 received, 100% packet loss, time 1999ms
+root@server:~# ip netns exec ns2 ping -c 3 192.168.0.1
+PING 192.168.0.1 (192.168.0.1) 56(84) bytes of data.
+--- 192.168.0.1 ping statistics ---
+3 packets transmitted, 0 received, 100% packet loss, time 1999ms
+root@server:~#
+
+```
+We can also use the unshare utility that we saw in the mount and UTC namespaces examples to create a new network namespace:
+
+```
+root@server:~# unshare --net /bin/bash
+root@server:~# ip a s
+1: lo: <LOOPBACK> mtu 65536 qdisc noop state DOWN group default
+link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+root@server:~# exit
+root@server
+
+```
+
+
