@@ -1,3 +1,10 @@
+---
+layout: default
+title: The case for Linux containers
+parent: LXC Hands-On Workshop
+nav_order: 3
+---
+
 # The case for Linux containers
 
 - The hypervisor as part of the operating system is responsible for managing the life cycle of virtual machines, and has been around since the early days of mainframe machines in the late 1960s. Most modern virtualization implementations, such as Xen and KVM, can trace their origins back to that era. The main reason for the wide adoption of these virtualization technologies around 2005 was the need to better control and utilize the ever-growing clusters of compute resources. The inherited security of having an extra layer between the virtual machine and the host OS was a good selling point for the security minded, though as with any other newly adopted technology there were security incidents.
