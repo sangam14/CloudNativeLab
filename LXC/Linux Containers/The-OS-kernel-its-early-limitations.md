@@ -1,3 +1,10 @@
+---
+layout: default
+title: Introduction to Linux Containers
+parent: LXC Hands-On Workshop
+nav_order: 2
+---
+
 # The OS kernel and its early limitations
 
 - The current state of Linux containers is a direct result of the problems that early OS designers were trying to solve – managing memory, I/O, and process scheduling in the most efficient way.
