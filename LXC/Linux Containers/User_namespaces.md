@@ -1,3 +1,10 @@
+---
+layout: default
+title: User namespaces
+parent: LXC Hands-On Workshop
+nav_order: 8
+---
+
 # User namespaces
 
 - The user namespaces allow a process inside a namespace to have a different user and group ID than that in the default namespace. 
