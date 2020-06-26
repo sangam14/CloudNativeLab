@@ -1,3 +1,11 @@
+---
+layout: default
+title: Linux namespaces – the foundation of LXC
+parent: LXC Hands-On Workshop
+nav_order: 4
+---
+
+
 # Linux namespaces – the foundation of LXC
 
 - Namespaces are the foundation of lightweight process virtualization. They enable a process and its children to have different views of the underlying system. 
