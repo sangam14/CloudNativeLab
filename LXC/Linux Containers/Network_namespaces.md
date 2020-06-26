@@ -1,3 +1,11 @@
+---
+layout: default
+title: Network namespaces
+parent: LXC Hands-On Workshop
+nav_order: 9
+---
+
+
 # Network namespaces
 
 - Network namespaces provide isolation of the networking resources, such as network devices, addresses, routes, and firewall rules. This effectively creates a logical copy of the network stack, allowing multiple processes to listen on the same port from multiple namespaces. This is the foundation of networking in LXC and there are quite a lot of other use cases where this can come in handy.
