@@ -80,8 +80,8 @@ The few files of interest are described in the following table:
 
 | File         |  Description    | 
 |:-------------|:------------------|
-| ` freezer.parent_freezing`  | Shows the parent-state. Shows 0 if none of the cgroup's ancestors is FROZEN; otherwise 1. | 
+| `freezer.parent_freezing` | Shows the parent-state. Shows 0 if none of the cgroup's ancestors is FROZEN; otherwise 1. | 
 | `freezer.self_freezing` |  Shows the self-state. Shows 0 if the self-state is THAWED; otherwise, 1. | 
-| ` freezer.state `  |  Sets the self-state of the cgroup to either THAWED or FROZEN. | 
+| ` freezer.state`  |  Sets the self-state of the cgroup to either THAWED or FROZEN. | 
 | `tasks`  | Attaches tasks to the cgroup. | 
 
