@@ -15,7 +15,7 @@ The cgroups we are most interested in are described in the following table:
 | Subsystem     | Description     |  Defined in    | 
 |:-------------|:------------------|:------------------|
 | `cpu`  |   Allocates CPU time for tasks | `kernel/sched/core.c` |
-| `cpuacct` |  Accounts for CPU usage  | `kernel/sched/core.c |
+| `cpuacct` |  Accounts for CPU usage  | `kernel/sched/core.c`|
 | `cpuset `  |  Assigns CPU cores to tasks  | `kernel/cpuset.c`|
 | `memory`  | Allocates memory for tasks | `mm/memcontrol.c`|
 | `blkio `| Limits the I/O access to devices | `block/blk-cgroup.c`|
