@@ -32,3 +32,12 @@ Note
 If you are interested in how the different subsystems are implemented in the kernel, install the kernel source and have a look at the C files,
 shown in the third column of the table.
 ```
+![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/cgroup1.jpg)
+
+Cgroups can be used in two ways:
+
+   - By manually manipulating files and directories on a mounted VFS
+
+   - Using userspace tools provided by various packages such as cgroup-bin on Debian/Ubuntu and libcgroup on RHEL/CentOS
+
+Let's have a look at few practical examples on how to use cgroups to limit resources. This will help us get a better understanding of how containers work.
