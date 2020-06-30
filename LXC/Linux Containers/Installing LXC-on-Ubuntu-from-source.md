@@ -1,3 +1,12 @@
+---
+layout: default
+title:  Installing LXC on Ubuntu from source
+parent: LXC Hands-On Workshop
+nav_order: 18
+---
+
+
+
 # Installing LXC on Ubuntu from source
 
 To use the latest version of LXC, you can download the source code from the upstream GitHub repository and compile it:
