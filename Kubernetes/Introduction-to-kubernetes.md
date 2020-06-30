@@ -1,3 +1,40 @@
 # Introduction to Kubernetes 
 
 ![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/k8s_arch_new.png)
+
+
+# NODE
+- A Kubernetes cluster consists of one or more nodes managed by Kubernetes. The nodes are bare-metal servers, on-premises VMs, or VMs on a cloud provider. Every node contains a container runtime (for example, Docker Engine), kubelet (responsible for starting, stopping, and managing individual containers by requests from the Kubernetes control plane), and kube-proxy (responsible for networking and load balancing).
+
+# MASTER NODE
+- A Kubernetes cluster also contains one or more master nodes that run the Kubernetes control plane. The control plane consists of different processes, such as an API server (provides JSON over HTTP API), scheduler (selects nodes to run containers), controller manager (runs controllers, see below), and etcd (a globally available configuration store).
+
+# DASHBOARD AND CLI
+- A Kubernetes cluster can be managed via the Kubernetes Dashboard, a web UI running on the master node. The cluster can also be managed via the command line tool kubectl, which can be installed on any machine able to access the API server, running on the master node. This tool can be used to manage several Kubernetes clusters by specifying a context defined in a configuration file.
+
+# KUBERNETES BUILDING BLOCKS
+- Kubernetes provides basic mechanisms for the deployment, maintenance, and scaling of containerized applications. It uses declarative primitives, or building blocks, to maintain the state requested by the user, implementing the transition from the current observable state to the requested state.
+
+# POD
+- A pod is the smallest deployable unit that can be managed by Kubernetes. A pod is a logical group of one or more containers that share the same IP address and port space. The main purpose of a pod is to support co-located processes, such as an application server and its local cache. Containers within a pod can find each other via localhost, and can also communicate with each other using standard inter-process communications like SystemV semaphores or POSIX shared memory. In other words, a pod represents a “logical host”. Pods are not durable; they will not survive scheduling failures or node failures. If a node where the pod is running dies, the pod is deleted. It can then be replaced by an identical pod, with even the same name, but with a new unique identifier (UID).
+
+# LABEL
+- A label is a key/value pair that is attached to Kubernetes resource, for example, a pod. Labels can be attached to resources at creation time, as well as added and modified at any later time.
+
+  # CONTROLLER
+- A controller manages a set of pods and ensures that the cluster is in the specified state. Unlike manually created pods, the pods maintained by a replication controller are automatically replaced if they fail, get deleted, or are terminated. There are several controller types, such as replication controllers or deployment controllers.
+
+   # REPLICATION CONTROLLER
+- A replication controller is responsible for running the specified number of pod copies (replicas) across the cluster.
+
+   # DEPLOYMENT CONTROLLER
+- A deployment defines a desired state for logical group of pods and replica sets. It creates new resources or replaces the existing resources, if necessary. A deployment can be updated, rolled out, or rolled back. A practical use case for a deployment is to bring up a replica set and pods, then update the deployment to re-create the pods (for example, to use a new image). Later, the deployment can be rolled back to an earlier revision if the current deployment is not stable.
+
+   # REPLICA SET
+- A replica set is the next-generation replication controller. A replication controller supports only equality-based selectors, while a replica set supports set-based selectors.
+
+   # SERVICE
+- A service uses a selector to define a logical group of pods and defines a policy to access such logical groups. Because pods are not durable, the actual pods that are running may change. A client that uses one or more containers within a pod should not need to be aware of which specific pod it works with, especially if there are several pods (replicas).
+- There are several types of services in Kubernetes, including ClusterIP, NodePort, LoadBalancer. A ClusterIP service exposes pods to connections from inside the cluster. A NodePort service exposes pods to external traffic by forwarding traffic from a port on each node of the cluster to the container port. A LoadBalancer service also exposes pods to external traffic, as NodePort service does, however it also provides a load balancer.
+
+
