@@ -1,4 +1,7 @@
-# Introduction to Kubernetes 
+#  Looking at Kubernetes from the top of a mountain
+- Kubernetes is a software system that allows you to easily deploy and manage container- ized applications on top of it. It relies on the features of Linux containers to run het- erogeneous applications without having to know any internal details of these applications and without having to manually deploy these applications on each host. Because these apps run in containers, they don’t affect other apps running on the
+
+
 
 ![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/k8s_arch_new.png)
 
