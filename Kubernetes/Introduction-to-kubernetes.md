@@ -19,6 +19,7 @@ Deploying applications through Kubernetes is always the same, whether your clust
 
 # MASTER NODE
 - A Kubernetes cluster also contains one or more master nodes that run the Kubernetes control plane. The control plane consists of different processes, such as an API server (provides JSON over HTTP API), scheduler (selects nodes to run containers), controller manager (runs controllers, see below), and etcd (a globally available configuration store).
+![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/kubernetes-master-node.png)
 
 # DASHBOARD AND CLI
 - A Kubernetes cluster can be managed via the Kubernetes Dashboard, a web UI running on the master node. The cluster can also be managed via the command line tool kubectl, which can be installed on any machine able to access the API server, running on the master node. This tool can be used to manage several Kubernetes clusters by specifying a context defined in a configuration file.
