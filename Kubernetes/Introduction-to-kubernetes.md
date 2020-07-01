@@ -1,3 +1,10 @@
+---
+layout: default
+title: Looking at Kubernetes from the top of a mountain
+parent: CKA / CKAD Certification Workshop Track
+nav_order: 1
+---
+
 # Looking at Kubernetes from the top of a mountain
 
 - Kubernetes is a software system that allows you to easily deploy and manage containerized applications on top of it. It relies on the features of Linux containers to run heterogeneous applications without having to know any internal details of these applications and without having to manually deploy these applications on each host. Because these apps run in containers, they don’t affect other apps running on the same server, which is critical when you run applications for completely different organizations on the same hardware. This is of paramount importance for cloud provid- ers, because they strive for the best possible utilization of their hardware while still having to maintain complete isolation of hosted applications.
