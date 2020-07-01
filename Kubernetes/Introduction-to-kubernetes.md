@@ -5,13 +5,13 @@
 - Kubernetes enables you to run your software applications on thousands of computer nodes as if all those nodes were a single, enormous computer. It abstracts away the underlying infrastructure and, by doing so, simplifies development, deployment, and management for both development and the operations teams.
 Deploying applications through Kubernetes is always the same, whether your cluster contains only a couple of nodes or thousands of them. The size of the cluster makes no difference at all. Additional cluster nodes simply represent an additional amount of resources available to deployed apps.
 
-
+# What is Master Node in Kubernetes Architecture?
 
 ![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/k8s_arch_new.png)
 
-
-# NODE
-- A Kubernetes cluster consists of one or more nodes managed by Kubernetes. The nodes are bare-metal servers, on-premises VMs, or VMs on a cloud provider. Every node contains a container runtime (for example, Docker Engine), kubelet (responsible for starting, stopping, and managing individual containers by requests from the Kubernetes control plane), and kube-proxy (responsible for networking and load balancing).
+- The Kubernetes Master (Master Node) receives input from a CLI (Command-Line Interface) or UI (User Interface) via an API. These are the commands you provide to Kubernetes.
+- You define pods, replica sets, and services that you want Kubernetes to maintain. For example, which container image to use, which ports to expose, and how many pod replicas to run.
+- You also provide the parameters of the desired state for the application(s) running in that cluster.
 
 ![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/master-node-k8s.png)
     - Masters: The master is the heart of Kubernetes; it controls and schedules all of the activities in the cluster <br>
@@ -20,6 +20,10 @@ Deploying applications through Kubernetes is always the same, whether your clust
 # MASTER NODE
 - A Kubernetes cluster also contains one or more master nodes that run the Kubernetes control plane. The control plane consists of different processes, such as an API server (provides JSON over HTTP API), scheduler (selects nodes to run containers), controller manager (runs controllers, see below), and etcd (a globally available configuration store).
 ![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/kubernetes-master-node.png)
+
+# NODE
+- A Kubernetes cluster consists of one or more nodes managed by Kubernetes. The nodes are bare-metal servers, on-premises VMs, or VMs on a cloud provider. Every node contains a container runtime (for example, Docker Engine), kubelet (responsible for starting, stopping, and managing individual containers by requests from the Kubernetes control plane), and kube-proxy (responsible for networking and load balancing).
+![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/worker-node.png)
 
 # DASHBOARD AND CLI
 - A Kubernetes cluster can be managed via the Kubernetes Dashboard, a web UI running on the master node. The cluster can also be managed via the command line tool kubectl, which can be installed on any machine able to access the API server, running on the master node. This tool can be used to manage several Kubernetes clusters by specifying a context defined in a configuration file.
