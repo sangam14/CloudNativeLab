@@ -67,6 +67,8 @@ DEPLOYMENT CONTROLLER
  {: .label .label-blue }
 - A replica set is the next-generation replication controller. A replication controller supports only equality-based selectors, while a replica set supports set-based selectors.
 
+![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/Deploy-po-container.png)
+
  SERVICE
  {: .label .label-blue }
 - A service uses a selector to define a logical group of pods and defines a policy to access such logical groups. Because pods are not durable, the actual pods that are running may change. A client that uses one or more containers within a pod should not need to be aware of which specific pod it works with, especially if there are several pods (replicas).
