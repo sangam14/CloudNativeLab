@@ -47,6 +47,8 @@ POD
 ![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/pods-k8s.png)
 - A pod is the smallest deployable unit that can be managed by Kubernetes. A pod is a logical group of one or more containers that share the same IP address and port space. The main purpose of a pod is to support co-located processes, such as an application server and its local cache. Containers within a pod can find each other via localhost, and can also communicate with each other using standard inter-process communications like SystemV semaphores or POSIX shared memory. In other words, a pod represents a “logical host”. Pods are not durable; they will not survive scheduling failures or node failures. If a node where the pod is running dies, the pod is deleted. It can then be replaced by an identical pod, with even the same name, but with a new unique identifier (UID).
 
+![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/pod-node.png)
+
 LABEL
 {: .label .label-blue }
 - A label is a key/value pair that is attached to Kubernetes resource, for example, a pod. Labels can be attached to resources at creation time, as well as added and modified at any later time.
