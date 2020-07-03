@@ -11,7 +11,12 @@ Under the hood Docker-in-Docker (DinD) is used to give the effect of multiple VM
 - If you want to learn more about Kubernetes, consider the Play with Kubernetes Classroom which provides more directed learning using an integrated 
 Play with Kubernetes commandline.
 
+- login using docker hub or github credentials
+
 ![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/playwithk8s-login.png)
 
+- click on start button 
+
+![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/pwk-start.png)
 
 # 
