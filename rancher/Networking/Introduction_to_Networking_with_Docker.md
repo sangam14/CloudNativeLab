@@ -1,3 +1,10 @@
+---
+layout: default
+title: An Introduction to Networking with Docker
+parent: Rancher Networking
+nav_order: 1
+---
+
 # An Introduction to Networking with Docker
 - Docker follows a unique approach to networking that is very different from the Kubernetes approach. 
 - Understanding how Docker works help later in understanding the Kubernetes model, since Docker containers are the fundamental unit of deployment in Kubernetes. 
