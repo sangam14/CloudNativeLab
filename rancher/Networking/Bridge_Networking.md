@@ -1,3 +1,9 @@
+---
+layout: default
+title: Bridge Networking
+parent: Rancher Networking
+nav_order: 2
+---
 
 # Bridge Networking
 
