@@ -1,3 +1,10 @@
+---
+layout: default
+title: Custom Bridge Network
+parent: Rancher Networking
+nav_order: 3
+---
+
 # Custom Bridge Network
 
 There is no requirement to use the default bridge on the host; it’s easy to create a new bridge network and attach containers to it. 
