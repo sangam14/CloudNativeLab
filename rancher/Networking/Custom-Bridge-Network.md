@@ -8,14 +8,14 @@ nav_order: 3
 # Custom Bridge Network
 
 There is no requirement to use the default bridge on the host; it’s easy to create a new bridge network and attach containers to it. 
-This provides better isolation and interoperability between containers, and custom bridge networks have better security and features than the default bridge.
-  • All containers in a custom bridge can communicate with the ports of other containers on that bridge.
+This provides better isolation and interoperability between containers, and custom bridge networks have better security and features than the default bridge. <br>
+  - All containers in a custom bridge can communicate with the ports of other containers on that bridge.
   This means that you do not need to publish the ports explicitly. It also ensures that the communication between them is secure.
   Imagine an application in which a backend container and a database container need to communicate and where we 
   also want to make sure that no external entity can talk to the database. We do this with a custom bridge network in which only the database container and 
-  the backend containers reside. You can explicitly expose the backend API to the rest of the world using port publishing.
-  • The same is true with environment variables - environment variables in a bridge network are shared by all containers on that bridge.
-  • Network configuration options such as MTU can differ between applications. By creating a bridge, you can configure the network to best suit 
+  the backend containers reside. You can explicitly expose the backend API to the rest of the world using port publishing. <br>
+  -  The same is true with environment variables - environment variables in a bridge network are shared by all containers on that bridge.
+  -  Network configuration options such as MTU can differ between applications. By creating a bridge, you can configure the network to best suit 
   the applications connected to it.
 
 - To create a custom bridge network and two containers that use it, run the following commands:
