@@ -6,13 +6,15 @@ nav_order: 5
 ---
 
 
-# An Introduction to Kubernetes Networking
+ An Introduction to Kubernetes Networking
+ {: .label .label-blue }
 
 - Kubernetes networking builds on top of the Docker and Netfilter constructs to tie multiple components together into applications.
 Kubernetes resources have specific names and capabilities, and we want to understand those before exploring their inner workings. 
 
 
-# Pods
+ Pods
+ {: .label .label-blue }
 - The smallest unit of deployment in a Kubernetes cluster is the Pod, 
 and all of the constructs related to scheduling and orchestration assist in the deployment and management of Pods.
 
@@ -32,28 +34,33 @@ If one tier of the application needed to scale, the number of Pods in that tier 
 ![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/k8snet.png)
 
 
-# Workloads 
+Workloads 
+{: .label .label-blue }
 - Production applications with users run more than one instance of the application. This enables fault tolerance, where if one instance goes down, another
 handles the traffic so that users don't experience a disruption to the service. In a traditional model that doesn't use Kubernetes, these types of deployments 
 require that an external person or software monitors the application and acts accordingly.
 - Kubernetes recognizes that an application might have unique requirements. Does it need to run on every host? Does it need to handle state to avoid data corruption? Can all of its pieces run anywhere, or do they need special scheduling 
 consideration? To accommodate those situations where a default structure won't give the best results, Kubernetes provides abstractions for different workload types.
 
-# REPLICASETT
+REPLICASET
+{: .label .label-blue }
 - the ReplicaSet maintains the desired number of copies of a Pod running within the cluster. 
 If a Pod or the host on which it's running fails, Kubernetes launches a replacement. In all cases, Kubernetes works to maintain the desired state of the ReplicaSet.
 
-# DEPLOYMENT
+DEPLOYMENT
+{: .label .label-blue }
 - A Deployment manages a ReplicaSet. Although it’s possible to launch a ReplicaSet directly or to use a ReplicationController, 
 the use of a Deployment gives more control over the rollout strategies of the Pods that the ReplicaSet controller manages.
 By defining the desired states of Pods through a Deployment, users can perform updates to the image running within the containers and maintain 
 the ability to perform rollbacks.
 
-# DAEMONSET
+ DAEMONSET
+ {: .label .label-blue }
 - A DaemonSet runs one copy of the Pod on each node in the Kubernetes cluster. This workload model provides the flexibility to run daemon processes such as log management, monitoring, storage providers, or network providers 
 that handle Pod networking for the cluster.
 
-# STATEFULSET
+ STATEFULSET
+ {: .label .label-blue }
 - A StatefulSet controller ensures that the Pods it manages have durable storage and persistent identity. StatefulSets are appropriate for situations where Pods have a similar definition but need a unique identity, ordered deployment and scaling, and storage that persists across Pod rescheduling.
 
 
