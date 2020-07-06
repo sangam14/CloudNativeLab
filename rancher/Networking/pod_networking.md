@@ -39,3 +39,27 @@ When we do so, we see that the container does not have the network settings prov
 
 Note: Run the commands below on the host where the nginx Pod is scheduled
 
+```
+
+node01 $ docker ps | grep nginx
+4db98393f5ff        nginx                                          "/docker-entrypoint.…"   50 secondsago       Up 38 seconds                           k8s_nginx_nginx_default_7422cd8a-7f56-4b9d-abee-3158e84feb87_0
+0c51920d3349        k8s.gcr.io/pause:3.2                           "/pause"                 59 secondsago       Up 58 seconds                           k8s_POD_nginx_default_7422cd8a-7f56-4b9d-abee-3158e84feb87_7
+
+
+```
+```
+node01 $ docker inspect 4db98393f5ff  --format="{{json .NetworkSettings}}"
+{"Bridge":"","SandboxID":"","HairpinMode":false,"LinkLocalIPv6Address":"","LinkLocalIPv6PrefixLen":0,"Ports":{},"SandboxKey":"","SecondaryIPAddresses":null,"SecondaryIPv6Addresses":null,"EndpointID":"","Gateway":"","GlobalIPv6Address":"","GlobalIPv6PrefixLen":0,"IPAddress":"","IPPrefixLen":0,"IPv6Gateway":"","MacAddress":"","Networks":{}}
+
+```
+```
+node01 $ docker inspect 0c51920d3349   --format="{{json .NetworkSettings}}"
+{"Bridge":"","SandboxID":"d0808905b62dd655b22a9927e7a5f5f2ad00ab5331765596bb24fa5ff93240ed","HairpinMode":false,"LinkLocalIPv6Address":"","LinkLocalIPv6PrefixLen":0,"Ports":{},"SandboxKey":"/var/run/docker/netns/d0808905b62d","SecondaryIPAddresses":null,"SecondaryIPv6Addresses":null,"EndpointID":"","Gateway":"","GlobalIPv6Address":"","GlobalIPv6PrefixLen":0,"IPAddress":"","IPPrefixLen":0,"IPv6Gateway":"","MacAddress":"","Networks":{"none":{"IPAMConfig":null,"Links":null,"Aliases":null,"NetworkID":"419c5963169c9ffa00c35371ac71de4a6eee8985b0bb7d8c71a0aac403c5d40b","EndpointID":"74757167a48d43352773406ec7c83ba1a824cb9b2f4cc0875e1b7aaa3c73dc38","Gateway":"","IPAddress":"","IPPrefixLen":0,"IPv6Gateway":"","GlobalIPv6Address":"","GlobalIPv6PrefixLen":0,"MacAddress":"","DriverOpts":null}}}
+
+```
+# Intra-Pod Communication
+- Kubernetes follows the IP-per-Pod model where it assigns a routable IP address to the Pod. The containers within the Pod share the same network space and communicate with one another over localhost. Like processes running on a host, two containers cannot each use the same network port, but we can work around this by changing the manifest.
+
+# Inter-Pod Communication
+- Because it assigns routable IP addresses to each Pod, and because it requires that all resources see the address of a Pod the same way, Kubernetes assumes that all Pods communicate with one another via their assigned addresses. Doing so removes the need for an external service discovery mechanism
+
