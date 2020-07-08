@@ -24,10 +24,9 @@ IP in IP .
       - The Node Controller loop watches for the addition or removal of Kubernetes nodes and updates the kvdb with the corresponding data.
 
 
-
-
 - First lets setup the k8s cluster with kubeadm - this will take a minute - in this case we will be setting the pod network to a custom cidr since calico 
 is already to use it, and downloading the images before executing the kubeadm init.
+
 ```
 
 controlplane $ kubeadm config images pull
@@ -115,12 +114,15 @@ After kubeadmin completes we need to complete two other process' listed in the o
     run the join command on the second node.
 
 (1). Copy (ctrl-insert) the 3 lines starting with mkdir and run in the top terminal (shift-insert), you'll then be able to run kubectrl. OR just run the following: 
+
 ```
 
 $ mkdir -p $HOME/.kube ; sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config ;sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
 ```
 (2). You'll see the join command with it's token at the end off the kubeadm init stdout, copy that and paste it into the second node in the bottom terminal. 
 If you run kubectl get nodes in the top terminal you should see the two nodes running..
+
 ```
 controlplane $ kubectl get nodes
 NAME           STATUS     ROLES    AGE    VERSION
@@ -129,6 +131,7 @@ controlplane   NotReady   master   2m5s   v1.14.0
 You'll see nodes are not totally ready since we don't have a network solution working.
 
 And lets see what control plane pods are runnning: k get pods --all-namespaces Wait a minute or two, you should see all 8 pods up and running.
+
 ```
 controlplane $ k get pods --all-namespaces
 NAMESPACE     NAME                                   READY   STATUS    RESTARTS   AGE
@@ -139,6 +142,7 @@ kube-system   kube-apiserver-controlplane            1/1     Running   0        
 kube-system   kube-controller-manager-controlplane   1/1     Running   0          2m55s
 kube-system   kube-proxy-6llvn                       1/1     Running   0          3m49s
 kube-system   kube-scheduler-controlplane            1/1     Running   0          2m57s
+
 ```
 
 Check Bridges
@@ -168,6 +172,7 @@ Note that under containers, there are no containers listed, and the IPAM setting
 `docker network inspect bridge`
 
 The first control plane componet to come up is the kubelet, this will be resposible for directly instructing the containers and the local network. and for the cluster network through a network solution like Calico. 
+
 ```
 controlplane $ brctl show
 bridge name     bridge id               STP enabled     interfaces
@@ -220,6 +225,7 @@ controlplane $ docker network inspect bridge
 ```
 
 ```
+
 node01 $ brctl show
 bridge name     bridge id               STP enabled     interfaces
 docker0         8000.02425f3cbb10       no
@@ -270,6 +276,7 @@ node01 $
 
 
 ```
+
 Kubelet Configuration
 
 Let's take a look at the startup kubelet config
@@ -282,7 +289,10 @@ Or, look at the running config (which should be the same):
 
 lets make it easier to read with the sed command:
 
-`ps -aux | grep /usr/bin/kubelet | sed "s/--/\n--/g"`
+```
+ps -aux | grep /usr/bin/kubelet | sed "s/--/\n--/g"
+
+```
 
 note the lines
 
@@ -378,10 +388,12 @@ controlplane $
 
 
 ```
+note
+```
 - --network plugin=cni
 - --cni-bin-dir=/opt/cni/bin    # contains the availble plugins binaries for below
 - --cni-conf-dir=/etc/cni/net.d # contains the conf files for network plugins to use (in the file name)
-
+```
 the kubelet looks for the right script to run on container creation with net.d, which points to the network script to run (netscript.sh with the container) (WIP: re-word this statement to be more correct)
 
 Lets look at the cni config
