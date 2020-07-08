@@ -402,11 +402,11 @@ Setup Calico network
 
 OK, lets download and install the calico manifest curl https://docs.projectcalico.org/v3.9/manifests/calico.yaml -O
 
-kubectl apply -f calico.yaml
+`kubectl apply -f calico.yaml`
 
 And check the pods and daemonsets are up:
 
-k get pods -n kube-system k get ds -n kube-system
+`k get pods -n kube-system k get ds -n kube-system`
 
 and the pods are controlled by rs' k get rs -n kube-system
 
