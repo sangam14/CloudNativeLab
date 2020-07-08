@@ -61,13 +61,16 @@ kube-system   kube-scheduler-master                     1/1     Running   0     
    - Once it arrives at its destination, the process flows in reverse, with the Flannel driver on the destination host unwrapping the packet, sending it to the bridge interface, and from there the packet finds its way into the overlay network and to the destination Pod.
    
 -  Host-gw
-   
-    - The Host-gw backend provides better performance than VxLAN but requires Layer 2 connectivity between hosts. It operates by creating IP routes to subnets via remote machine addresses
+![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/host-gw.png)
+
+- The Host-gw backend provides better performance than VxLAN but requires Layer 2 connectivity between hosts. It operates by creating IP routes to subnets via remote machine addresses
     
-    - Unlike VxLAN, no Flannel interface is created when using this backend. Instead, each node sends traffic directly to the destination node where the remote network is located.
+- Unlike VxLAN, no Flannel interface is created when using this backend. Instead, each node sends traffic directly to the destination node where the remote network is located.
     
-    - This backend may require additional network configuration if used in a cloud provider where inter-host communication uses virtual switches.
+- This backend may require additional network configuration if used in a cloud provider where inter-host communication uses virtual switches.
+
 - UDP
+![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/UDP.png)
     - The UDP backend is insecure and should only be used for debugging or if the kernel does not support VxLAN.  
     
     
