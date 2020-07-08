@@ -385,6 +385,7 @@ controlplane $
 the kubelet looks for the right script to run on container creation with net.d, which points to the network script to run (netscript.sh with the container) (WIP: re-word this statement to be more correct)
 
 Lets look at the cni config
+
 ```
 
 controlplane $ ls /etc/cni/net.d
@@ -396,6 +397,7 @@ controlplane $ k run nettools --image=busybox --replicas 2 -- sleep 3600
 kubectl run --generator=deployment/apps.v1 is DEPRECATED and will be removed in a future version. Use kubectl run --generator=run-pod/v1 or kubectl create instead.
 deployment.apps/nettools created
 controlplane $
+
 ```
 
 Setup Calico network
@@ -416,9 +418,6 @@ and the docker containers ps -aux | grep calico
 
 ```
 controlplane $ curl https://docs.projectcalico.org/v3.9/manifests/calico.yaml -O
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100 20674  100 20674    0     0   111k      0 --:--:-- --:--:-- --:--:--  111k
 controlplane $ kubectl apply -f calico.yaml
 configmap/calico-config created
 customresourcedefinition.apiextensions.k8s.io/felixconfigurations.crd.projectcalico.org created
