@@ -33,9 +33,6 @@ search:
   # Supports true or false (default)
   button: false
 
-aux_links:
-  "GopherLabs on GitHub":
-    - "//github.com/sangam14/ContainerLabs/"
     # Footer content 
 # appears at the bottom of every page's main content
 # Footer last edited timestamp
