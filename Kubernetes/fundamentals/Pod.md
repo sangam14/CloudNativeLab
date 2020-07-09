@@ -30,16 +30,17 @@ spec:
 ```
 # Launch or Apply POD
 
-
+```
 sangam$ kubectl create -f pod.yml 
 pod/myapp-pod created
-
+```
 # OR 
 
 kubectl apply Creates and Updates Resources through local or remote files.
-
+```
 sangam$ kubectl apply -f pod.yml
 pod/myapp-pod configured
+```
 
 # Check All running Pod And States From Current Namespaces 
 
