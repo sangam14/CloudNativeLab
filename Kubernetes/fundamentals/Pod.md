@@ -6,7 +6,7 @@ nav_order: 4
 ---
 
 Pod
-{: .btn .btn-green .mr-4 }
+{: .label .label-blue }
 
 A pod is a collection of containers sharing a network and mount namespace and is the basic unit of deployment in Kubernetes.
 All containers in a pod are scheduled on the same node.
@@ -15,7 +15,7 @@ All containers in a pod are scheduled on the same node.
 
 
 Deploy your first pod 
-{: .btn .btn-green .mr-4 }
+{: .label .label-blue }
 ```
 apiVersion : v1
 kind : Pod 
@@ -31,14 +31,14 @@ spec:
         
 ```
 Launch or Apply POD
-{: .btn .btn-green .mr-4 }
+{: .label .label-blue }
 
 ```
 sangam$ kubectl create -f pod.yml 
 pod/myapp-pod created
 ```
 OR
-{: .btn .btn-green .mr-4 }
+{: .label .label-blue }
 
 
 kubectl apply Creates and Updates Resources through local or remote files.
@@ -48,7 +48,7 @@ pod/myapp-pod configured
 ```
 
 Check All running Pod And States From Current Namespaces 
-{: .btn .btn-green .mr-4 }
+{: .label .label-blue }
 
 
 ```
@@ -58,13 +58,13 @@ myapp-pod                            1/1     Running                      0     
 
 ```
 Check All running Pod And States From All Namespaces 
-{: .btn .btn-green .mr-4 }
+{: .label .label-blue }
 
 ```
 kubectl get pods --all-namespaces 
 ```
 check describetion details of pod 
-{: .btn .btn-green .mr-4 }
+{: .label .label-blue }
 
 ```
 sangam$ kubectl describe pods myapp-pod 
@@ -138,7 +138,7 @@ Events:
 ```
 
 Get The Documentation For Pod Manifests
-{: .btn .btn-green .mr-4 }
+{: .label .label-blue }
 
 ```
 
