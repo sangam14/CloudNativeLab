@@ -1,3 +1,10 @@
+---
+layout: default
+title: Interactive Playground To Learn Kubernetes 
+parent: CKA / CKAD Certification Workshop Track
+nav_order: 3
+---
+
 # Interactive Playground To Learn Kubernetes 
 
 # Play With Kubernetes - Free ready-made Kubernetes platfrom 
