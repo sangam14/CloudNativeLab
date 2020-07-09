@@ -1,3 +1,10 @@
+---
+layout: default
+title:  Labs1 - Pod
+parent: CKA / CKAD Certification Workshop Track
+nav_order: 4
+---
+
 # Pod
 
 A pod is a collection of containers sharing a network and mount namespace and is the basic unit of deployment in Kubernetes.
