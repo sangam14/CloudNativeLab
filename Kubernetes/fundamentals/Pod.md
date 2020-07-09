@@ -5,7 +5,8 @@ parent: CKA / CKAD Certification Workshop Track
 nav_order: 4
 ---
 
-# Pod
+Pod
+{: .btn .btn-green .mr-4 }
 
 A pod is a collection of containers sharing a network and mount namespace and is the basic unit of deployment in Kubernetes.
 All containers in a pod are scheduled on the same node.
@@ -13,7 +14,8 @@ All containers in a pod are scheduled on the same node.
 ![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/akmsymlk8s.png)
 
 
-# Deploy your first pod 
+Deploy your first pod 
+{: .btn .btn-green .mr-4 }
 ```
 apiVersion : v1
 kind : Pod 
@@ -28,13 +30,16 @@ spec:
           image : nginx
         
 ```
-# Launch or Apply POD
+Launch or Apply POD
+{: .btn .btn-green .mr-4 }
 
 ```
 sangam$ kubectl create -f pod.yml 
 pod/myapp-pod created
 ```
-# OR 
+OR
+{: .btn .btn-green .mr-4 }
+
 
 kubectl apply Creates and Updates Resources through local or remote files.
 ```
@@ -42,7 +47,9 @@ sangam$ kubectl apply -f pod.yml
 pod/myapp-pod configured
 ```
 
-# Check All running Pod And States From Current Namespaces 
+Check All running Pod And States From Current Namespaces 
+{: .btn .btn-green .mr-4 }
+
 
 ```
  sangam$ kubectl get pods
@@ -50,12 +57,15 @@ NAME                                 READY   STATUS                       RESTAR
 myapp-pod                            1/1     Running                      0          6m26s
 
 ```
+Check All running Pod And States From All Namespaces 
+{: .btn .btn-green .mr-4 }
 
-# Check All running Pod And States From All Namespaces 
 ```
 kubectl get pods --all-namespaces 
 ```
-# check describetion details of pod 
+check describetion details of pod 
+{: .btn .btn-green .mr-4 }
+
 ```
 sangam$ kubectl describe pods myapp-pod 
 Name:               myapp-pod
@@ -127,7 +137,9 @@ Events:
 
 ```
 
-# Get The Documentation For Pod Manifests
+Get The Documentation For Pod Manifests
+{: .btn .btn-green .mr-4 }
+
 ```
 
 sangam:~ sangam$ kubectl explain pods 
