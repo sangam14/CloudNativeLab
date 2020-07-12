@@ -10,6 +10,7 @@ nav_order: 7
 
 Log-Shipping Sidecar :- 
 
+![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/pod-log-sidecar.png)
 
 
 # Create ` pod-logging-sidecar.yaml ` file with following Contents:- 
