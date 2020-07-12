@@ -1,3 +1,11 @@
+---
+layout: default
+title:  Lab 4 Pods - Pod Logging Sidecar 
+parent: CKA / CKAD Certification Workshop Track
+nav_order: 7
+---
+
+
 # Lab 4 Pods : Pod Logging Sidecar 
 
 Log-Shipping Sidecar :- 
