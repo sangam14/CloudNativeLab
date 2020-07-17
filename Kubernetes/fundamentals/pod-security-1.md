@@ -1,4 +1,9 @@
-
+---
+layout: default
+title:   Securing Kubernetes Pods
+parent: CKA / CKAD Certification Workshop Track
+nav_order: 9
+---
 # Securing Kubernetes Pods
 
 # Hardening container images
