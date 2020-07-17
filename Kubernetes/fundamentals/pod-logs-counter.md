@@ -1,15 +1,15 @@
 ---
 layout: default
-title:  Lab2 - Pod
+title:  Lab2 - Pod - Arg Instruction
 parent: CKA / CKAD Certification Workshop Track
 nav_order: 5
 ---
 
-# Lab2 : Pod - Args Instruction 
+## Lab2 : Pod - Args Instruction 
 
 
 
-# Create ` pod-logging.yml` File With Following Contents:
+## Create ` pod-logging.yml` File With Following Contents:
 
 ```
 
@@ -27,13 +27,13 @@ nav_order: 5
 // If you supply a command and args, the default Entrypoint and the default Cmd defined in the Docker image are ignored. Your command is run with your args.
 
 ```
-# use `kubectl create` or `kubectl apply' 
+## use `kubectl create` or `kubectl apply' 
 ```
 kubectl create -f pod-logging.yml 
 
 ```
 
-# List All Running Pod 
+## List All Running Pod 
 ```
 sangam:~ sangam$ kubectl get po
 NAME                                 READY   STATUS                       RESTARTS   AGE
@@ -41,7 +41,7 @@ counter                              1/1     Running                      0     
 myapp-pod                            1/1     Running                      0          25h
 
 ```
-# Run The Args Specification To Get Logs 
+## Run The Args Specification To Get Logs 
 ```
 Syntax : kubectl logs <pod-name> - c <container-name-specified-in-yml> 
 ```
