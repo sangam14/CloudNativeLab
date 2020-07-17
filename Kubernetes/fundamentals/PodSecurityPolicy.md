@@ -5,13 +5,13 @@ parent: CKA / CKAD Certification Workshop Track
 nav_order: 10
 ---
 
-# Pod Security Policy
+## Pod Security Policy
 
 - A Kubernetes PodSecurityPolicy is a cluster-level resource that controls security-sensitive aspects of the pod specification through which the access privileges of a Kubernetes pod are limited. As a DevOps engineer, you may want to use a PodSecurityPolicy to restrict most of the workloads run in limited access privileges, while only allowing a few workloads to be run with extra privileges. 
 
 we will first take a closer look at a PodSecurityPolicy, and then we will introduce an open source tool, kube-psp-advisor, which can help build an adaptive PodSecurityPolicy for the running Kubernetes cluster. 
 
-# Understanding PodSecurityPolicy
+## Understanding Pod Security Policy
 
 - You can think of a PodSecurityPolicy as a policy to evaluate the security attributes defined in the pod's specification. Only those pods whose security attributes meet the requirements of PodSecurityPolicy will be admitted to the cluster. For example, PodSecurityPolicy can be used to block the launch of most privileged pods, while only allowing those necessary or limited pods access to the host filesystem.
 
@@ -133,7 +133,7 @@ And only those that meet the requirements will be admitted to the cluster.
 It would be a challenge to create and manage pod security policies for different workloads. Now, let's take a look at kube-psp-advisor and see how it can help create pod security policies for you.
 
 
-# Kubernetes PodSecurityPolicy Advisor
+## Kubernetes PodSecurityPolicy Advisor
 
 - Kubernetes PodSecurityPolicy Advisor (also known as kube-psp-advisor) is an open source tool from Sysdig. It scans the security attributes of running workloads in the cluster and then, on this basis, recommends pod security policies for your cluster or workloads.
 
