@@ -1,6 +1,6 @@
 ---
 layout: default
-title:  Lab1 - Pod
+title:  Lab1 - Understanding Pod
 parent: CKA / CKAD Certification Workshop Track
 nav_order: 4
 ---
