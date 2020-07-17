@@ -1,6 +1,6 @@
 ---
 layout: default
-title:  Lab 4 Pods - Pod Logging Sidecar 
+title:  Lab 4 - Pod Logging Sidecar 
 parent: CKA / CKAD Certification Workshop Track
 nav_order: 7
 ---
