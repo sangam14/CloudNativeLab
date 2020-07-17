@@ -49,37 +49,35 @@ CMD ["/usr/bin/node", "/var/www/app.js"]
  
 
  ```
- 
- # CIS Docker benchmarks
+# CIS Docker benchmarks
  
  Center for Internet Security (CIS) put together a guideline regarding Docker container administration and management.
  Now, let's take a look at the security recommendations from CIS Docker benchmarks regarding container images:
- 
- # Create a user for a container image to run a microservice:
+# Create a user for a container image to run a microservice:
  
  - It is good practice to run a container as non-root. Although user namespace mapping is available, 
  it is not enabled by default. Running as root means that if an attacker were to successfully escape from the container, they would gain root access to the host.
  Use the USER instruction to create a user in the Dockerfile.
  
- # Use trusted base images to build your own image:
+# Use trusted base images to build your own image:
  
  Images downloaded from public repositories cannot be fully trusted. It is well known that images from public repositories may contain malware or crypto miners.
  Hence, it is recommended that you build your image from scratch or use minimal trusted images, such as Alpine. Also, perform the image scan after your image has been built.
  
- # Do not install unnecessary packages in your image:
+# Do not install unnecessary packages in your image:
  Installing unnecessary packages will increase the attack surface. It is recommended that you keep your image slim. Occasionally, 
  you will probably need to install some tools during the process of building an image. Do remember to remove them at the end of the Dockerfile. 
  
- # Scan and rebuild an image in order to apply security patches:
+# Scan and rebuild an image in order to apply security patches:
  
  It is highly likely that new vulnerabilities will be discovered in your base image or in the packages you install in your image. It is good practice to scan your image frequently. Once you identify any vulnerabilities, try to patch the security fixes by rebuilding the image. 
  Image scanning is a critical mechanism for identifying vulnerabilities at the build stage.
  
- # Enable content trust for Docker:
+# Enable content trust for Docker:
  Content trust uses digital signatures to ensure data integrity between the client and the Docker registry. It ensures the provenance of the container image. However, it is not enabled by default.
  You can turn it on by setting the environment variable, `DOCKER_CONTENT_TRUST`, to 1.
  
- # Add a HEALTHCHECK instruction to the container image:
+# Add a HEALTHCHECK instruction to the container image:
  
  A HEALTHCHECK instruction defines a command to ask Docker Engine to check the health status of the container periodically. Based on the health status check result,
  Docker Engine then exits the non-healthy container and initiates a new one.
@@ -89,17 +87,17 @@ CMD ["/usr/bin/node", "/var/www/app.js"]
  `setuid` and `setgid `permissions can be used for privilege escalation as files with such permissions are allowed to be executed with owners' privileges instead of launchers' privileges.
  You should carefully review the files with `setuid` and `setgid` permissions and remove those files that don't require such permissions.
  
- # Use COPY instead of ADD in the Dockerfile:
+# Use COPY instead of ADD in the Dockerfile:
  
  The `COPY `instruction can only copy files from the local machine to the filesystem of the image, while the `ADD` instruction can not only copy files from the local machine but also retrieve files from the remote URL to the filesystem of the image.
  Using ADD may introduce the risk of adding malicious files from the internet to the image.
  
- # Do not store secrets in the Dockerfile: 
+# Do not store secrets in the Dockerfile: 
  
  There are many tools that are able to extract image file layers. If there are any secrets stored in the image, secrets are no longer secrets. Storing secrets in the Dockerfile renders containers potentially exploitable. 
  A common mistake is to use the ENV instruction to store secrets in environment variables. 
  
- # Install verified packages only: 
+# Install verified packages only: 
  
  This is similar to using the trusted base image only. 
  Observe caution as regards the packages you are going to install within your image. Make sure they are from trusted package repositories. 
