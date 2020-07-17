@@ -1,4 +1,11 @@
-# PodSecurityPolicy
+---
+layout: default
+title:  Pod Security Policy
+parent: CKA / CKAD Certification Workshop Track
+nav_order: 10
+---
+
+# Pod Security Policy
 
 - A Kubernetes PodSecurityPolicy is a cluster-level resource that controls security-sensitive aspects of the pod specification through which the access privileges of a Kubernetes pod are limited. As a DevOps engineer, you may want to use a PodSecurityPolicy to restrict most of the workloads run in limited access privileges, while only allowing a few workloads to be run with extra privileges. 
 
