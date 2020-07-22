@@ -19,3 +19,7 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
 
 [Birth of Containerization](http://containerlabs.kubedaily.com/Birth_of_Containerization/README.html){: .btn .btn-purple .mr-2 }  [LXC](http://containerlabs.kubedaily.com/LXC/){: .btn .btn-purple .mr-2 }[Docker](http://containerlabs.kubedaily.com/Docker/Overview/){: .btn .btn-purple .mr-2 } [Kubernetes](){: .btn .btn-purple .mr-2 } [Rancher](){: .btn .btn-purple .mr-2 }  [OPENFAAS](){: .btn .btn-purple .mr-2 } [K3S](){: .btn .btn-purple .mr-2 } [Okteto](){: .btn .btn-purple .mr-2 } [Traeffik](){: .btn .btn-purple .mr-2 }
 
+
+![img](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/connection.png)
+
+[litmuschaos)(https://dev.to/t/litmuschaos){: .btn .btn-purple .mr-2 } 
