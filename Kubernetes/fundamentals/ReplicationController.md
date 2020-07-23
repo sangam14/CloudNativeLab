@@ -258,4 +258,170 @@ rm -rf myapp
 
 ```
 
+Faq : 1. replicationcontrollerMetadata attributes : deletionGracePeriodSeconds 
+Is it same as parameter at pod specification by name "terminationGracePeriodSeconds" ? 
+
+yes ! as per my personal knowledge ! 
+
+graceful delete option for pods
+on the Kubelet.  When a pod is deleted on the API server, a
+grace period is calculated that is based on the
+Pod.Spec.TerminationGracePeriodInSeconds, the user's provided grace
+period, or a default.  The grace period can only shrink once set.
+The value provided by the user (or the default) is set onto metadata
+as DeletionGracePeriod.
+
+When the Kubelet sees a pod with DeletionTimestamp set, it uses the
+value of ObjectMeta.GracePeriodSeconds as the grace period
+sent to Docker.  When updating status, if the pod has DeletionTimestamp
+set and all containers are terminated, the Kubelet will update the
+status one last time and then invoke Delete(pod, grace: 0) to
+clean up the pod immediately.
+
+
+# 
+
+- Docker containers can be terminated any time, due to an auto-scaling policy, pod or deployment deletion or while rolling out an update. In most of such cases, you will probably want to graceful shutdown your application running inside the container.
+
+- In our case, for example, we do want to wait until all current requests (or jobs processing) have completed, but the actual reasons to graceful shutdown an application may be many, including releasing resources, distributed locks or opened connections.
+
+# How it works
+
+- When a pod should be terminated:
+
+   - A SIGTERM signal is sent to the main process (PID 1) in each container, and a “grace period” countdown starts (defaults to 30 seconds - see below to change it).
+   - Upon the receival of the SIGTERM, each container should start a graceful shutdown of the running application and exit.
+   - If a container doesn’t terminate within the grace period, a SIGKILL signal will be sent and the container violently terminated.
+   
+   
+   refer: https://kubernetes.io/docs/concepts/workloads/pods/pod/#termination-of-pods
+   
+# A common pitfall while handling the SIGTERM
+
+Let’s say your Dockerfile ends with a CMD in the shell form:
+
+```
+CMD myapp
+
+```
+
+- the shell form runs the command with /bin/sh -c myapp, so the process that will get the SIGTERM is actually /bin/sh and not its child myapp. Depending on the actual shell you’re running, it could or could not pass the signal to its children.
+
+- For example, the shell shipped by default with Alpine Linux does not pass signals to children, while Bash does it. If your shell doesn’t pass signals to children, you’ve a couple of options to ensure the signal will be correctly delivered to the app.
+
+# Option #1: run the CMD in the exec form
+
+You can obviously use the CMD in the exec form. This will run myapp instead of /bin/sh -c myapp, but will not allow you to pass environment variables as arguments.
+
+```
+
+CMD [ "myapp" ]
+
+```
+
+Option #2: run the command with Bash
+
+You can ensure your container includes Bash and run your command through it, in order to support environment variables passed as arguments.
+
+```
+CMD [ "/bin/bash", "-c", "myapp --arg=$ENV_VAR" ]
+
+```
+# How to change the grace period
+
+
+The default grace period is 30 seconds. As any default, it could fit or couldn’t fit on your specific use cases. There are two way to change it:
+
+    - In the deployment .yaml file
+    - On the command line, when you run kubectl delete
+    
+    
+# Deployment
+
+You can customize the grace period setting terminationGracePeriodSeconds at the pod spec level. For example, the following .yaml shows a simple deployment config with a 60 seconds termination grace period.    
+
+```
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+    name: test
+spec:
+    replicas: 1
+    template:
+        spec:
+            containers:
+              - name: test
+                image: ...
+            terminationGracePeriodSeconds: 60
+
+```
+# Command line
+
+You can also change the default grace period when you manually delete a resource with kubectl delete command, adding the parameter --grace-period=SECONDS. For example:
+
+```
+kubectl delete deployment test --grace-period=60
+
+```
+Alternatives
+
+There’re some circumstances where a SIGTERM violently kill the application, vanishing all your efforts to gracefully shutdown it. Nginx, for example, quickly exit on SIGTERM, while you should run /usr/sbin/nginx -s quit to gracefully terminate it.
+
+In such cases, you can use the preStop hook. According to the Kubernetes doc, PreStop works as follow:
+
+
+```
+
+This hook is called immediately before a container is terminated. No parameters are passed to the handler. This event handler is blocking, and must complete before the call to delete the container is sent to the Docker daemon. The SIGTERM notification sent by Docker is also still sent. A more complete description of termination behavior can be found in Termination of Pods.
+
+
+
+```
+
+The preStop hook is configured at container level and allows you to run a custom command before the SIGTERM will be sent (please note that the termination grace period countdown actually starts before invoking the preStop hook and not once the SIGTERM signal will be sent).
+
+The following example, taken from the Kubernetes doc, shows how to configure a preStop command.
+
+```
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+        lifecycle:
+          preStop:
+            exec:
+              # SIGTERM triggers a quick exit; gracefully terminate instead
+              command: ["/usr/sbin/nginx","-s","quit"]
+
+
+```
+
+Faq 2 . I could not follow usecase for finalizers and initializers.
+
+```
+
+
+
+
+
+```
+
+
+
+
+
+
+
+
 
