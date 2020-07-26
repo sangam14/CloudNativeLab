@@ -260,7 +260,7 @@ rm -rf myapp
 
 Faq : 1. replicationcontrollerMetadata attributes : deletionGracePeriodSeconds 
 Is it same as parameter at pod specification by name "terminationGracePeriodSeconds" ? 
-{: .label .label-blue }
+{: .label .label-red }
 
 yes ! as per my personal knowledge ! 
 
@@ -409,13 +409,13 @@ spec:
 ```
 
 Faq 2 . I could not follow usecase for finalizers and initializers.( If possible, please share relevant links) 
-{: .label .label-blue }
+{: .label .label-red }
 refer :- https://github.com/sangam14/k8s-initializer 
 
 FAQ 3 : replicationcontrollerSpec attributes: minReadySeconds This is for pod level
 we have similar one for container level also pod->spec->container->readinessProbe->initialDelaySeconds
 So if readiness probe started passing for all containers of pod, then also, then pod will not move to available state, unless and until minReadySeconds is passed? This  minReadySeconds duration starts after all containers become ready? What is the usecase? 
-{: .label .label-blue }
+{: .label .label-red }
 
 initialDelaySeconds: Number of seconds after the container has started before liveness or readiness probes are initiated.
 So initialDelaySeconds comes before minReadySeconds.
