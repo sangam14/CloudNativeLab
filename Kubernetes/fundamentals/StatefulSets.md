@@ -1,3 +1,10 @@
+---
+layout: default
+title: StatefulSets
+parent: CKA / CKAD Certification Workshop Track
+nav_order: 15
+---
+
 # StatefulSets
 
 StatefulSets make it easier to deploy stateful applications into our Kubernetes cluster.
@@ -333,10 +340,347 @@ The NGINX webservers, by default, will serve an index file at /usr/share/nginx/h
 
 ```
 
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+spec:
+  ports:
+  - port: 80
+    name: web
+  clusterIP: None
+  selector:
+    app: nginx
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: web
+spec:
+  serviceName: "nginx"
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: k8s.gcr.io/nginx-slim:0.8
+        ports:
+        - containerPort: 80
+          name: web
+        volumeMounts:
+        - name: www
+          mountPath: /usr/share/nginx/html
+  volumeClaimTemplates:
+  - metadata:
+      name: www
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+
+```
+
+ Write the Pods' hostnames to their index.html files :
+ 
+ ```
+ $ for i in 0 1 2; do kubectl exec web-$i -- sh -c 'echo $(hostname) > /usr/share/nginx/html/index.html'; done
+ 
+ ```
+ 
+ Then, verify that the NGINX webservers are serving the hostnames:
+ 
+ ```
+ $ for i in 0 1 2; do kubectl exec -it web-$i -- curl localhost; done
+web-0
+web-1
+web-2
+
+ ```
+ 
+ Let's test if the pods are serving the right hostname even after rescheduled.
+
+As we've done before we need to delete the pods and wait for the StatefulSet resume them. Then, we check if they are still serving the same host:
+
+```
+$ kubectl delete pod -l app=nginx
+pod "web-0" deleted
+pod "web-1" deleted
+pod "web-2" deleted
+
+$ kubectl get pod -l app=nginx
+NAME    READY   STATUS    RESTARTS   AGE
+web-0   1/1     Running   0          22s
+web-1   1/1     Running   0          19s
+web-2   1/1     Running   0          12s
+
+
+```
+Once again, we can see the "web-0" came up first.
+
+This time, we don't have to write the host to the index.html because it is supposed be in the PersistentVolumes. All we need to do is to run "curl":
+
+```
+$ for i in 0 1 2; do kubectl exec -it web-$i -- curl localhost; done
+web-0
+web-1
+web-2
+
+```
+As we can see from the output, even though web-0, web-1 and web-2 were rescheduled, they continue to serve their hostnames because the PersistentVolumes associated with their PersistentVolumeClaims are remounted to their volumeMounts. No matter what node web-0and web-1 are scheduled on, their PersistentVolumes will be mounted to the appropriate mount points.
+
+# Scale up via StatefulSet - kubectl scale statefulset
+
+Scaling a StatefulSet refers to increasing or decreasing the number of replicas. This is accomplished by updating the replicas field.
+We can use kubectl scale:
+
+```
+$ kubectl scale sts web --replicas=5
+statefulset.apps/web scaled
+
+$ kubectl get pod -l app=nginx
+NAME    READY   STATUS    RESTARTS   AGE
+web-0   1/1     Running   0          7m25s
+web-1   1/1     Running   0          7m22s
+web-2   1/1     Running   0          7m15s
+web-3   1/1     Running   0          17s
+web-4   1/1     Running   0          11s
 
 
 
 ```
+The StatefulSet controller scaled the number of replicas. As with StatefulSet creation, the StatefulSet controller created each Pod sequentially with respect to its ordinal index, and it waited for each Pod's predecessor to be "Running" and "Ready" before launching the subsequent Pod.
+
+
+# Scale down via StatefulSet - kubectl scale statefulset 
+
+```
+
+$ kubectl scale sts web --replicas=2
+statefulset.apps/web scaled
+
+$ kubectl get pod -l app=nginx
+NAME    READY   STATUS    RESTARTS   AGE
+web-0   1/1     Running   0          9m24s
+web-1   1/1     Running   0          9m21s
+
+
+
+```
+The controller deleted one Pod at a time, in reverse order with respect to its ordinal index, and it waited for each to be completely shutdown before deleting the next.
+
+```
+$ kubectl get pvc -l app=nginx
+NAME        STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+www-web-0   Bound    pvc-1568146b-82ee-4658-969b-e4afbd660701   1Gi        RWO            standard       3h49m
+www-web-1   Bound    pvc-d0505e50-ac97-4263-92ac-29d3ce97f2c1   1Gi        RWO            standard       3h49m
+www-web-2   Bound    pvc-5a021388-5272-416b-825f-0883d2d4ff06   1Gi        RWO            standard       3h49m
+www-web-3   Bound    pvc-0b6247ee-80a8-4808-9bf9-23455734be15   1Gi        RWO            standard       3m
+www-web-4   Bound    pvc-9c6c1d1a-88c6-48dd-bcc3-33862db7650e   1Gi        RWO            standard       2m55s
+
+
+
+```
+
+There are still five PersistentVolumeClaims (pvc-*, ...) and five PersistentVolumes (www-web-*, ...) - the PersistentVolumes mounted to the Pods of a StatefulSet are not deleted when the StatefulSet's Pods are deleted. This is still true when Pod deletion is caused by scaling the StatefulSet down.
+
+# Updating StatefulSets - kubectl patch statefulset
+
+The StatefulSet controller supports automated updates. The strategy used is determined by the spec.updateStrategy field of the StatefulSet API Object. This feature can be used to upgrade the container images, resource requests and/or limits, labels, and annotations of the Pods in a StatefulSet. There are two valid update strategies, RollingUpdate which is the default and another updateStrategy is OnDelete.
+
+Let's patch the web StatefulSet to change the container image:
+
+```
+$ kubectl patch statefulset web --type='json' -p='[{"op": "replace", "path": "/spec/template/spec/containers/0/image", "value":"gcr.io/google_containers/nginx-slim:0.8"}]'
+statefulset.apps/web patched
+
+
+```
+The RollingUpdate update strategy will update all Pods in a StatefulSet, in reverse ordinal order, while respecting the StatefulSet guarantees.
+
+Let's patch the web StatefulSet to apply the RollingUpdate update strategy:
+
+```
+$ kubectl patch statefulset web -p '{"spec":{"updateStrategy":{"type":"RollingUpdate"}}}'
+statefulset.apps/web patched (no change)
+
+
+
+```
+
+```
+$ kubectl get po -l app=nginx -w
+web-2   1/1   Terminating   0     18m
+web-2   0/1   Terminating   0     18m
+web-2   0/1   Terminating   0     18m
+web-2   0/1   Terminating   0     18m
+web-2   0/1   Terminating   0     18m
+web-2   0/1   Pending   0     0s
+web-2   0/1   Pending   0     0s
+web-2   0/1   ContainerCreating   0     0s
+web-2   1/1   Running   0     2s
+web-1   1/1   Terminating   0     20m
+web-1   0/1   Terminating   0     20m
+web-1   0/1   Terminating   0     20m
+web-1   0/1   Terminating   0     20m
+web-1   0/1   Pending   0     0s
+web-1   0/1   Pending   0     0s
+web-1   0/1   ContainerCreating   0     0s
+web-1   1/1   Running   0     2s
+web-0   1/1   Terminating   0     20m
+web-0   0/1   Terminating   0     20m
+web-0   0/1   Terminating   0     20m
+web-0   0/1   Terminating   0     20m
+web-0   0/1   Pending   0     0s
+web-0   0/1   Pending   0     0s
+web-0   0/1   ContainerCreating   0     0s
+web-0   1/1   Running   0     2s
+
+
+
+
+```
+The Pods in the StatefulSet are updated in reverse ordinal order. The StatefulSet controller terminates each Pod, and waits for it to transition to Running and Ready prior to updating the next Pod.
+
+Note that, even though the StatefulSet controller will not proceed to update the next Pod until its ordinal successor is Running and Ready, it will restore any Pod that fails during the update to its current version. Pods that have already received the update will be restored to the updated version, and Pods that have not yet received the update will be restored to the previous version. In this way, the controller attempts to continue to keep the application healthy and the update consistent in the presence of intermittent failures.
+
+Get the Pods to view their container images:
+
+```
+$ for p in 0 1 2; do kubectl get po web-$p --template '{{range $i, $c := .spec.containers}}{{$c.image}}{{end}}'; echo; done
+gcr.io/google_containers/nginx-slim:0.8
+gcr.io/google_containers/nginx-slim:0.8
+gcr.io/google_containers/nginx-slim:0.8
+
+
+
+```
+
+# Deleting StatefulSets
+
+StatefulSet supports both Non-Cascading and Cascading deletion. In a Non-Cascading Delete, the StatefulSet's Pods are not deleted when the StatefulSet is deleted. In a Cascading Delete, both the StatefulSet and its Pods are deleted.
+
+```
+
+$ kubectl delete statefulset web
+statefulset.apps "web" deleted
+
+
+
+```
+By default, when we delete a StatefuleSet, it deletes the pods as well ("--cascade=true"). To keep the pods, we can append "--cascade=false":
+
+```
+
+$ kubectl delete sts web --cascade=false     
+
+```
+
+# Pod Management Policy - OrderedReady vs Parallel
+
+
+For some distributed systems, the StatefulSet ordering guarantees are unnecessary and/or undesirable. These systems require only uniqueness and identity.
+
+To address this, we'll use `.spec.podManagementPolicy` as shown below (`web-parallel.yaml`):
+
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+spec:
+  ports:
+  - port: 80
+    name: web
+  clusterIP: None
+  selector:
+    app: nginx
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: web
+spec:
+  serviceName: "nginx"
+  podManagementPolicy: "Parallel"
+  replicas: 5
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: k8s.gcr.io/nginx-slim:0.8
+        ports:
+        - containerPort: 80
+          name: web
+        volumeMounts:
+        - name: www
+          mountPath: /usr/share/nginx/html
+  volumeClaimTemplates:
+  - metadata:
+      name: www
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi    
+
+
+
+
+```
+In one terminal, watch the Pods in the StatefulSet with` kubectl get po -l app=nginx -w `while running `kubectl apply -f web-parallel.yaml` on another terminal:
+
+```
+
+$  kubectl get pods -l app=nginx -w
+NAME    READY   STATUS    RESTARTS   AGE
+web-0   0/1     Pending   0          0s
+web-0   0/1     Pending   0          0s
+web-1   0/1     Pending   0          0s
+web-1   0/1     Pending   0          0s
+web-2   0/1     Pending   0          0s
+web-2   0/1     Pending   0          0s
+web-3   0/1     Pending   0          0s
+web-3   0/1     Pending   0          0s
+web-4   0/1     Pending   0          0s
+web-0   0/1     ContainerCreating   0          0s
+web-4   0/1     Pending             0          0s
+web-1   0/1     ContainerCreating   0          0s
+web-2   0/1     ContainerCreating   0          0s
+web-3   0/1     ContainerCreating   0          1s
+web-4   0/1     ContainerCreating   0          2s
+web-1   1/1     Running             0          3s
+web-2   1/1     Running             0          3s
+web-3   1/1     Running             0          5s
+web-4   1/1     Running             0          5s
+web-0   1/1     Running             0          6s    
+
+
+
+
+```
+- Parallel pod management tells the StatefulSet controller to launch or terminate all Pods in parallel, and not to wait for Pods to become Running and Ready or completely terminated prior to launching or terminating another Pod.
+
+- Same thing happens when we scale the StatefuleSet with `kubectl scale statefulset/web --replicas=3 `or delete the set with kubectl delete sts web.
+
+Note that the default pod management is set to OrderedReady which tells the StatefulSet controller to respect the ordering.
+
+More StatefulSets:- ( https://kubernetes.io/docs/tutorials/stateful-application/basic-stateful-set/ )
+
 
 
 
