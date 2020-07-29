@@ -163,7 +163,86 @@ fluentd-es-demo-xm2rl            1/1       Running   0          1m          10.0
 We can see that not only is our fluentd-es-demo pods running, but there is a copy of each on every node.
 
 
+ReplicaSet VS DaemonSet
+{: .label .label-red }
 
+Kubernetes API is growing day by day and they are adding new features every day. The latest feature they added was DaemonSet.
+
+Although they had ReplicaSet,  DaemonSet is the K8 object they added. Let’s see the difference.
+
+ReplicasSet will ensure that the number of pods (defined in our config file) is always running in our cluster. Does not matter in which worker node they are running. The scheduler will schedule the pods on any node depending upon the free resources. If one of our nodes goes down then all pods running on the node will be randomly scheduled on different nodes as per the resource availability. In this way, ReplicaSet ensures that the number of pods of an application is running on the correct scale as specified in the conf file.
+
+
+![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/replicasetvs.png)
+
+
+Whereas in the case of DaemonSet it will ensure that one copy of pod defined in our configuration will always be available on every worker node
+
+The total # of pods running in DaemonSet = Number of worker nodes in our cluster
+
+If a new node is added in our cluster then DaemonSet will automatically allocate pod on that node. Similarly, if a node is deleted then the pod running on the node is also destroyed, it will not reschedule the pod on different nodes as in case of ReplicaSet.
+
+![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/daemonsetvs.png)
+
+
+Let’s take a scenario where we have to create a pod containing nginx image in it. Below are the configuration files for creating a ReplicaSet and DaemonSet. Save this configuration in DemonSet.yml file.
+
+```
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  labels:
+    app: nginx
+  name: example-daemon
+spec:
+  template:
+     metadata:
+       labels:
+        app: nginx
+     spec:   
+       containers:
+         - name: nginx
+           image: nginx
+
+```
+This is the configuration of a DaemonSet for nginx.
+
+To create the Deamon Set, execute below commands.
+```
+ kubectl create -f DemonSet.yml
+ ```
+
+This daemonSet will create a pod in every node running in our cluster.
+
+The configuration of ReplicaSet:-
+
+```
+
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  labels:
+    app: nginx
+  name: example-daemon
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+     metadata:
+       labels:
+        app: nginx
+     spec:   
+       containers:
+         - name: nginx
+           image: nginx
+
+
+
+
+```
+This ReplicaSet will make sure that 3 replicas are present in our cluster everytime whether our node is up or down. The scheduler will take care on which node to schedule pod depending upon the free resources on the node.
 
       
        
