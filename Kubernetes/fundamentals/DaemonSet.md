@@ -33,8 +33,8 @@ Now that we understand DaemonSets, here are some examples of why and how to use 
        
  As your use case gets more complex, you can deploy multiple DaemonSets for one kind of daemon, using a variety of flags or memory and CPU requests 
  for various hardware types.
- 
- # How are DaemonSets scheduled?
+
+# How are DaemonSets scheduled?
 
 DaemonSets are scheduled either with `DaemonSet controller` or `default scheduler`. Let’s compare:
 
@@ -45,7 +45,7 @@ DaemonSets are scheduled either with `DaemonSet controller` or `default schedule
   - `Default scheduler.` Using ScheduleDaemonSetPods allows for scheduling DaemonSets using defaults, not DaemonSet controller. To do this, 
   add NodeAffinity to the DaemonSet pods (instead of .spec.nodeName). By default, the scheduler will replace your DaemonSet pod node affinity if it already exists.
   
- # Working with DaemonSets
+# Working with DaemonSets
 
 - Like every manifest in K8S, the following fields are required:
 
