@@ -1,4 +1,9 @@
-
+---
+layout: default
+title: kubernetes Configmap
+parent: CKA / CKAD Certification Workshop Track
+nav_order: 19
+---
 
 # What is a ConfigMap in Kubernetes?
 
