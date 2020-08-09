@@ -4,6 +4,7 @@
 # Pod 
 
 simple.yaml
+{: .label .label-red }
 ```
 ---
 apiVersion: v1
@@ -20,6 +21,7 @@ spec:
      
 ```
 multi-container.yaml
+{: .label .label-red }
  
 ```
  ---
@@ -43,6 +45,7 @@ spec:
       
    ```   
 imagepullsecret.yaml
+{: .label .label-red }
 
 ```
 # https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
@@ -64,6 +67,7 @@ spec:
 
 ```
 host-aliases.yaml
+{: .label .label-red }
 ```
 ---
 # https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/#adding-additional-entries-with-hostaliases
@@ -95,6 +99,7 @@ spec:
 # pod security policy
 
 privileged.yaml
+{: .label .label-red }
      
 ```
  ---
@@ -133,6 +138,7 @@ spec:
  ```
  
  restricted.yaml
+ {: .label .label-red }
  
  ```
  ---
@@ -198,6 +204,7 @@ spec:
  ```
  
  psp.yaml
+ {: .label .label-red }
  
  ```
  ---
@@ -275,6 +282,7 @@ spec:
  # deployments
  
  simple-deployment.yaml
+
  
  ```
  ---
@@ -306,6 +314,7 @@ spec:
  # namespace
  
  namespace.yaml
+
  ```
  ---
 apiVersion: v1
@@ -316,6 +325,7 @@ metadata:
 ```
 
 memory-request-limit.yaml
+
 
 ```
 ---
@@ -338,6 +348,10 @@ spec:
 
 ```
 # resource quotas
+
+quotas.yaml
+
+
 
 ```
 
@@ -394,6 +408,7 @@ items:
 # daemon set
 
 simple-daemon-set.yaml
+
 
 ```
 ---
@@ -1615,6 +1630,827 @@ spec:
 
 
 ```
+
+# webserver
+
+simple.yaml
+
+```
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webserver-simple-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: webserver-simple-app
+  template:
+    metadata:
+      labels:
+        app: webserver-simple-app
+    spec:
+      containers:
+        - name: webserver-simple-container
+          image: python:3
+          command:
+            - python
+            - -m
+            - http.server
+---
+# https://kubernetes.io/docs/concepts/services-networking/service/
+apiVersion: v1
+kind: Service
+metadata:
+  name: webserver-simple-service
+spec:
+  selector:
+    app: webserver-simple-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+
+
+```
+
+# readiness
+
+readiness.yaml
+
+```
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pods-readiness-exec-pod
+spec:
+  containers:
+    - args:
+        - /bin/sh
+        - -c
+        - touch /tmp/healthy; sleep 30; rm -rf /tmp/healthy; sleep 600
+      image: busybox
+      readinessProbe:
+        exec:
+          command:
+            - cat
+            - /tmp/healthy
+        initialDelaySeconds: 5
+      name: pods-readiness-exec-container
+
+
+```
+
+# rbac
+
+role.yaml
+
+```
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: rbac-role-role
+rules:
+  - apiGroups: [""]  # "" indicates the core API group
+    resources: ["pods"]
+    verbs: ["get", "watch", "list"]
+
+
+```
+role-binding.yaml
+
+```
+---
+apiVersion: rbac.authorization.k8s.io/v1
+# This role binding allows "jane" to read pods in the "default" namespace.
+# You need to already have a Role named "pod-reader" in that namespace.
+kind: RoleBinding
+metadata:
+  name: rbac-role-binding-role-binding
+subjects:
+  # You can specify more than one "subject"
+  - kind: User
+    name: jane  # "name" is case sensitive
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  # "roleRef" specifies the binding to a Role / ClusterRole
+  kind: Role  # this must be Role or ClusterRole
+  # this must match the name of the Role or ClusterRole you wish to bind to
+  name: rbac-role-binding-role
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: rbac-role-binding-role
+rules:
+  - apiGroups: [""]  # "" indicates the core API group
+    resources: ["pods"]
+    verbs: ["get", "watch", "list"]
+
+
+
+```
+cluster-role.yaml
+
+```
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  # "namespace" omitted since ClusterRoles are not namespaced
+  name: rbac-cluster-role
+rules:
+  - apiGroups: [""]
+    # at the HTTP level, the name of the resource for accessing Secret
+    # objects is "secrets"
+    resources: ["secrets"]
+    verbs: ["get", "watch", "list"]
+
+
+```
+cluster-role-binding.yaml
+
+```
+---
+apiVersion: rbac.authorization.k8s.io/v1
+# This cluster role binding allows anyone in the "manager" group to
+# read secrets in any namespace.
+kind: ClusterRoleBinding
+metadata:
+  name: rbac-cluster-role-binding-cluster-role-binding
+subjects:
+  - kind: Group
+    name: manager  # Name is case sensitive
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: rbac-cluster-role-binding-cluster-role
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  # "namespace" omitted since ClusterRoles are not namespaced
+  name: rbac-cluster-role-binding-cluster-role
+rules:
+  - apiGroups: [""]
+    #
+    # at the HTTP level, the name of the resource for accessing Secret
+    # objects is "secrets"
+    resources: ["secrets"]
+    verbs: ["get", "watch", "list"]
+
+
+```
+# privileged
+
+simple.yaml
+
+```
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: privileged-simple-pod
+spec:
+  containers:
+    - command:
+        - sleep
+        - "3600"
+      image: busybox
+      name: privileged-simple-pod
+      securityContext:
+        privileged: true
+
+
+```
+
+namespace.yaml
+
+```
+---
+# Namespace here refers to the container namespaces, not kubernetes
+apiVersion: v1
+kind: Pod
+metadata:
+  name: privileged-namespace-pod
+spec:
+  hostPID: true
+  hostIPC: true
+  hostUTS: true
+  hostNetwork: true
+  containers:
+    - command:
+        - sleep
+        - "3600"
+      image: busybox
+      name: privileged-namespace-container
+      securityContext:
+        privileged: true
+
+
+
+```
+# memory request
+
+memory-request-limit.yaml
+
+```
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: -memory-request-limit-pod
+spec:
+  containers:
+    - args: ["--vm", "1", "--vm-bytes", "150M", "--vm-hang", "1"]
+      command: ["stress"]
+      image: polinux/stress
+      name: memory-request-limit-container
+      resources:
+        limits:
+          memory: "200Mi"
+        requests:
+          memory: "100Mi"
+
+```
+
+# liveness
+
+liveness.yaml
+
+```
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pods-liveness-exec-pod
+spec:
+  containers:
+    - args:
+        - /bin/sh
+        - -c
+        - touch /tmp/healthy; sleep 30; rm -rf /tmp/healthy; sleep 600
+      image: busybox
+      livenessProbe:
+        exec:
+          command:
+            - cat
+            - /tmp/healthy
+        initialDelaySeconds: 5
+        periodSeconds: 5
+      name: pods-liveness-exec-container
+
+```
+advanced-liveness.yaml
+
+```
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    test: liveness
+  name: liveness-http
+spec:
+  containers:
+    - args:
+        - /server
+      image: k8s.gcr.io/liveness
+      livenessProbe:
+        httpGet:
+          httpHeaders:
+            - name: X-Custom-Header
+              value: Awesome
+          # when "host" is not defined, "PodIP" will be used
+          # host: my-host
+          # when "scheme" is not defined, "HTTP" scheme will be used. Only "HTTP" and "HTTPS" are allowed
+          # scheme: HTTPS
+          path: /healthz
+          port: 8080
+        initialDelaySeconds: 15
+        timeoutSeconds: 1
+      name: liveness
+
+```
+# headless service
+
+headless-service.yaml
+
+```
+# Example of a headless service.
+# To see the difference, exec onto the headless service app, and do
+#
+# nslookup headless-service-normal-service
+# nslookup headless-service-headless-service
+#
+# from the dns-debug service (does not work from the deployed app itself - not sure why)
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: headless-service-normal-service
+spec:
+  selector:
+    app: headless-service-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: headless-service-headless-service
+spec:
+  clusterIP: None  # This marks this service out as a headless service
+  selector:
+    app: headless-service-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: headless-service-deployment
+  labels:
+    app: headless-service-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: headless-service-app
+  template:
+    metadata:
+      labels:
+        app: headless-service-app
+    spec:
+      containers:
+        - command:
+            - sleep
+            - "3600"
+          image: busybox
+          name: headless-service-app
+          ports:
+            - containerPort: 3000
+---
+# https://kubernetes.io/docs/tasks/administer-cluster/dns-debugging-resolution/
+apiVersion: v1
+kind: Pod
+metadata:
+  name: headless-service-dnsutils-pod
+spec:
+  containers:
+    - command:
+        - sleep
+        - "3600"
+      image: gcr.io/kubernetes-e2e-test-images/dnsutils:1.3
+      name: dnsutils
+
+
+
+```
+# DNS Debug
+
+dns-debug.yaml
+
+```
+---
+# https://kubernetes.io/docs/tasks/administer-cluster/dns-debugging-resolution/
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dnsutils
+spec:
+  containers:
+    - command:
+        - sleep
+        - "3600"
+      image: gcr.io/kubernetes-e2e-test-images/dnsutils:1.3
+      name: dnsutils
+
+```
+
+# DNS Config 
+
+dns-config.yaml
+
+```
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dns-config-dns-config-pod
+spec:
+  containers:
+    - name: test
+      image: nginx
+  dnsPolicy: "None"
+  dnsConfig:
+    nameservers:
+      - 1.2.3.4
+    searches:
+      - ns1.svc.cluster-domain.example
+      - my.dns.search.suffix
+    options:
+      - name: ndots
+        value: "2"
+      - name: edns0
+
+
+
+```
+policy.yaml
+```
+---
+# Adapted from: https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy
+# "Default": The Pod inherits the name resolution configuration from the node that the pods run on. See related discussion for more details.
+# "ClusterFirst": Any DNS query that does not match the configured cluster domain suffix, such as "www.kubernetes.io", is forwarded to the upstream nameserver inherited from the node. Cluster administrators may have extra stub-domain and upstream DNS servers configured. See related discussion for details on how DNS queries are handled in those cases.
+# "ClusterFirstWithHostNet": For Pods running with hostNetwork, you should explicitly set its DNS policy "ClusterFirstWithHostNet".
+# "None": It allows a Pod to ignore DNS settings from the Kubernetes environment. All DNS settings are supposed to be provided using the dnsConfig field in the Pod Spec. See Pod's DNS config subsection below.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dns-config-policy-pod
+spec:
+  containers:
+    - command:
+        - sleep
+        - "3600"
+      image: busybox
+      name: dns-config-policy-container
+  hostNetwork: true
+  dnsPolicy: ClusterFirstWithHostNet
+
+
+```
+# cronjob
+simple.yaml
+
+```
+---
+# https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: cronjob-simple
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - args:
+                - /bin/sh
+                - -c
+                - date; echo Hello from the Kubernetes cluster cronjob
+              image: busybox
+              name: cronjob-simple-container
+          restartPolicy: OnFailure
+
+
+```
+# broken-init-container
+
+init-container.yaml
+```
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: broken-init-container-pod
+spec:
+  containers:
+    - name: broken-init-container-container
+      image: busybox
+      command: ['sh', '-c', 'echo The app is running! && sleep 3600']
+  initContainers:
+    - name: broken-init-container-init-container
+      image: busybox
+      command: ['sh', '-c', "until nslookup pods-init-container-service-nonexistent.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for myservice; sleep 2; done"]
+
+
+
+```
+# broken-liveness
+liveness.yaml
+
+```
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: broken-liveness-pod
+spec:
+  containers:
+    - args:
+        - /bin/sh
+        - -c
+        - "sleep 3600"
+      image: busybox
+      livenessProbe:
+        exec:
+          command:
+            - cat
+            - /tmp/healthy
+        initialDelaySeconds: 5
+        periodSeconds: 5
+      name: broken-liveness-container
+
+
+
+```
+# broken-pods
+
+bad-command.yaml
+```
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: broken-pods-bad-command-pod
+spec:
+  containers:
+    - command:
+        - thiscommanddoesnotexist
+      image: busybox
+      name: broken-pods-bad-command-container
+
+```
+default-shell-command.yaml
+
+```
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: broken-pods-default-shell-command-pod
+spec:
+  containers:
+    - image: busybox
+      name: broken-pods-default-shell-comman-container
+
+
+
+```
+failed-command.yaml
+```
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: broken-pods-failed-command-pod
+spec:
+  containers:
+    - image: busybox
+      command:
+        - /bin/sh
+        - -c
+        - "exit 1"
+      name: broken-pods-failed-command-container
+
+
+```
+misused-command.yaml
+```
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: broken-pods-misused-command-pod
+spec:
+  containers:
+    - image: busybox
+      command:
+        - /bin/sh
+        - -c
+      name: broken-pods-misused-command-container
+
+
+```
+multi-container-no-command.yaml
+```
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: broken-pod-multi-container-no-command-pod
+spec:
+  containers:
+    # this container has no command or entrypoint specified
+    - image: mstormo/suse
+      imagePullPolicy: IfNotPresent
+      name: broken-pod-multi-container-no-command-1
+    - image: busybox
+      command:
+        - sleep
+        - "3600"
+      name: broken-pod-multi-container-no-command-2
+
+
+```
+
+no-command.yaml
+
+```
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: broken-pods-no-command-pod
+spec:
+  containers:
+    # this container has no command or entrypoint specified
+    - image: mstormo/suse
+      name: broken-pods-no-command-container
+
+```
+oom-killed.yaml
+
+```
+---
+# https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/ claims that this invoked the OOM killer, but it runs fine on MicroK8s?
+apiVersion: v1
+kind: Pod
+metadata:
+  name: broken-pods-oom-killed-pod
+spec:
+  containers:
+    - args: ["--vm", "1", "--vm-bytes", "250M", "--vm-hang", "1"]
+      command: ["stress"]
+      image: polinux/stress
+      name: broken-pods-oom-killed-container
+      resources:
+        limits:
+          memory: "100Mi"
+        requests:
+          memory: "50Mi"
+
+
+
+```
+private-repo.yaml
+
+```
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: broken-pods-private-repo-pod
+spec:
+  containers:
+    # this container has no command or entrypoint specified
+    - image: imiell/bad-dockerfile-private
+      name: broken-pods-private-repo-container
+
+
+```
+too-much-mem.yaml
+
+```
+---
+# https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/ claims that this invoked the OOM killer, but it runs fine on MicroK8s?
+apiVersion: v1
+kind: Pod
+metadata:
+  name: broken-pods-too-much-mem-pod
+spec:
+  containers:
+    - command:
+        - sleep
+        - "3600"
+      image: busybox
+      name: broken-pods-too-much-mem-container
+      resources:
+        requests:
+          memory: "1000Gi"
+
+
+
+
+```
+# readiness-broken
+
+readiness.yaml
+```
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: broken-readiness-pod
+spec:
+  containers:
+    - args:
+        - /bin/sh
+        - -c
+        - "sleep 3600"
+      image: busybox
+      readinessProbe:
+        exec:
+          command:
+            - cat
+            - /tmp/healthy
+        initialDelaySeconds: 5
+        periodSeconds: 5
+      name: broken-readiness-container
+
+
+
+
+```
+readiness-broken.yaml
+
+```
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: readiness-broken-deployment
+  labels:
+    app: readiness-broken-app-label
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: readiness-broken-app-label
+  template:
+    metadata:
+      labels:
+        app: readiness-broken-app-label
+        tier: backend
+    spec:
+      containers:
+        - name: readiness-broken-container
+          image: eu.gcr.io/container-solutions-workshops//backend:3.14159
+          ports:
+            - containerPort: 8080
+          env:
+            - name: READINESS_PROBE_ENABLED
+              value: "enabled"
+          readinessProbe:
+            httpGet:
+              path: /neverready
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 5
+            timeoutSeconds: 5
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: readiness-broken-svc
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    tier: frontend
+
+
+```
+# broken-secrets
+
+simple-secret.yaml
+
+```
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: secrets-simple-secret-pod
+spec:
+  containers:
+    - command:
+        - sleep
+        - "3600"
+      image: busybox
+      name: secrets-simple-secret-container
+      volumeMounts:
+        - name: secrets-simple-secret-volume
+          mountPath: "/etc/simple-secret"
+  volumes:
+    - name: secrets-simple-secret-volume
+      secret:
+        secretName: secrets-simple-secret-secret-doesnotexist
+
+
+```
+
+
+
 
 
 
