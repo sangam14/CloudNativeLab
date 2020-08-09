@@ -522,8 +522,431 @@ spec:
 
 ```
 
+# Services
+
+simple.yaml
+
+```
+---
+# https://kubernetes.io/docs/concepts/services-networking/service/
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-simple-service
+spec:
+  selector:
+    app: service-simple-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+
+```
+
+node-port.yaml
+
+```
+
+---
+# https://kubernetes.io/docs/concepts/services-networking/service/#nodeport
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-node-port-service
+spec:
+  type: NodePort
+  selector:
+    app: MyApp
+  ports:
+    # By default and for convenience, the `targetPort` is set to the same value as the `port` field.
+    - port: 80
+      targetPort: 80
+      # Optional field
+      # By default and for convenience, the Kubernetes control plane will allocate a port from a range (default: 30000-32767)
+      nodePort: 30007
+      
+ ```     
+
+service-and-endpoint.yaml
+
+```
+
+---
+# https://kubernetes.io/docs/concepts/services-networking/service/#services-without-selectors
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-and-endpoint-service
+spec:
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 9376
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: service-and-endpoint-endpoint
+subsets:
+  - addresses:
+      - ip: 192.0.2.42
+    ports:
+      - port: 9376
 
 
+```
+
+multi-port-service.yaml
+
+```
+---
+# https://kubernetes.io/docs/concepts/services-networking/service/#multi-port-services
+apiVersion: v1
+kind: Service
+metadata:
+  name: multi-port-service-service
+spec:
+  selector:
+    app: MyApp
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 8080
+    - name: https
+      protocol: TCP
+      port: 443
+      targetPort: 8443
+
+
+```
+load-balancer.yaml
+
+```
+---
+# https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-load-balancer-service
+spec:
+  selector:
+    app: MyApp
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 9376
+  clusterIP: 10.0.171.239
+  type: LoadBalancer
+status:
+  loadBalancer:
+    ingress:
+      - ip: 192.0.2.127
+
+
+```
+
+external-name.yaml
+
+```
+---
+# https://kubernetes.io/docs/concepts/services-networking/service/#externalname
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-external-name-service
+spec:
+  type: ExternalName
+  externalName: my.database.example.com
+
+
+```
+external-ips.yaml
+
+```
+
+---
+# https://kubernetes.io/docs/concepts/services-networking/service/#external-ips
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-external-ips-service
+spec:
+  selector:
+    app: MyApp
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 9376
+  externalIPs:
+    - 80.11.12.10
+    
+```
+
+# service topologies
+
+fallback.yaml
+```
+---
+# https://kubernetes.io/docs/concepts/services-networking/service-topology/#prefer-node-local-zonal-then-regional-endpoints
+# A Service that prefers node local, zonal, then regional endpoints but falls back to cluster wide endpoints.
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-topolgies-fallback-service
+spec:
+  selector:
+    app: my-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 9376
+  topologyKeys:
+    - "kubernetes.io/hostname"
+    - "topology.kubernetes.io/zone"
+    - "topology.kubernetes.io/region"
+    - "*"
+
+```
+
+# resources
+
+resource-limit.yaml
+
+```
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: resource-limit-pod
+spec:
+  containers:
+    - name: resource-limit-container
+      image: busybox
+      args:
+        - sleep
+        - "600"
+      livenessProbe:
+        exec:
+          command:
+            - cat
+            - /tmp/healthy
+        initialDelaySeconds: 5
+        periodSeconds: 5
+      resources:
+        limits:
+          cpu: "30m"
+          memory: "200Mi"
+
+
+
+
+```
+
+resource-request.yaml
+
+```
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: resource-request-pod
+spec:
+  containers:
+    - name: resource-request-container
+      image: busybox
+      args:
+        - sleep
+        - "600"
+      livenessProbe:
+        exec:
+          command:
+            - cat
+            - /tmp/healthy
+        initialDelaySeconds: 5
+        periodSeconds: 5
+      resources:
+        requests:
+          memory: "20000Mi"
+          cpu: "99999m"
+
+
+```
+
+# ingress
+
+ingress.yaml
+
+```
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: test-ingress
+spec:
+  backend:
+    serviceName: testsvc
+    servicePort: 80
+    
+```
+
+ingress-class.yaml
+
+```
+
+
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: IngressClass
+metadata:
+  name: external-lb
+spec:
+  controller: example.com/ingress-controller
+  parameters:
+    apiGroup: k8s.example.com/v1alpha
+    kind: IngressParameters
+    name: external-lb
+
+
+```
+virtualhosting.yaml
+```
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: name-virtual-host-ingress
+spec:
+  rules:
+    - host: foo.bar.com
+      http:
+        paths:
+          - backend:
+              serviceName: testsvc1
+              servicePort: 80
+    - host: bar.foo.com
+      http:
+        paths:
+          - backend:
+              serviceName: testsvc2
+              servicePort: 80
+
+
+```
+tls.yaml
+
+```
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ingress-tls-secret
+data:
+  # Data here as a placeholder - it's just a base64-encoded 'a'
+  tls.crt: YQo=
+  tls.key: YQo=
+type: kubernetes.io/tls
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-tls
+spec:
+  tls:
+    - hosts:
+        - sslexample.foo.com
+      secretName: ingress-tls-secret
+  rules:
+    - host: sslexample.foo.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: testsvc1
+              servicePort: 80
+
+
+```
+rewrite.yaml
+
+```
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-rewrite
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /rewritepath
+            pathType: Prefix
+            backend:
+              serviceName: testsvc
+              servicePort: 80
+
+
+```
+nohost.yaml
+
+```
+
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: name-virtual-host-ingress
+spec:
+  rules:
+    - host: first.bar.com
+      http:
+        paths:
+          - backend:
+              serviceName: testsvc1
+              servicePort: 80
+    - host: second.foo.com
+      http:
+        paths:
+          - backend:
+              serviceName: testsvc2
+              servicePort: 80
+    # No host supplied here
+    - http:
+        paths:
+          - backend:
+              serviceName: testsvc3
+              servicePort: 80
+
+```
+fanout.yaml
+
+```
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-fanout
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: foo.bar.com
+      http:
+        paths:
+          - path: /path1
+            backend:
+              serviceName: testsvc1
+              servicePort: 4201
+          - path: /path2
+            backend:
+              serviceName: testsvc2
+              servicePort: 4202
+
+
+```
 
 
 
