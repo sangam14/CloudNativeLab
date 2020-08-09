@@ -272,5 +272,258 @@ spec:
         privileged: true
   ``` 
   
-  
-  
+ # deployments
+ 
+ simple-deployment.yaml
+ 
+ ```
+ ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployments-simple-deployment-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: deployments-simple-deployment-app
+  template:
+    metadata:
+      labels:
+        app: deployments-simple-deployment-app
+    spec:
+      containers:
+        - name: busybox
+          image: busybox
+          command:
+            - sleep
+            - "3600"
+ 
+ 
+ 
+ ```
+ 
+ # namespace
+ 
+ namespace.yaml
+ ```
+ ---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: namespace-namespace
+
+```
+
+memory-request-limit.yaml
+
+```
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: -memory-request-limit-pod
+spec:
+  containers:
+    - args: ["--vm", "1", "--vm-bytes", "150M", "--vm-hang", "1"]
+      command: ["stress"]
+      image: polinux/stress
+      name: memory-request-limit-container
+      resources:
+        limits:
+          memory: "200Mi"
+        requests:
+          memory: "100Mi"
+
+
+```
+# resource quotas
+
+```
+
+---
+apiVersion: v1
+kind: List
+items:
+  # https://kubernetes.io/docs/concepts/policy/resource-quotas/
+  - apiVersion: v1
+    kind: ResourceQuota
+    metadata:
+      name: resource-quotas-quotas-pods-high
+    spec:
+      hard:
+        cpu: "1000"
+        memory: 200Gi
+        pods: "10"
+      scopeSelector:
+        matchExpressions:
+          - operator: In
+            scopeName: PriorityClass
+            values: ["high"]
+  - apiVersion: v1
+    kind: ResourceQuota
+    metadata:
+      name: resource-quotas-quotas-pods-medium
+    spec:
+      hard:
+        cpu: "10"
+        memory: 20Gi
+        pods: "10"
+      scopeSelector:
+        matchExpressions:
+          - operator: In
+            scopeName: PriorityClass
+            values: ["medium"]
+  - apiVersion: v1
+    kind: ResourceQuota
+    metadata:
+      name: resource-quotas-quotas-pods-low
+    spec:
+      hard:
+        cpu: "5"
+        memory: 10Gi
+        pods: "10"
+      scopeSelector:
+        matchExpressions:
+          - operator: In
+            scopeName: PriorityClass
+            values: ["low"]
+
+```
+
+# daemon set
+
+simple-daemon-set.yaml
+
+```
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: fluentd-elasticsearch
+spec:
+  selector:
+    matchLabels:
+      name: fluentd-elasticsearch
+  template:
+    metadata:
+      labels:
+        name: fluentd-elasticsearch
+    spec:
+      tolerations:
+        # this toleration is to have the daemonset runnable on master nodes
+        # remove it if your masters can't run pods
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/master
+      containers:
+        - image: quay.io/fluentd_elasticsearch/fluentd:v2.5.2
+          name: fluentd-elasticsearch
+      terminationGracePeriodSeconds: 30
+
+```
+
+# init-container
+
+init-container.yaml
+
+```
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: init-container-pod
+spec:
+  containers:
+    - name: init-container-container
+      image: busybox
+      command: ['sh', '-c', 'echo The app is running! && sleep 3600']
+  initContainers:
+    - name: init-container-init-container
+      image: busybox
+      command: ['sh', '-c', "until nslookup pods-init-container-service.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for myservice; sleep 2; done"]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: init-container-service
+spec:
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 12345
+
+
+```
+
+init-container-msg.yaml
+```
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: init-container-msg-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: init-container-msg-app
+  template:
+    metadata:
+      labels:
+        app: init-container-msg-app
+    spec:
+      initContainers:
+        - command:
+            - "/bin/bash"
+            - "-c"
+            - "echo 'message from init' > /init-container-msg-mount-path/this"
+          image: busybox
+          name: init-container-msg-container-init
+          volumeMounts:
+            - mountPath: /init-container-msg-mount-path
+              name: init-container-msg-volume
+      containers:
+        - command:
+            - "/bin/sh"
+            - "-c"
+            - "while true; do cat /init-container-msg-mount-path/this; sleep 5; done"
+          image: busybox
+          name: init-container-msg-container-main
+          volumeMounts:
+            - mountPath: /init-container-msg-mount-path
+              name: init-container-msg-volume
+      volumes:
+        - emptyDir: {}
+          name: init-container-msg-volume
+
+
+
+```
+# lifecycle
+
+```
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: lifecycle-pod
+spec:
+  containers:
+    - image: nginx
+      lifecycle:
+        postStart:
+          exec:
+            command: ["/bin/sh", "-c", "echo Hello from the postStart handler > /usr/share/message"]
+        preStop:
+          exec:
+            command: ["/bin/sh", "-c", "nginx -s quit; while killall -0 nginx; do sleep 1; done"]
+      name: lifecycle-container
+
+
+```
+
+
+
+
+
+
