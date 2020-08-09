@@ -1074,5 +1074,547 @@ spec:
 ```
 
 
+# volumes
+
+local.yaml
+
+```
+---
+# https://kubernetes.io/docs/concepts/storage/volumes/#local
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: volumes-local-persistent-volume
+spec:
+  capacity:
+    storage: 100Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: local-storage
+  local:
+    path: /mnt/disks/ssd1
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - example-node
+
+```
+
+hostdir.yaml
+
+```
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: volumes-hostdir-pod
+spec:
+  containers:
+    - command:
+        - sleep
+        - "3600"
+      image: busybox
+      name: volumes-hostdir-container
+      volumeMounts:
+        - mountPath: /volumes-hostdir-mount-path
+          name: volumes-hostdir-volume
+  volumes:
+    - hostPath:
+        # directory location on host
+        path: /tmp
+      name: volumes-hostdir-volume
+
+
+
+```
+
+file-or-create.yaml
+
+```
+---
+# https://kubernetes.io/docs/concepts/storage/volumes/#example-pod-fileorcreate
+apiVersion: v1
+kind: Pod
+metadata:
+  name: volumes-file-or-create-pod
+spec:
+  containers:
+    - command:
+        - sleep
+        - "3600"
+      name: busybox
+      volumeMounts:
+        - mountPath: /var/local/aaa
+          name: volumes-file-or-create-dir
+        - mountPath: /var/local/aaa/1.txt
+          name: volumes-file-or-create-file
+  volumes:
+    - name: volumes-file-or-create-dir
+      hostPath:
+        # Ensure the file directory is created.
+        path: /var/local/aaa
+        type: DirectoryOrCreate
+    - name: volumes-file-or-create-file
+      hostPath:
+        path: /var/local/aaa/1.txt
+        type: FileOrCreate
+
+
+```
+
+emptydir.yaml
+
+```
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: volumes-emptydir-pod
+spec:
+  containers:
+    - command:
+        - sleep
+        - "3600"
+      image: busybox
+      name: volumes-emptydir-container
+      volumeMounts:
+        - mountPath: /volumes-emptydir-mount-path
+          name: volumes-emptydir-volume
+  volumes:
+    - name: volumes-emptydir-volume
+      emptyDir: {}
+
+
+```
+configmap.yaml
+
+```
+---
+# https://kubernetes.io/docs/concepts/storage/volumes/#configmap
+apiVersion: v1
+kind: Pod
+metadata:
+  name: volumes-configmap-pod
+spec:
+  containers:
+    - command:
+        - sleep
+        - "3600"
+      image: busybox
+      name: volumes-configmap-pod-container
+      volumeMounts:
+        - name: volumes-configmap-volume
+          mountPath: /etc/config
+  volumes:
+    - name: volumes-configmap-volume
+      configMap:
+        name: volumes-configmap-configmap
+        items:
+          - key: game.properties
+            path: configmap-volume-path
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: volumes-configmap-configmap
+data:
+  game.properties: |
+    enemies=aliens
+    lives=3
+    enemies.cheat=true
+    enemies.cheat.level=noGoodRotten
+  ui.properties: |
+    color.good=purple
+    color.bad=yellow
+
+```
+
+projected.yaml
+
+```
+---
+# https://kubernetes.io/docs/concepts/storage/volumes/#example-pod-with-a-secret-a-downward-api-and-a-configmap
+apiVersion: v1
+kind: Pod
+metadata:
+  name: volumes-projected-pod
+spec:
+  containers:
+    - command:
+        - sleep
+        - "3600"
+      image: busybox
+      name: volumes-projected-container
+      volumeMounts:
+        - name: volumes-projected-volume-mount
+          mountPath: "/volumes-projected-volume-path"
+          readOnly: true
+  volumes:
+    - name: volumes-projected-volume-mount
+      projected:
+        sources:
+          - secret:
+              items:
+                - key: username
+                  path: my-group/my-username
+              name: volumes-projected-secret
+              mode: 511
+          - downwardAPI:
+              items:
+                - path: "labels"
+                  fieldRef:
+                    fieldPath: metadata.labels
+                - path: "cpu_limit"
+                  resourceFieldRef:
+                    containerName: container-test
+                    resource: limits.cpu
+          - configMap:
+              items:
+                - key: config
+                  path: my-group/my-config
+              name: volumes-projected-configmap
+
+
+```
+sa-token.yaml
+
+```
+---
+# https://kubernetes.io/docs/concepts/storage/volumes/#example-pod-with-a-secret-a-downward-api-and-a-configmap
+apiVersion: v1
+kind: Pod
+metadata:
+  name: volumes-sa-token-pod
+spec:
+  containers:
+    - name: container-test
+      image: busybox
+      volumeMounts:
+        - mountPath: "/service-account"
+          name: volumes-sa-token-volume
+          readOnly: true
+  volumes:
+    - name: volumes-sa-token-volume
+      projected:
+        sources:
+          - serviceAccountToken:
+              audience: api
+              expirationSeconds: 3600
+              path: token
+
+
+
+```
+
+subpath.yaml
+
+```
+---
+# https://kubernetes.io/docs/concepts/storage/volumes/#using-subpath
+# Sometimes, it is useful to share one volume for multiple uses in a single Pod.
+# The volumeMounts.subPath property can be used to specify a sub-path inside the
+# referenced volume instead of its root.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: volumes-subpath-pod
+spec:
+  containers:
+    - env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "rootpasswd"
+      image: mysql
+      name: mysql
+      volumeMounts:
+        - mountPath: /var/lib/mysql
+          name: site-data
+          subPath: mysql
+    - image: php:7.0-apache
+      name: php
+      volumeMounts:
+        - mountPath: /var/www/html
+          name: site-data
+          subPath: html
+  volumes:
+    - name: site-data
+      persistentVolumeClaim:
+        claimName: my-lamp-site-data
+
+
+```
+
+subpathexpr.yaml
+
+```
+---
+# https://kubernetes.io/docs/concepts/storage/volumes/#using-subpath-with-expanded-environment-variables
+apiVersion: v1
+kind: Pod
+metadata:
+  name: volumes-subpathexpr-pod
+spec:
+  containers:
+    - command: ["sleep", "3600"]
+      env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+      image: busybox
+      name: volumes-subpathexpr-container
+      volumeMounts:
+        - name: volumes-subpathexpr-volume
+          mountPath: /logs
+          subPathExpr: $(POD_NAME)
+  restartPolicy: Never
+  volumes:
+    - name: volumes-subpathexpr-volume
+      hostPath:
+        path: /var/log/pods
+
+```
+
+# statefulset
+
+simple-stateful-set.yaml
+
+```
+
+# https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: nginx
+  name: nginx
+spec:
+  clusterIP: None
+  ports:
+    - name: web
+      port: 80
+  selector:
+    app: nginx
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: simple-stateful-set
+spec:
+  replicas: 3  # the default is 1
+  selector:
+    matchLabels:
+      app: nginx  # has to match .spec.template.metadata.labels
+  serviceName: "nginx"
+  template:
+    metadata:
+      labels:
+        app: nginx  # has to match .spec.selector.matchLabels
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - image: nginx
+          name: nginx
+          ports:
+            - containerPort: 80
+              name: web
+          volumeMounts:
+            - mountPath: /usr/share/nginx/html
+              name: www
+  volumeClaimTemplates:
+    - metadata:
+        name: www
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi
+        storageClassName: "my-storage-class"
+
+
+```
+
+# secrets
+
+simple-secret.yaml
+
+```
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: broken-secrets-simple-secret-secret
+type: Opaque
+stringData:
+  config.yaml: |-
+    password: apassword
+    username: ausername
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: broken-secrets-simple-secret-pod
+spec:
+  containers:
+    - command:
+        - sleep
+        - "3600"
+      image: busybox
+      name: broken-secrets-simple-secret-container
+      volumeMounts:
+        - name: broken-secrets-simple-secret-volume
+          mountPath: "/etc/simple-secret"
+  volumes:
+    - name: broken-secrets-simple-secret-volume
+      secret:
+        secretName: broken-secrets-simple-secret-secret
+
+
+```
+
+# topology spread constraints
+
+opology-spread-constraints-with-node-affinity.yaml
+
+```
+---
+# https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
+kind: Pod
+apiVersion: v1
+metadata:
+  name: topology-spread-constraints/topology-spread-constraints-with-node-affinity-pod
+  labels:
+    label1: value1
+spec:
+  topologySpreadConstraints:
+    - labelSelector:
+        matchLabels:
+          label1: value1
+      maxSkew: 1
+      topologyKey: zone
+      whenUnsatisfiable: DoNotSchedule
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: zone
+                operator: NotIn
+                values:
+                  - zoneC
+  containers:
+    - name: pause
+      image: k8s.gcr.io/pause:3.1
+
+
+```
+
+topology-spread-constraints.yaml
+
+```
+---
+# https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
+kind: Pod
+apiVersion: v1
+metadata:
+  name: topology-spread-constraints-pod
+  labels:
+    label1: value1
+spec:
+  topologySpreadConstraints:
+    - maxSkew: 1
+      topologyKey: zone
+      whenUnsatisfiable: DoNotSchedule
+      labelSelector:
+        matchLabels:
+          label1: value1
+  containers:
+    - name: pause
+      image: k8s.gcr.io/pause:3.1
+
+
+```
+# subdomain
+
+simple.yaml
+
+```
+---
+# Taken from: https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-hostname-and-subdomain-fields
+# Currently when a pod is created, its hostname is the Pod's metadata.name value.
+# The Pod spec has an optional hostname field, which can be used to specify the Pod's hostname.
+# When specified, it takes precedence over the Pod's name to be the hostname of the pod.
+# For example, given a Pod with hostname set to "my-host", the Pod will have its hostname set to "my-host".
+# The Pod spec also has an optional subdomain field which can be used to specify its subdomain.
+# For example, a Pod with hostname set to "foo", and subdomain set to "bar", in namespace
+# "default", will have the fully qualified domain name (FQDN) "foo.bar.default.svc.cluster-domain.example".
+#
+# If there exists a headless service in the same namespace as the pod and with the same name as the subdomain,
+# the cluster's DNS Server also returns an A or AAAA record for the Pod's fully qualified hostname.
+# For example, given a Pod with the hostname set to "subdomain-simple-hostname-1" and the subdomain
+# set to "subdomain-simple-subdomain-service", and a headless Service named "subdomain-simple-subdomain-service"
+# in the same namespace, the pod will see its own FQDN as
+# "subdomain-simple-hostname-1.subdomain-simple-subdomain-service.default.svc.cluster-domain.example".
+# DNS serves an A or AAAA record at that name, pointing to the Pod's IP.
+# Both pods "subdomain-simple-pod-1" and "subdomain-simple-pod-2" can have their distinct A or AAAA records.
+
+Example:
+apiVersion: v1
+kind: Service
+metadata:
+  name: subdomain-simple-subdomain-service
+spec:
+  clusterIP: None  # A headless service
+  ports:
+    - name: subdomain-simple-port-name  # Actually, no port is needed.
+      port: 1234
+      targetPort: 1234
+  selector:
+    name: subdomain-simple-selector
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    name: subdomain-simple-selector
+  name: subdomain-simple-pod-1
+spec:
+  containers:
+    - command:
+        - sleep
+        - "3600"
+      image: busybox
+      name: subdomain-simple-container-1
+  hostname: subdomain-simple-hostname-1
+  subdomain: subdomain-simple-subdomain-service
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: subdomain-simple-pod-2
+  labels:
+    name: subdomain-simple-selector
+spec:
+  containers:
+    - command:
+        - sleep
+        - "3600"
+      image: busybox
+      name: subdomain-simple-container-2
+  hostname: subdomain-simple-hostname-2
+  subdomain: subdomain-simple-subdomain-service
+
+
+
+```
+
 
 
