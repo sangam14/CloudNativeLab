@@ -10,7 +10,7 @@ permalink: /yml-sample/
 # Pod 
 
 simple.yaml
-{: .label .label-red }
+
 ```
 ---
 apiVersion: v1
@@ -27,7 +27,7 @@ spec:
      
 ```
 multi-container.yaml
-{: .label .label-red }
+
  
 ```
  ---
@@ -51,7 +51,7 @@ spec:
       
    ```   
 imagepullsecret.yaml
-{: .label .label-red }
+
 
 ```
 # https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
@@ -73,7 +73,7 @@ spec:
 
 ```
 host-aliases.yaml
-{: .label .label-red }
+
 ```
 ---
 # https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/#adding-additional-entries-with-hostaliases
@@ -105,7 +105,7 @@ spec:
 # pod security policy
 
 privileged.yaml
-{: .label .label-red }
+
      
 ```
  ---
@@ -144,7 +144,7 @@ spec:
  ```
  
  restricted.yaml
- {: .label .label-red }
+
  
  ```
  ---
@@ -210,7 +210,7 @@ spec:
  ```
  
  psp.yaml
- {: .label .label-red }
+
  
  ```
  ---
@@ -356,8 +356,6 @@ spec:
 # resource quotas
 
 quotas.yaml
-
-
 
 ```
 
