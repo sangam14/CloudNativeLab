@@ -1,3 +1,9 @@
+---
+layout: default
+title: The Ultimate Yaml for Kubernetes 
+nav_order: 5
+permalink: /yml-sample/
+---
 
 # The Ultimate Yaml for Kubernetes 
 
