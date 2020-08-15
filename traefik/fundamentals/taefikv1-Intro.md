@@ -1,3 +1,10 @@
+---
+layout: default
+title: Traefik V1 Introduction
+parent: Traefik
+nav_order: 1
+---
+
 
 Traefik is a open source reverse proxy / load balancer which is raising in popularity because of its ease to setup, integration with Docker and Let’s encrypt and much more features.
 
