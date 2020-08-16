@@ -283,6 +283,8 @@ kubectl taint nodes <nodename> mytaintkey=mytaintvalue:NoExecute
 ```
 This will evict all pods from the current node and move them to another available node. 
 
+![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/kube-scheduler-toleration.png)
+
 - But after a while a Customer-Group comes along and says - "Oh that's fine. We have *"toleration"** for peanut allergies. So please proceed and place us in the "tainted" table". The Kube scheduler verifies their toleration and places them in the tainted table*
 
 - Now if the pod has a toleration for the taint key value that the node has specified, then this pod will get exempted from the taint and will be placed on the node if necessary.
