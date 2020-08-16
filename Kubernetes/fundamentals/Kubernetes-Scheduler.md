@@ -1,3 +1,9 @@
+---
+layout: default
+title: Kubernetes Scheduler
+parent: CKA / CKAD Certification Workshop Track
+nav_order: 20
+---
 
 - In Kubernetes pod is the smallest deployable unit of workload. So the obvious question :
  
@@ -147,6 +153,8 @@ In, NotIn, Exists, DoesNotExist, Gt, Lt. NotIn and `DoesNotExist` will create th
 
 #  4. Pod affinity and anti-affinity 
 
+![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/kube-scheduler-green-table.png)
+
 Another vegan girl-gang **Customer-Group* come in to the restaurant . They have a requirement not to be placed in any table 
 which contain seats which are already occupied by meat eaters. They are a little more choosy - they also want to be seated in tables which contains 
 seats which are already occupied by boys. In other words they have a non-affinity towards meat-eaters, but have an affinity towards boys.*
@@ -248,6 +256,8 @@ Once you deploy this - we got what we were aiming for - 3 web-servers and 3 redi
 
 #  5. Taint and Tolerations 
 
+![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/kube-scheduler-tainted.png)
+
 - This time around the restaurant got one of the tables "tainted" with a peanut spillage disaster. So they have said no new **Customer-Groups* will
 be scheduled on this table to avoid allergic reactions. So any new Customer-Groups are placed on every other table except this tainted one.*
 
@@ -255,6 +265,47 @@ be scheduled on this table to avoid allergic reactions. So any new Customer-Grou
 schedule anymore new pods ? This is where taints come in. Once you taint a node you have two options 
 -  NoSchedule - This means no new pods should be scheduled on this pod once its tainted. *unless they have a toleration
 -  NoExecute - Existing pods will be evicted from the pod once its tainted. *unless they have a toleration (we will talk about tolerations in just a minute)
+
+
+So how do we taint a node ?
+
+```
+kubectl taint nodes <nodename> mytaintkey=mytaintvalue:NoSchedule
+
+```
+Once we have this set the node is now tainted with the following key value pair (mytaintkey=mytaintvalue). So no new pods can be scheduled. 
+
+But what if you want to evict the existing pods from the nodes ?
+
+```
+kubectl taint nodes <nodename> mytaintkey=mytaintvalue:NoExecute
+
+```
+This will evict all pods from the current node and move them to another available node. 
+
+- But after a while a Customer-Group comes along and says - "Oh that's fine. We have *"toleration"** for peanut allergies. So please proceed and place us in the "tainted" table". The Kube scheduler verifies their toleration and places them in the tainted table*
+
+- Now if the pod has a toleration for the taint key value that the node has specified, then this pod will get exempted from the taint and will be placed on the node if necessary.
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web-server
+spec:
+  containers:
+  - name: web-app
+    image: nginx:1.12-alpine
+  tolerations:
+  - key: "mytaintkey"
+    operator: "Equal"
+    value: "mytaintvalue"
+    effect: "NoExecute"
+
+
+```
+
+
 
 
 
