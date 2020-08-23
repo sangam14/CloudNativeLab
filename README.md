@@ -18,4 +18,4 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
 {: .label .label-blue }
 
 
-[Birth of Containerization](http://containerlabs.kubedaily.com/Birth_of_Containerization/README.html){: .btn .btn-purple .mr-2 }  [LXC](http://containerlabs.kubedaily.com/LXC/){: .btn .btn-purple .mr-2 }[Docker](http://containerlabs.kubedaily.com/Docker/Overview/){: .btn .btn-purple .mr-2 } [Kubernetes](){: .btn .btn-purple .mr-2 } [Rancher Networking](https://containerlabs.kubedaily.com/rancher/Networking/){: .btn .btn-purple .mr-2 } [litmuschaos](https://dev.to/t/litmuschaos){: .btn .btn-purple .mr-2 } 
+[Birth of Containerization](http://containerlabs.kubedaily.com/Birth_of_Containerization/README.html){: .btn .btn-purple .mr-2 }  [LXC](http://containerlabs.kubedaily.com/LXC/){: .btn .btn-purple .mr-2 }[Docker](http://containerlabs.kubedaily.com/Docker/Overview/){: .btn .btn-purple .mr-2 } [Kubernetes](https://containerlabs.kubedaily.com/Kubernetes/){: .btn .btn-purple .mr-2 } [Rancher Networking](https://containerlabs.kubedaily.com/rancher/Networking/){: .btn .btn-purple .mr-2 } [litmuschaos](https://dev.to/t/litmuschaos){: .btn .btn-purple .mr-2 } 
