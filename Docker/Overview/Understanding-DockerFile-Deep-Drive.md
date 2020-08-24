@@ -31,7 +31,7 @@ Think of it as a shellscript. It gathered multiple commands into a single docume
 
 - Every `Dockerfile` must have a `FROM` instruction, and it must be the first instruction in the file.  
 
-The `FROM` instruction sets the base for the image being created and instructs the Docker daemon that the base of the new image should be the existing Docker image specified as the parameter. The specified image can be described using the same syntax we saw in the Docker container run command from Chapter 2, Learning Docker Commands. Here, it's a `FROM` instruction that specifies using the official nginx image with a version of 1.15.2:
+The `FROM` instruction sets the base for the image being created and instructs the Docker daemon that the base of the new image should be the existing Docker image specified as the parameter. The specified image can be described using the same syntax we saw in the Docker container run comman , Learning Docker Commands. Here, it's a `FROM` instruction that specifies using the official nginx image with a version of 1.15.2:
 
 ```
 # Dockerfile
