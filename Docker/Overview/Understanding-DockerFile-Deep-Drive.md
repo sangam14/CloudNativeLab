@@ -7,10 +7,8 @@ nav_order: 3
 
 # Describe the use of Dockerfile. 
 
-
 - A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image.
 Think of it as a shellscript. It gathered multiple commands into a single document to fulfill a single task.
-
 
 ## build command is used to create an image from the Dockerfile.
 
@@ -671,11 +669,79 @@ docker container run --rm -d -p 80:80 --name health sangam14-healthcheck
 
 You can see that the `HEALTHCHECK` initially reported a status of starting, but once the `HEALTHCHECKCMD` reported success, the status updated to healthy.
 
-
 ## The `ONBUILD` instruction
 
+- The `ONBUILD` instruction is a tool used when creating images that will become the parameter to the `FROM` instructions in another Dockerfile. The ONBUILD instruction just adds metadata to your image, specifically a trigger that is stored in the image and not otherwise used. However, that metadata trigger does get used when your image is supplied as the parameter in the FROM command of another Dockerfile. Here is the `ONBUILD` instruction syntax:
+
+```
+# ONBUILD instruction syntax
+ONBUILD [INSTRUCTION]
+
+```
+
+The `ONBUILD` instruction is kind of like a Docker time machine used to send instructions into the future. (You might laugh if you knew how many times I just typed Doctor time machine!) Let's demonstrate the use of the `ONBUILD` instruction with a simple example. First, we will build an image named my-base using the following Dockerfile:
+```
+# my-base Dockerfile
+FROM alpine
+LABEL maintainer="sangam biradar"
+ONBUILD LABEL version="1.0"
+ONBUILD LABEL support-email="sangam@something.com" support-phone="123-456-7890"
+CMD ["sh"]
+
+```
+
+Next, let's build an image named my-app that is built FROM the my-base image, like so:
+
+```
+# my-app Dockerfile
+FROM my-base:1.0
+CMD ["sh"]
+
+```
+
+Inspecting the resulting `my-app` image shows us that the `LABEL` commands provided in the `ONBUILD` instructions were sent forward in time, arriving at the `my-app ` image:
+
+```
+docker inspect --format "{{json .Config}}" myapp | jq `.Labels'
+
+```
+
+If you did a similar inspect of themy-base image, you would find that it does not contain the version and support labels. Note also that the `ONBUILD` instruction is a one-time-use time machine. If you were to build a new image using the my-app in the `FROM` instruction, the new image would not get the labels that were provided in the `ONBUILD` instructions of the `my-base` image.
 
 
+## The `STOPSIGNAL` instruction
+
+The `STOPSIGNAL` instruction is used to set the system call signal that will be sent to the container to tell it to exit. The parameter used in the instruction can be an unsigned number, which equals a position in the kernel's syscall table, or it can be an actual signal name in uppercase. Here is the syntax for the instruction:
+
+```
+# STOPSIGNAL instruction syntax
+STOPSIGNAL signal
+
+```
+
+Examples of the `STOPSIGNAL` instruction include the following:
+
+```
+# Sample STOPSIGNAL instruction using a position number in the syscall table
+STOPSIGNAL 9
+# or using a signal name
+STOPSIGNAL SIGQUIT
+
+```
+The parameter supplied to the `STOPSIGNAL` instruction is used when a docker container stop command is issued. Remember that it is vital to use the exec form of your ENTRYPOINT and/or CMD instructions so that the application is PID 1, and will receive the signals directly. Here is a link to an excellent blog post on using signals with Docker: (https://medium.com/@gchudnov/trapping-signals-in-docker-containers-7a57fdda7d86.) The article provides an excellent example of using a node.js app to handle the signals, complete with code and Dockerfile.
+
+
+
+## The `SHELL` instruction
+
+As you have read in many sections throughout this chapter, there are several instructions that take two forms, the exec form or the shell form. As mentioned, the default used by all of the shell forms is `["/bin/sh", "-c"]` for Linux containers, and `["cmd", "/S", "/C"]` for Windows containers. The SHELL instruction allows you to change that default. Here is the syntax for the SHELL instruction:
+
+```
+# SHELL instruction syntax
+SHELL ["executable", "parameters"]
+
+```
+The `SHELL` instruction can be used more than once in a Dockerfile. All instructions that use a shell, and that come after a SHELL instruction, will use the new shell. Thus, you can change the shell multiple times in a single Dockerfile as needed. This can be especially powerful when creating Windows containers since it allows you to switch back and forth between using `cmd.exe` and `powershell.exe`.
 
 
 
