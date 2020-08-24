@@ -367,10 +367,226 @@ docker image build --rm --tag sangam14-user-demo .
  Notice that the output from `Step 3/6:RUN` id shows the current user as root, and then in `Step 5/6` (which is after the USER instruction) it shows the current user as games. Finally, notice that the container run from the image has the current user games. The `USER` instruction creates a zero-byte-sized layer in the image.
  
  
+## The `WORKDIR` instruction
+
+We have seen the `WORKDIR` instruction used in some of the examples used to demonstrate other instructions. It is sort of like a combination of the Linux cd and mkdir commands. The `WORKDIR` instruction will change the current working directory in the image to the value provided in the instruction. If any segment of the path in the parameter of the `WORKDIR` instruction does not yet exist, it will be created as part of the execution of the instruction. The syntax for the `WORKDIR` instruction is as follows:
+
+```
+# WORKDIR instruction syntax
+WORKDIR instruction syntax
+WORKDIR /path/to/workdir
+
+```
+The `WORKDIR` instruction can use `ENV` or `ARG` parameter values for all or part of its parameter. A Dockerfile can have more than one `WORKDIR` instruction, and each subsequent WORKDIR instruction will be relative to the previous one (if a relative path is used). Here is an example that demonstrates this possibility:
+
+```
+# WORKDIR instruction Dockerfile for Docker Quick Start
+FROM alpine
+# Absolute path...
+WORKDIR /
+# relative path, relative to previous WORKDIR instruction
+# creates new folder
+WORKDIR sub-folder-level-1
+RUN touch file1.txt
+# relative path, relative to previous WORKDIR instruction
+# creates new folder
+WORKDIR sub-folder-level-2
+RUN touch file2.txt
+# relative path, relative to previous WORKDIR instruction
+# creates new folder
+WORKDIR sub-folder-level-3
+RUN touch file3.txt
+# Absolute path, creates three sub folders...
+WORKDIR /l1/l2/l3
+CMD ["sh"]
+
+```
+
+Building the image from this Dockerfile will result in the image having three levels of nested folders. Running a container from the image and listing the files and folders will look like this:
+
+```
+docker container run --rm sangam14-workdir-demo  ls -lR /sub-folder-1
+
+```
+
+The `WORKDIR` instruction will create a zero-byte-sized layer in the resulting image.
 
 
+## The `VOLUME` instruction
+
+- You should remember that a Docker image is made up of a series of read-only layers built upon one another, and that when you run a container from a Docker image, it creates a new read-write layer that you can think of as being on top of the read-only layers. All the changes to the container are applied to the read-write layer. If you make a change to a file found in one of the read-only layers, a copy of that file is made and added to the read-write layer. Then, all the changes are applied to the copy. The copy hides the version found in the read-only layer so, from the point of view of the running container, there is only one version of the file, and it is the one that has been changed. This is roughly how the Unified File System works. 
+
+- This is actually a great thing. However, it presents a challenge, this being that when the running container exits and is removed, all of the changes are removed with it. This is normally OK until you want to have some data that persists after the life of the container, or when you want to share data between containers. Docker has an instruction to help you solve this issue, the `VOLUME` instruction.
+
+- The `VOLUME` instruction will create a storage location that is outside of the United File System, and by so doing, allow storage to persist beyond the life of your container. Here is the syntax of the `VOLUME` instruction:
+
+```
+# VOLUME instruction syntax
+VOLUME ["/data"]
+# or for creating multiple volumes with a single instruction
+VOLUME /var/log /var/db /moreData
+
+```
+- Other ways to create volumes are to add volume parameters to the docker container run command or to use the docker volume create command. 
+
+- Here is a simple example Dockerfile. It creates a volume at `/myvol` that will have a file named `greeting`:
+
+```
+# VOLUME instruction Dockerfile for Docker Quick Start
+FROM alpine
+RUN mkdir /myvol
+RUN echo "hello world" > /myvol/greeting
+VOLUME /myvol
+CMD ["sh"]
+```
+Running a container based on an image made from this Dockerfile will create a mount point on the host system that initially contains the greeting file. When the container exits, the mount point will remain. Be careful with the use of the --rm parameter when running a container that has mount points you wish to persist. Using --rm, with no other volume parameters, will cause the mount points to be cleaned up along with the container when it exits. Here is what that looks like:
+
+```
+docker image ls
+cd volume-demo
+ll
+cat Dockerfile
+docker image build --rm --tag volume-demo:1.0 .
+docker image ls
+clear
+docker container run --rm -it --mount source=myvolsrc,target=/myvol sangam14-volume-demo:1.0
+clear
+docker volume ls
+docker container run --rm -d --name vol-demo volume-demo:1.0 tail -f /dev/null
+docker volume ls
+docker container stop vol-demo
+docker container ls
+docker volume ls
+clear
+
+```
+
+We start out with no volumes. Then, we run a container based on the image made from the preceding Dockerfile in detached mode. We check the volumes again, and we see the volume created by running the container. Then, we stop the container and check for volumes again, and the volume is now gone. Usually, the purpose of using a VOLUME instruction is to have data in a mount point that persists after the container is gone. So, if you are going to use --rm when you run a container, you should include the `--mount` run parameter
 
 
+```
+docker volume create myvolsrc
+docker container run -d --name vol-demo --mount source=myvolsrc,target=/myvol sangam14-volume-demo:1.0 tail -f /dev/null
+docker container exec vol-demo ls -l /myvol
+docker volume inspect myvolsrc -f "{{.Mountpoint}}"
+echo /var/lib/docker/volumes/myvolsrc/_data/new-file.txt
+touch /var/lib/docker/volumes/myvolsrc/_data/new-file.txt\n
+sudo touch /var/lib/docker/volumes/myvolsrc/_data/new-file.txt\n
+docker container exec vol-demo ls -l /myvol
+docker container stop vol-demo
+docker container rm vol-demo
+docker volume rm myvolsrc
+docker volume ls
+docker container ls
+
+```
+- In this demo, we run a container that is based on an image created with the preceding Dockerfile. Then, we list the volumes and see the myvolsrc volume (we already knew the name since we provided it in the run command, but you can use the ls command to find volume names that you might not otherwise know). Using the volume's name, we inspect the volume to find its mount point on the host. To verify the contents of the volume in the container, we use an exec command to do an ls of the folder. Next, using the mount point path, we create a new file using the touch command. Finally, we use the same exec command and see that inside the container the volume has been changed (from actions outside of the container). Similarly, if the container makes changes to the contents of the volume, they are reflected instantly on the host mount point.
+
+- Using the VOLUME instruction is both powerful and dangerous. It is powerful in that it lets you have data that will persist beyond the life of your containers. It is dangerous because data is passed instantaneously from the container to the host, and if the container is ever compromised, that can spell trouble. That is why, for security purposes, it is best practice to not include host-based VOLUME mounts in your Dockerfile
+
+- The `VOLUME` instruction will add a zero-bytes sized layer to your resulting Docker image.
+
+
+## The `EXPOSE` instruction
+
+The `EXPOSE` instruction is a way to document what network ports the image expects to be opened when a container is run from the image built using the Dockerfile. The syntax for the EXPOSE instruction is as follows:
+
+```
+# EXPOSE instruction syntax
+EXPOSE <port> [<port>/<protocol>...]
+
+
+```
+- it is important to understand that including the EXPOSE instruction in the Dockerfile does not actually open network ports in containers. When containers are run from the images with the EXPOSE instruction in their Dockerfile, it is still necessary to include the `-p` or `-P `parameters to actually open the network ports to the container.
+
+- You can include multiple EXPOSE instructions in your Dockerfile as needed. Including the -P parameter at runtime is a shortcut way to automatically open ports for all of the EXPOSE instructions included in the Dockerfile. The corresponding host ports will be randomly assigned when using the `-P` parameter on the run command.
+
+- Think of the `EXPOSE` instruction as a message from the image developer telling you that the application in the image is expecting you to open the indicated port(s) when you run your containers. The `EXPOSE` instruction creates a zero-byte-sized layer in the resulting image.
+
+
+## The `RUN` instruction
+
+The `RUN` instruction is the real workhorse of the Dockerfile. It is the tool by which you affect the most change in the resulting docker image. Basically, it allows you to execute any command in the image. There are two forms of the RUN instruction. Here is the syntax:
+
+```
+# RUN instruction syntax
+# Shell form to run the command in a shell
+# For Linux the default is "/bin/sh -c"
+# For Windows the default is "cmd /S /C"
+RUN <command>
+
+# Exec form
+RUN ["executable", "param1", "param2"]
+
+```
+
+- Every `RUN` instruction creates a new layer in the image, and the layers for each instruction that follow will be built on the results of the `RUN` instruction's layer. The shell form of the instruction will use the default shell unless it is overridden using a SHELL instruction, which we will discuss in The `SHELL` instruction section. If you are building a container that does not include a shell, you will need to use the exec form of the `RUN` instruction. You can also use the exec form of the instruction to use a different shell. For example, to run a command using the bash shell, you could add a `RUN` instruction, like so:
+
+```
+# Exec form of RUN instruction using bash
+RUN ["/bin/bash", "-c", "echo hello world > /myvol/greeting"]
+
+```
+The uses for the RUN command are limited only by the imagination, so providing an exhaustive list of RUN instruction samples would be impossible, but here are a few using both forms of the instruction, just to give you some ideas:
+
+```
+# RUN instruction Dockerfile for Docker Quick Start
+FROM ubuntu
+RUN useradd --create-home -m -s /bin/bash dev
+RUN mkdir /myvol
+RUN echo "hello DQS Guide" > /myvol/greeting
+RUN ["chmod", "664", "/myvol/greeting"]
+RUN ["chown", "dev:dev", "/myvol/greeting"]
+VOLUME /myvol
+USER dev
+CMD ["/bin/bash"]
+
+```
+
+You can use the following code to create a custom prompt displayed when you shell into your containers. If you don't like the whale graphic, you can switch it up and use anything you like better. I've included some of my favorite options. Here's the code:
+
+The resulting prompt looks like this:
+
+```
+docker container run -rm -it sangam-run-demo 
+
+```
+
+## The `CMD` instruction
+
+- The `CMD` instruction is used to define the default action taken when containers are run from images built with their Dockerfile. While it is possible to include more than one `CMD` instruction in a Dockerfile, only the last one will be significant. Essentially, the final `CMD` instruction provides the default action for the image. This allows you to either override or use the CMD in the image used in the `FROM` instruction of your Dockerfile. Here is an example where a trivial Dockerfile does not contain a `CMD` instruction and relies on the one found in the ubuntu image used in the `FROM` instruction:
+
+```
+docker history ubuntu 
+
+cat Dockerfile 
+From ubuntu 
+
+```
+- You can see from the output of the history command that the ubuntu image includes the `CMD ["/bin/bash"]` instruction. You will also see that our Dockerfile does not have its own CMD instruction. When we run the container, the default action is to run "/bin/bash".
+
+- There are three forms of the CMD instruction. The first is a shell form. The second is an exec form, which is the best practice form to use. And, the third is a special exec form that has exactly two parameters, and it is used in conjunction with the `ENTRYPOINT` instruction, which we will talk about in The `ENTRYPOINT` instruction section. Here is the syntax for the `CMD` instruction.
+
+```
+# CMD instruction syntax
+CMD command param1 param2 (shell form)
+CMD ["executable","param1","param2"] (exec form)
+CMD ["param1","param2"] (as default parameters to ENTRYPOINT)
+
+```
+
+Here are a few `CMD` instruction examples for your enjoyment:
+
+```
+# CMD instruction examples
+CMD ["/bin/bash"]
+CMD while true; do echo 'DQS Expose Demo' | nc -l -p 80; done
+CMD echo "How many words are in this echo command" | wc -
+CMD tail -f /dev/null
+CMD ["-latr", "/var/opt"]
+
+```
+- Like the `RUN` instruction, the shell form of the `CMD` instruction will use the `["/bin/sh", "-c"]` shell command (or `["cmd", "/S", "/C"]` for Windows) by default unless it is overridden with a `SHELL` instruction. However, unlike the `RUN` instruction, the CMD instruction does not execute anything during the building of the image but instead is executed when containers built from the image are run. If the container image being built will not have a shell, then the exec form of the instruction can be used as it does not invoke a shell. The `CMD` instruction adds a zero-byte-sized layer to the image.
 
 
 
