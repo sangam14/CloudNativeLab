@@ -588,6 +588,98 @@ CMD ["-latr", "/var/opt"]
 ```
 - Like the `RUN` instruction, the shell form of the `CMD` instruction will use the `["/bin/sh", "-c"]` shell command (or `["cmd", "/S", "/C"]` for Windows) by default unless it is overridden with a `SHELL` instruction. However, unlike the `RUN` instruction, the CMD instruction does not execute anything during the building of the image but instead is executed when containers built from the image are run. If the container image being built will not have a shell, then the exec form of the instruction can be used as it does not invoke a shell. The `CMD` instruction adds a zero-byte-sized layer to the image.
 
+## The `ENTRYPOINT `instruction
+
+```
+# ENTRYPOINT instruction Dockerfile for Docker Quick Start
+FROM alpine
+RUN apk add curl
+ENTRYPOINT ["curl"]
+CMD ["--help"]
+
+```
+
+We can run the container image with no overriding CMD parameter and it will show help for the curl command. However, when we run the container with a CMD override parameter, in this case, a URL, the response will be to curl the URL. Take a look:
+
+```
+docker container run sangam14-entrypoint-demo google.com
+```
+When run parameters are provided to a container that has the exec form of the ENTRYPOINT command, those parameters will be appended to the ENTRYPOINT instruction, overriding anything provided in a CMD instruction. In this example, `--help` is overridden with the `google.com` run parameter, so the resulting instruction is curl `google.com`. Here is the actual syntax for the `ENTRYPOINT `instruction:
+
+```
+# ENTRYPOINT instruction syntax
+ENTRYPOINT command param1 param2 (shell form)
+ENTRYPOINT ["executable", "param1", "param2"] (exec form, best practice)
+
+```
+- Like the `CMD` instruction, only the last `ENTRYPOINT` instruction is significant. Again, this allows you to either use or override the ENTRYPOINT instruction in the FROM image used. Like both the `RUN` and `CMD` instructions, using the shell form will invoke a shell as `["/bin/sh", "-c"]` (or` ["cmd", "/S", "/C"]` on Windows). This is not the case when using the exec form of the instruction. This is key if you have an image that does not have a shell or if the shell is not available to the active user context. However, you will not get shell processing, so any shell environment variables will not get substituted when using the exec form of the instruction. It is generally considered best practice to use the exec form of the `ENTRYPOINT` instruction whenever possible.
+
+
+## The difference between CMD and ENTRYPOINT
+
+- Here again, we have two instructions that on the surface seem to be very much the same. It is true that there is some overlap of functionality between the two. Both instructions provide a way to define a default application that is executed when containers are run. However, they each serve their own unique purpose, and in some cases work together to provide greater functionality than either instruction alon
+
+
+- The best practice is to use the ENTRYPOINT instruction when you want a container to execute as an application, providing a specific (developer) defined function, and to use CMD when you want to give the user more flexibility in what function the container will serve.
+
+- Both of these instructions have two forms: a shell form and an exec form. It is best practice to use the exec form of either whenever possible. The reason for this is that the shell form, by definition, will run `["/bin/sh", "-c"]` (or `["cmd", "/S", "/C"]` on Windows) to launch the application in the parameter of the instruction. Because of this, the primary process running in the container is not the application. Instead, it is the shell. This affects how the container exits, it affects how signals are processed, and it can really cause problems for images that do not include "/bin/sh". One use case where you might need to use the shell form is if you require shell-environment-variable substitution.
+
+- There is also a use case for using both instructions in your Dockerfile. When you use both, you can define a specific application that gets executed when the container is run, and allow the user to easily provide the parameters that get used with the defined application. In this scenario, you would use the ENTRYPOINT instruction to set the application being executed and provide a default set of parameters for the application using the `CMD` instruction. With this configuration, the user of the container can benefit from the default parameters supplied in the `CMD` instruction, or they can easily override those parameters used in the application by supplying them as arguments in the container run command. It is highly recommended that you use the exec form of both instructions when you use them together.
+
+## The `HEALTHCHECK` instruction
+
+- The `HEALTHCHECK` instruction, which is a fairly new addition to the Dockerfile, is used to define the command to run inside a container to test the container's application health. When a container has a `HEALTHCHECK`, it gets a special status variable. Initially, that variable will be set to starting. Any time a `HEALTHCHECK ` is performed successfully, the status will be set to healthy. When a `HEALTHCHECK` is performed and fails, the fail count value will be incremented and then checked against a retries value. If the fail count equals or exceeds the retries value, the status is set to unhealthy. The syntax of the `HEALTHCHECK` instruction is as follows
+
+```
+# HEALTHCHECK instruction syntax
+HEALTHCHECK [OPTIONS] CMD command (check container health by running a command inside the container)
+HEALTHCHECK NONE (disable any HEALTHCHECK inherited from the base image)
+
+```
+There are four options that can be used when setting the `HEALTHCHECK`, and these options are as follows:
+
+```
+# HEALTHCHECK CMD options
+--interval=DURATION (default: 30s)
+--timeout=DURATION (default: 30s)
+--start-period=DURATION (default: 0s)
+--retries=N (default: 3)
+
+```
+
+- The `--interval` option allows you to define the amount of time between the HEALTHCHECK tests. The `--timeout` option allows you to define the amount of time that is considered too long for a HEALTHCHECK test. If the timeout is exceeded, the test is automatically considered a failure. The `--start-period` option allows for the definition of a no-fail time period during the container startup. Finally, the `--retries` option allows you to define how many consecutive failures it takes to update the `HEALTHCHECK` status to unhealthy.
+
+- The `CMD` part of the `HEALTHCHECK` instruction follows the same rules as the `CMD` instruction. Please review the preceding section regarding the `CMD` instruction for complete details. The `CMD` that is used will provide a status when it exits, which will be either a 0 for success or a 1 for fail. Here is a `Dockerfile` example that uses the `HEALTHCHECK` instruction
+
+```
+# HEALTHCHECK instruction Dockerfile for Docker Quick Start
+FROM alpine
+RUN apk add curl
+EXPOSE 80/tcp
+HEALTHCHECK --interval=30s --timeout=3s \
+CMD curl -f http://localhost/ || exit 1
+CMD while true; do echo 'DQS Expose Demo' | nc -l -p 80; done
+
+```
+
+Running a container from an image built with the preceding Dockerfile looks like this:
+
+```
+docker container run --rm -d -p 80:80 --name health sangam14-healthcheck
+
+```
+
+You can see that the `HEALTHCHECK` initially reported a status of starting, but once the `HEALTHCHECKCMD` reported success, the status updated to healthy.
+
+
+## The `ONBUILD` instruction
+
+
+
+
+
+
+
 
 
 
