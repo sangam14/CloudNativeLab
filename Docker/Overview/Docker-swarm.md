@@ -334,21 +334,171 @@ inactive
 ```   
 
 - for more details :- 
-   - Getting started with swarm mode tutorial:(https://docs.docker.com/engine/swarm/swarm-tutorial/)
-   - The docker swarm init command wiki doc: (https://docs.docker.com/engine/reference/commandline/swarm_init/)
-   - The docker swarm ca command wiki doc: (https://docs.docker.com/engine/reference/commandline/swarm_ca/)
-   - The docker swarm join-token command wiki doc: (https://docs.docker.com/engine/reference/commandline/swarm_join-token/)
-   - The docker swarm join command wiki doc: (https://docs.docker.com/engine/reference/commandline/swarm_join/)
-   - Thedocker swarm unlock command wiki doc: (https://docs.docker.com/engine/reference/commandline/swarm_unlock/)
-   - The docker swarm unlock-key command wiki doc: (https://docs.docker.com/engine/reference/commandline/swarm_unlock-key/)
-   - The docker swarm update command wiki doc: (https://docs.docker.com/engine/reference/commandline/swarm_update/)
-   - The docker swarm leave command wiki doc: (https://docs.docker.com/engine/reference/commandline/swarm_leave/)
-   - Learn more about Docker Secrets: (https://docs.docker.com/engine/swarm/secrets/)
+   - [Getting started with swarm mode tutorial](https://docs.docker.com/engine/swarm/swarm-tutorial/)
+   - [The docker swarm init command wiki doc](https://docs.docker.com/engine/reference/commandline/swarm_init/)
+   - [The docker swarm ca command wiki doc](https://docs.docker.com/engine/reference/commandline/swarm_ca/)
+   - [The docker swarm join-token command wiki doc](https://docs.docker.com/engine/reference/commandline/swarm_join-token/)
+   - [The docker swarm join command wiki doc](https://docs.docker.com/engine/reference/commandline/swarm_join/)
+   - [The docker swarm unlock command wiki doc](https://docs.docker.com/engine/reference/commandline/swarm_unlock/)
+   - [The docker swarm unlock-key command wiki doc](https://docs.docker.com/engine/reference/commandline/swarm_unlock-key/)
+   - [The docker swarm update command wiki doc](https://docs.docker.com/engine/reference/commandline/swarm_update/)
+   - [The docker swarm leave command wiki doc](https://docs.docker.com/engine/reference/commandline/swarm_leave/)
+   - [Learn more about Docker Secrets](https://docs.docker.com/engine/swarm/secrets/)
+
+# Managers and workers
+
+- All manager nodes are actually worker nodes as well by default. This means that they can and will run containers. If you want to keep your managers from running workloads, you need to change the node's availability setting. Changing it to draining will carefully stop any running containers on the manager node marked as draining, and will start up those containers on other (non-draining) nodes. No new container workloads will be started on a node in drain mode, for example as follows:
+
+```
+# Set node03's availability to drain
+docker node update --availability drain ubuntu-node03
+
+```
+
+There may be times when you want or need to change the role of a docker node in the swarm. You can promote a worker node to manager status, or you can demote a manager node to worker status. Here are some examples of these activities:
+
+```
+# Promote worker nodes 04 and 05 to manager status
+docker node promote ubuntu-node04 ubuntu-node05
+# Demote manager nodes 01 and 02 to worker status
+docker node demote ubuntu-node01 ubuntu-node02
+
+```
+[Check out the official documentation on how nodes work](https://docs.docker.com/engine/swarm/how-swarm-mode-works/nodes/)
 
 
+# Swarm services
 
+- Docker swarm cluster, and how its nodes go from single-engine mode into swarm mode. You also know that the significance of that is to free you from directly managing individual running containers. So, you may be starting to wonder, if I don't manage my containers directly and individually now, how do I manage them? You've come to the right place! This is where swarm services come into play. swarm services allow you to define the desired state for your container application in terms of how many concurrent running copies of the container there should be. Let's take a quick look at what commands are available to us in the management group for swarm services, and then we'll talk about those commands:
 
+```
+docker service --help
 
+Usage:  docker service COMMAND
+
+Manage services
+
+Commands:
+  create      Create a new service
+  inspect     Display detailed information on one or more services
+  logs        Fetch the logs of a service or task
+  ls          List services
+  ps          List the tasks of one or more services
+  rm          Remove one or more services
+  rollback    Revert changes to a service's configuration
+  scale       Scale one or multiple replicated services
+  update      Update a service
+
+Run 'docker service COMMAND --help' for more information on a command.
+
+```
+
+- The first thing that you'll probably want to do is create a new service, so we will begin our swarm services discussion with the service create command. 
+  Here is the syntax and a basic sample of the service create command:
+
+```
+# Syntax for the service create command
+# Usage: docker service create [OPTIONS] IMAGE [COMMAND] [ARG...]
+# Create a service
+docker service create --replicas 1 --name submarine alpine ping google.com
+
+```
+
+Let's break down the sample `service create` command shown here. First, you have the management group service followed by the create command. Then, we start getting into the parameters; the first one is `--replicas`. This defines the number of copies of the container that should be run concurrently. Next, we have the `--name` parameter. This one is pretty obvious and is the name of the service we are creating, in this case, submarine. We will be able to use the stated name in other service commands. After the name parameter, we have the fully-qualified Docker image name. In this case, it is just alpine. It could have been something such as `alpine:3.8`, or alpine:latest, or something more qualified such as `tenstartups/alpine:latest`. Following the image name to use for the service is the command to use when running the container and the parameters to pass to that command— `ping` and `google.com`, respectively. So, the preceding sample service create command will launch a single container from the alpine image, which will run the ping command with the google.com parameter, and then name the service submarine. Here is what that looks like:
+
+```
+# Create a service
+
+$ docker service create --replicas 1 --name submarine alpine ping google.com
+hb3wsapz67910mc2x44dricq1
+overall progress: 0 out of 1 tasks 
+overall progress: 1 out of 1 tasks 
+1/1: running   
+verify: Service converged 
+```
+
+You now know the basics of creating `docker services.` But, before you get too excited, there's still a lot of ground to cover for the service create command. In fact, this command has so many options that listing them all out would take two pages in this book. So, rather than do that, I want you to use the `--help` feature and enter the following command now:
+
+```
+# Get help with the service create command
+docker service create --help
+
+```
+
+- Just so you know, the two parameters we used so far, `--replicas` and `--name`, are both optional. If you don't provide a number of replicas to use, the service will be created with a default of 1. Also, if you don't provide a name for the service, a fanciful name will be made up and given to the service. 
+This is the same type of default naming we saw when using the docker container run command, It is generally better to provide both of these options for each
+service create command issued.
+
+- Also, know that generally speaking, the command and command parameters for the image that were supplied in the preceding sample are optional as well. In this specific case, they are necessary because, by itself, a container run from the alpine image with no other command or parameters supplied will just exit. In the sample, that would show up as a failure to converge the service and Docker would perpetually try to restart the service. Stated another way, you can leave off the command and its parameters if the image being used has them built in (such as in the `CMD` or `ENTRYPOINT` instruction of the Dockerfile).
+
+- Let's move on to some more create parameters now. You should recall Learning Docker Commands that there is a `--publish `parameter you can use on a docker container run command that defines the port exposed on the docker host and the port in the container that the host port is mapped to. It looked something like this:
+
+```
+# Create a nginx web-server that redirects host traffic from port 8080 to port 80 in the container
+docker container run --detach --name web-server1 --publish 8080:80 nginx
+```
+
+Well, you need the same functionality for a swarm service, and in their wisdom, Docker made the parameter used for both the container run command and the service create command the same: --publish. You can use the same abbreviated format we saw before, `--publish 8080:80`, or you can use a more verbose format: `--publish published=8080`, `target=80`. This still translates to redirect host traffic from port 8080 to port 80 in the container. Let's try out another example, this time one that uses the `--publish` parameter. We'll give the nginx image another run:
+
+```
+# Create a nginx web-server service using the publish parameter
+docker service create --name web-service --replicas 3 --publish published=8080,target=80 nginx
+
+```
+This example will create a new service that runs three container replicas, using the nginx image and exposing port 80 on the containers and port 8080 on the hosts. Have a look:
+
+```
+$ docker service create --name web-service --replicas 3 --publish published=8080,target=80 nginx
+bk5xisgb6vby5lii7mu9evbt7
+overall progress: 3 out of 3 tasks 
+1/3: running   
+2/3: running   
+3/3: running   
+verify: Service converged 
+
+```
+Let's review some of the other service commands you will want to know and use. Once you've created some services, you might want a list of those services. This can be achieved with the `service list` command. It looks like this:
+
+```
+# List services in the swarm
+# Usage: docker service ls [OPTIONS]
+docker service list
+
+```
+
+Once you have reviewed the list of running services, you might want more details about one or more of those services. To achieve this, you would use the `service ps ` command. Have a look:
+
+```
+# List the tasks associated with a service
+# Usage: docker service ps [OPTIONS] SERVICE [SERVICE...]
+docker service ps
+
+```
+Once a service has outlived its usefulness, you might want to terminate it. The command to do that is the service remove command. Here is what that looks like:
+
+```
+# Remove one or more services from the swarm
+# Usage: docker service rm SERVICE [SERVICE...]
+docker service remove sleepy_snyder
+
+```
+
+If you want to remove all of the services running in the swarm, you can combine some of these commands and execute something such as this:
+
+```
+# Remove ALL the services from the swarm
+docker service remove $(docker service list -q)
+
+```
+
+Finally, if you realize that the number of replicas currently configured is not set to the desired number, you can use the service scale command to adjust it. Here is how you do that:
+
+```
+# Adjust the configured number of replicas for a service
+# Usage: docker service scale SERVICE=REPLICAS [SERVICE=REPLICAS...]
+docker service scale web-service=4
+```
+[Read more about the Docker service create reference](https://docs.docker.com/engine/reference/commandline/service_create/)
 
 
 
