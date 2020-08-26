@@ -239,6 +239,116 @@ Another important point to remember is that rotating the certificate will immedi
 
 ## docker swarm unlock
 
+- You may recall from the discussion regarding the docker swarm init command that one of the optional parameters that you can include with the init command is --autolock. Using this parameter will enable the autolock feature on the swarm cluster. What does that mean? Well, when a swarm cluster is configured to use auto-locking, any time the docker daemon of a manager node goes offline, and then comes back online (that is, is restarted) it is necessary to enter an unlock key to allow the node to rejoin the swarm. Why would you use the auto-lock feature to lock your swarm? The auto-lock feature helps to protect the mutual TLS encryption key of the swarm, along with the encrypt and decrypt keys used with the swarm's raft logs. It is an additional security feature intended to supplement Docker Secrets. When the docker daemon restarts on the manager node of a locked swarm, you must enter the unlock key. Here is what using the unlock key looks like:
+
+
+```
+$ docker service docker restart 
+
+$ docker swarm unlock 
+please enter unlock key
+$docker node ls
+ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS      ENGINE VERSION
+llt33mev2jndnye35bt3jpd7j *   manager1            Ready               Active              Reachable           19.03.11
+msh0nhyi1whl4o1th4oua7l3s     manager2            Ready               Active              Reachable           19.03.11
+qvgyd9lxbd90wj6rdm1cui41h     manager3            Ready               Active              Leader              19.03.11
+vnqiv2t6z0awe38wdy6id2v0l     worker1             Ready               Active                                  19.03.11
+fm3p3sa38z9brn3yr9ehynxak     worker2             Ready               Active                                  19.03.11
+[manager1] (local) root@192.168.0.12 ~
+$ 
+
+```
+- By the way, to the rest of the swarm, a manager node that has not been unlocked will report as down, even though the docker daemon is running. The swarm auto-lock feature can be enabled or disabled on an existing swarm cluster using the swarm update command, which we will take a look at shortly. The unlock key is generated during the swarm initialization and will be presented on the command line at that time. If you have lost the unlock key, you can retrieve it on an unlocked manager node using the swarm unlock-key command.
+
+## docker swarm unlock-key
+
+The `swarm unlock-key` command is much like the swarm ca command. The unlock-key command can be used to retrieve the current swarm unlock key, or it can be used to rotate the unlock key to a new one:
+
+```
+# Retrieve the current unlock key
+docker swarm unlock-key
+# Rotate to a new unlock key
+docker swarm unlock-key --rotate
+
+```
+
+Depending on the size of the swarm cluster, the unlock key rotation can take a while for all of the manager nodes to get updated.
+
+Note :- It is a good idea to keep the current (old) key handy for a while when you rotate the unlock key, on the off-chance that a manager node goes offline before getting the updated key. That way, you can still unlock the node using the old key. Once the node is unlocked and receives the rotated (new) unlock key, the old key can be discarded.
+
+- As you might expect, the swarm unlock-key command is only useful when issued on a manager node of a cluster with the auto-lock feature enabled. If you have a cluster that does not have the auto-lock feature enabled, you can enable it with the swarm update command.
+
+## docker swarm update
+
+- There are several swarm cluster features that are enabled or configured when you initialize the cluster on the first manager node via the docker swarm init command. There may be times that you want to change which features are enabled, disabled, or configured after the cluster has been initialized. To accomplish this, you will need to use the swarm update command. For example, you may want to enable the auto-lock feature for your swarm cluster. Or, you might want to change the length of time that certificates are valid for. These are the types of changes you can execute using the `swarm update` command. Doing so might look like this:
+
+```
+# Enable autolock on your swarm cluster
+docker swarm update --autolock=true
+# Adjust certificate expiry to 30 days
+docker swarm update --cert-expiry 720h
+
+```
+
+Here is the list of settings that can be affected by the swarm update command:
+
+```
+$ docker swarm update --help
+
+Usage:  docker swarm update [OPTIONS]
+
+Update the swarm
+
+Options:
+      --autolock                        Change manager autolocking setting
+                                        (true|false)
+      --cert-expiry duration            Validity period for node
+                                        certificates (ns|us|ms|s|m|h)
+                                        (default 2160h0m0s)
+      --dispatcher-heartbeat duration   Dispatcher heartbeat period
+                                        (ns|us|ms|s|m|h) (default 5s)
+      --external-ca external-ca         Specifications of one or more
+                                        certificate signing endpoints
+      --max-snapshots uint              Number of additional Raft
+                                        snapshots to retain
+      --snapshot-interval uint          Number of log entries between Raft
+                                        snapshots (default 10000)
+      --task-history-limit int          Task history retention limit
+                                        (default 5)
+
+```
+
+## docker swarm leave
+
+- This one is pretty much what you would expect. You can remove a docker node from a swarm with the leave command. Here is an example of needing to use the leave command to correct a user error:
+
+```
+$ docker system info | grep Swarm 
+inactive 
+$ docker swarm join --token SWMTKN-1-3ovu7fbnqfqlw66csvvfw5xgljl26mdv0dudcdssjdcltk2sen-a830tv7e8bajxu1k5dc0045zn 192.168.159.156:2377
+docker system info | grep Swarm 
+active 
+$ docker swarm leave 
+$ docker system info | grep Swarm 
+inactive
+```   
+
+- for more details :- 
+   - Getting started with swarm mode tutorial: https://docs.docker.com/engine/swarm/swarm-tutorial/
+   - The docker swarm init command wiki doc: https://docs.docker.com/engine/reference/commandline/swarm_init/
+   - The docker swarm ca command wiki doc: https://docs.docker.com/engine/reference/commandline/swarm_ca/
+   - The docker swarm join-token command wiki doc: https://docs.docker.com/engine/reference/commandline/swarm_join-token/
+   - The docker swarm join command wiki doc: https://docs.docker.com/engine/reference/commandline/swarm_join/
+   - Thedocker swarm unlock command wiki doc: https://docs.docker.com/engine/reference/commandline/swarm_unlock/
+   - The docker swarm unlock-key command wiki doc: https://docs.docker.com/engine/reference/commandline/swarm_unlock-key/
+   - The docker swarm update command wiki doc: https://docs.docker.com/engine/reference/commandline/swarm_update/
+   - The docker swarm leave command wiki doc: https://docs.docker.com/engine/reference/commandline/swarm_leave/
+   - Learn more about Docker Secrets: https://docs.docker.com/engine/swarm/secrets/
+
+
+
+
+
 
 
 
