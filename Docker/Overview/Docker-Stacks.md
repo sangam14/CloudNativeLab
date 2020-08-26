@@ -372,7 +372,98 @@ The only truly new key is the stop_grace_period key. This key tells Docker how l
 # The rest of the stack commands
 
 
+Now, let's take a quick look at our other stack-related commands through the lens of the swarm where we deployed our voteapp stack. First up, we have the list stacks command: docker stack ls. Giving that a try looks like this:
+
+```
+# List the stacks deployed in a swarm
+docker stack ls
+
+```
 
 
+Here is what it looks like in the example environment:
+```
+$ # List the stacks deployed in a swarm
+$ docker stack ls
+NAME                SERVICES            ORCHESTRATOR
+voteapp             6                   Swarm
 
 
+```
+This is showing that we have one stack named voteapp currently deployed, and that it is composed of six services and is using swarm mode for its orchestration. Knowing the name of a deploy stack allows us to gather more information about it using the other stack commands. Next up is the list stack tasks command. Let's give this command a try in our example environment:
+
+```
+# List the tasks for our voteapp stack filtered by desried state
+docker stack ps voteapp --filter desired-state=running
+
+
+```
+Here are the results in my environment right now; yours should look very similar:
+
+```
+[manager1] (local) root@192.168.0.15 ~
+$ docker stack ps voteapp --filter desired-state=running
+ID                  NAME                   IMAGE                                          NODE                DESIRED STATE       CURRENT STATE            ERROR               PORTS
+zcsgldt6p6ec        voteapp_result.1       dockersamples/examplevotingapp_result:before   manager1            Running             Running 11 minutes ago                       
+si13cdpcrizt        voteapp_visualizer.1   dockersamples/visualizer:stable                manager2            Running             Running 3 hours ago                          
+kg1szl258kus        voteapp_vote.1         dockersamples/examplevotingapp_vote:before     worker1             Running             Running 3 hours ago                          
+vcy6b3rwyqec        voteapp_redis.1        redis:alpine                                   manager3            Running             Running 3 hours ago                          
+qvzz2oddsqcm        voteapp_vote.2         dockersamples/examplevotingapp_vote:before     worker2             Running             Running 3 hours ago    
+
+
+```
+Now, we will have a look at the stack services command. This command will give us a nice summary of the services that are deployed as part of our stack application. The command looks like this:
+
+```
+$ # Look at the services associated with a deployed stack
+$ docker stack services voteapp
+ID                  NAME                 MODE                REPLICAS            IMAGE                                          PORTS
+4fqgkj8el60m        voteapp_result       replicated          1/1                 dockersamples/examplevotingapp_result:before   *:5001->80/tcp
+ie4ezdkif73b        voteapp_vote         replicated          2/2                 dockersamples/examplevotingapp_vote:before     *:5000->80/tcp
+j93k6f2sa6sv        voteapp_db           replicated          0/1                 postgres:9.4                                   
+k4771o8421e0        voteapp_visualizer   replicated          1/1                 dockersamples/visualizer:stable                *:8080->8080/tcp
+lbx83i1xpfmv        voteapp_redis        replicated          1/1                 redis:alpine                                   *:30000->6379/tcp
+z3qx4rizc6je        voteapp_worker       replicated          0/1                 dockersamples/examplevotingapp_worker:latest  
+
+```
+
+command provides some very useful information. We can quickly see the names of our services, the number of replicas desired, and the actual number of replicas for each service. We can see the image used to deploy each service, and we can see the port mapping used for each service. Here, we can see the visualizer service is using port 8080, as we mentioned earlier. We can also see that our vote service is exposed on port 5000 of our swarm hosts. Let's have a look at what we are presenting in our voteapp by browsing to port 5000 
+
+- There is one final stack command: the remove command. We can quickly and easily take down an application deployed with the stack deploy command by issuing the rm command. Here is what that looks like:
+
+
+```
+# Remove a deploy stack using the rm command
+docker stack rm voteapp
+
+
+```
+Now you see it, now you don't:
+
+```
+$ # Remove a deploy stack using the rm command
+[manager1] (local) root@192.168.0.15 ~
+$ docker stack rm voteapp
+Removing service voteapp_db
+Removing service voteapp_redis
+Removing service voteapp_result
+Removing service voteapp_visualizer
+Removing service voteapp_vote
+Removing service voteapp_worker
+Removing network voteapp_default
+Removing network voteapp_frontend
+Removing network voteapp_backend
+[manager1] (local) root@192.168.0.15 ~
+$ 
+```
+
+- Check out the following links for more information:
+
+   - [The compose file reference](https://docs.docker.com/compose/compose-file/)
+   - [Some compose file examples](https://github.com/play-with-docker/stacks)
+   - [Docker sample images on Docker hub](https://hub.docker.com/u/dockersamples/)
+   - [Official redis image tags found on Docker hub](https://hub.docker.com/r/library/redis/tags/)
+   - [A great article about using the Docker daemon socket](https://medium.com/lucjuggery/about-var-run-docker-sock-3bfd276e12fd)
+   - [The stack deploy command reference](https://docs.docker.com/engine/reference/commandline/stack_deploy/)
+   - [The stack ps command reference](https://docs.docker.com/engine/reference/commandline/stack_ps/)
+   - [The stack services command reference](https://docs.docker.com/engine/reference/commandline/stack_services/)
