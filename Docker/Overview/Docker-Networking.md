@@ -234,7 +234,7 @@ of these third-party drivers include Contiv, Weave, Kuryr, and Calico. One of th
 support deployment in cloud-hosted environments, such as AWS. In order to use these drivers, they need to be installed in a separate installation 
 step for each of your Docker hosts. Each of the third-party network drivers brings their own set of features to the table.
 Here is the summary description of these drivers as shared by Docker in the reference architecture document:
-![]()
+![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/docker-driver-network.png)
 
 
 Although each of these third-party drivers has its own unique installation, setup, and execution methods, the general steps are similar. 
@@ -243,15 +243,52 @@ require swarm mode and can be used with or without it. As an example, let's take
 To install the weave network driver, issue the following commands on each Docker host:
 
 ```
-# Install the weave network driver plug-in
-sudo curl -L git.io/weave -o /usr/local/bin/weave
-sudo chmod a+x /usr/local/bin/weave
-# Disable checking for new versions
-export CHECKPOINT_DISABLE=1
-# Start up the weave network
-weave launch [for 2nd, 3rd, etc. optional hostname or IP of 1st Docker host running weave]
-# Set up the environment to use weave
-eval $(weave env)
+[node1] (local) root@192.168.0.23 ~
+$ sudo curl -L git.io/weave -o /usr/local/bin/weave
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   629  100   629    0     0    915      0 --:--:-- --:--:-- --:--:--   915
+100 51395  100 51395    0     0  68986      0 --:--:-- --:--:-- --:--:-- 68986
+[node1] (local) root@192.168.0.23 ~
+$ sudo chmod a+x /usr/local/bin/weave
+[node1] (local) root@192.168.0.23 ~
+$ export CHECKPOINT_DISABLE=1
+[node1] (local) root@192.168.0.23 ~
+$ weave launch
+2.7.0: Pulling from weaveworks/weave
+21c83c524219: Pull complete 
+3c1275a4379d: Pull complete 
+71ff85185d24: Pull complete 
+ba2937042659: Pull complete 
+35b26289b9d6: Pull complete 
+Digest: sha256:be309a6d90bb8663c479e6873ffc9f6265c40decac64c6b602af5084d851aef6
+Status: Downloaded newer image for weaveworks/weave:2.7.0
+docker.io/weaveworks/weave:2.7.0
+latest: Pulling from weaveworks/weavedb
+4e2a4496fae2: Pull complete 
+Digest: sha256:836c82b6bf5039c5d240af4c4ef5d2ce50f826a66fceaac370992db1a82b7bb0
+Status: Downloaded newer image for weaveworks/weavedb:latest
+docker.io/weaveworks/weavedb:latest
+Unable to find image 'weaveworks/weaveexec:2.7.0' locally
+2.7.0: Pulling from weaveworks/weaveexec
+21c83c524219: Already exists 
+3c1275a4379d: Already exists 
+71ff85185d24: Already exists 
+ba2937042659: Already exists 
+35b26289b9d6: Already exists 
+65c7f7e0a1c9: Pull complete 
+48e97ff78ad1: Pull complete 
+a2ba25002c0c: Pull complete 
+8678f227127c: Pull complete 
+Digest: sha256:17e8d712976e574d68181159d62f45449ee1b7376c200a87f2edd48890fc5650
+Status: Downloaded newer image for weaveworks/weaveexec:2.7.0
+46ec65c48a63b87e507e9f5832b4e1d4fe5bb2d561f935b6c908aeeb306166a0
+[node1] (local) root@192.168.0.23 ~
+$ eval $(weave env)
+[node1] (unknown) root@192.168.0.23 ~
+$ 
 
 ```
 
@@ -276,11 +313,210 @@ regardless of whether they are on the same Docker host or different ones.
 The weave network shows up in your network list just like any of your other networks:
 
 ```
+$ docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+0e6e8fc2dcda        bridge              bridge              local
+0e38259af941        host                host                local
+665ffb6c7c62        none                null                local
+34f4a8b1c448        weave               weavemesh           local
 
+```
+
+Let's test out our shiny new network. First, make sure that you have installed the weave driver on all the hosts you want to be connected by following the steps described previously. Make sure that you either use the launch command with node01 as a parameter, or from node01 you use the connect command for each of the additional nodes you are configuring. For this example, my lab servers are named node01 and node02. Let's start with node02:
+
+```
+# Install and setup the weave driver
+sudo curl -L git.io/weave -o /usr/local/bin/weave
+sudo chmod a+x /usr/local/bin/weave
+export CHECKPOINT_DISABLE=1
+weave launch
+eval $(weave env)
+
+```
+And, note the following, on ubuntu-node02:
+
+```
+# Install and setup the weave driver
+sudo curl -L git.io/weave -o /usr/local/bin/weave
+sudo chmod a+x /usr/local/bin/weave
+export CHECKPOINT_DISABLE=1
+weave launch
+eval $(weave env)
+
+```
+Now, back on ubuntu-node01, note the following:
+
+```
+# Bring node02 in as a peer on node01's weave network
+weave connect ubuntu-node02
+
+```
+Now, let's launch a container on each node. Make sure we name them for easy identification, starting with ubuntu-node01:
+
+```
+# Run a container detached on node01
+docker container run -d --name app01 alpine tail -f /dev/null
+
+```
+
+Now, launch a container on ubuntu-node02:
+
+```
+# Run a container detached on node02
+docker container run -d --name app02 alpine tail -f /dev/null
+
+
+```
+Excellent. Now, we have containers running on both nodes. Let's see whether they can communicate. Since we are on node02, we will check there first:
+
+```
+# From inside the app02 container running on node02,
+# let's ping the app01 container running on node01
+docker container exec -it app02 ping -c 4 app01
 
 
 ```
 
+Yeah! That worked. Let's try going the other way:
+
+```
+# Similarly, from inside the app01 container running on node01,
+# let's ping the app02 container running on node02
+docker container exec -it app01 ping -c 4 app02
+
+
+```
+
+Perfect! We have bi-directional communication. Did you notice anything else? We have name resolution for our app containers (we didn't have to ping by IP only). Pretty nice, right?
+
+- Check out these links for more information:
+    - [Installing and using the weave network driver](https://www.weave.works/docs/net/latest/overview/)
+    - [Weaveworks weave github repo](https://github.com/weaveworks/weave)
+    
+
+# Creating Docker networks
+
+
+OK, you now know a lot about both the local and the remote network drivers, and you have seen how several of them are created for you when you install Docker and/or initialize swarm mode (or install a remote driver). But, what if you want to create your own networks using some of these drivers? It is really pretty simple. Let's take a look. The built-in help for the network create command looks like this:
+
+```
+# Docker network create command syntax
+# Usage: docker network create [OPTIONS] NETWORK
+
+```
+
+Probably the most important option is the `--driver` option. This is how we tell Docker which of the pluggable network drivers to use when creating this network. As you have seen, the choice of driver determines the network characteristics. The value you supply to the driver option will be like the ones shown in the DRIVER column of the output from the `docker network ls` command. Some of the possible values are bridge, overlay, and macvlan. Remember that you cannot create additional host or null networks as they are limited to one per Docker host. So far, what might this look like? Here is an example of creating a new overlay network, using mostly defaults for options:
+
+```
+# Create a new overlay network, with all default options
+docker network create -d overlay defaults-over
+
+```
+
+That works just fine. You can run new services and attach them to your new network. But what else might we want to control in our network? Well, how about the IP space? Yep, and Docker provides options for controlling the IP settings for our networks. This is done using the `--subnet`, `--gateway`, and `--ip-range` optional parameters. So, let's take a look at creating a new network using this options. See Chapter 2, Learning Docker Commands, for how to install jq if you have not done so already:
+
+```
+# Create a new overlay network with specific IP settings
+docker network create -d overlay \
+--subnet=172.30.0.0/24 \
+--ip-range=172.30.0.0/28 \
+--gateway=172.30.0.254 \
+specifics-over
+# Initial validation
+docker network inspect specifics-over --format '{{json .IPAM.Config}}' | jq
+
+
+```
+
+Executing the preceding code in my lab looks like this:
+
+```
+[manager1] (local) root@192.168.0.19 ~
+$ # Create a new overlay network with specific IP settings
+[manager1] (local) root@192.168.0.19 ~
+$ docker network create -d overlay \
+> --subnet=172.30.0.0/24 \
+> --ip-range=172.30.0.0/28 \
+> --gateway=172.30.0.254 \
+> specifics-over
+ozgy9b0wge8jhilm3her61oln
+[manager1] (local) root@192.168.0.19 ~
+$ # Initial validation
+[manager1] (local) root@192.168.0.19 ~
+$ docker network inspect specifics-over --format '{{json .IPAM.Config}}' | jq
+[
+  {
+    "Subnet": "172.30.0.0/24",
+    "IPRange": "172.30.0.0/28",
+    "Gateway": "172.30.0.254"
+  }
+[manager1] (local) root@192.168.0.19 ~
+
+```
+Looking over this example, we see that we created a new overlay network using specific IP parameters for the subnet, the IP range, and the gateway. Then, we validated that the network was created with the requested options. Next, we created a service using our new network. Then, we found the container ID for a container belonging to the service and used it to inspect the network settings for the container. We can see that the container was run using an IP address (in this case, 172.30.0.7) from the IP range we configured our network with. Looks like we made it! 
+
+As mentioned, there are many other options available when creating Docker networks,
+and I will leave it as an exercise for you to discover them with the docker network create --help command, and to try some of them out to see what they do.
+
+- References
+  - [You can find the documentation for the network create command](https://docs.docker.com/engine/reference/commandline/network_create/)
+  
+# Free networking features
+
+
+First up is Service Discovery. When you create a service, it gets a unique name. That name gets registered with the swarm DNS. And, every service uses the swarm DNS for name resolution. Here is an example for you. We are going to leverage the specifics-over overlay network we created earlier in the creating Docker networks section. We'll create two services (tester1 and tester2) attached to that network, then we will connect to a container in the tester1 services and ping the tester2 service by name. Check it out:
+
+```
+ocker network create -d overlay \
+> --subnet=172.30.0.0/24 \                                                       > --ip-range=172.30.0.0/28 \
+> --gateway=172.30.0.254 \
+> specifics-over
+0cbhovsunneewllheqgod32jq
+[manager1] (local) root@192.168.0.23 ~
+$ docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+7e8a0b2f44ad        bridge              bridge              local
+21861fa3504d        docker_gwbridge     bridge              local
+2a404bf7784f        host                host                local
+f9tnnn6q58zy        ingress             overlay             swarm
+a3bfef39cbad        none                null                local
+0cbhovsunnee        specifics-over      overlay             swarm
+[manager1] (local) root@192.168.0.23 ~
+$ docker service create --detach --replicas 3 --name tester1 \
+> --network specifics-over alpine tail -f /dev/null
+igzb7bldsck4rg9qklg6ndilz
+[manager1] (local) root@192.168.0.23 ~
+$ docker service create --detach --replicas 3 --name tester2 \> --network specifics-over alpine tail -f /dev/null
+lt6772clx7okwjndvvijcpmk4
+$ docker container exec -it tester1.3.<GET THE NAME> ping -c 3 tester2
+
+```
+Note that I typed the first part of the service name (tester1) and used command-line completion by hitting Tab to fill in the container name for the exec command. But, as you can see, I was able to reference the tester2 service by name from within a tester1 container. 
+
+For free!
+
+- The second free feature we get is Load balancing. This powerful feature is pretty easy to understand. It allows traffic intended for a service to be sent to any host in a swarm regardless of whether that host is running a replica of the service. 
+
+- Imagine a scenario where you have a six-node swarm cluster, and a service that has only one replica deployed. You can send traffic to that service via any host in the swarm and know that it will arrive at the service's one container no matter which host the container is actually running on. In fact, you can direct traffic to all hosts in the swarm using a load balancer, say in a round-robin model, and each time traffic is sent to the load balancer, that traffic will get delivered to the app container without fail. 
+
+- Pretty handy, right? Again, for free!
+
+- References
+   - [Want to have a go at service discovery? Then check out](https://training.play-with-docker.com/swarm-service-discovery/)
+   - [You can read about swarm service load balancing](https://docs.docker.com/engine/swarm/key-concepts/#load-balancing)
+   
+   
+#  Which Docker network driver should I use?
+
+- The short answer to that question is the right one for the job. That means there is no single network driver that is the right fit for every situation. If you're doing work on your laptop, running with swarm inactive, and you just need your containers to be able to communicate with each other, the simple bridge mode driver is ideal. 
+
+If you have multiple nodes and just need container-to-container traffic, the overlay driver is the right one to use. This one works well in AWS, if you are within the container-to-container realm. If you need container-to-VM or container-to-physical-server communication (and can tolerate promiscuous mode), the MACVLAN driver is the way to go. Or, if you have a more complex requirement, one of the many remote drivers might be just what the doctor ordered. 
+
+I've found that for most multi-host scenarios, the overlay driver will get the job done, so I would recommend that you enable swarm mode, and give the overlay driver a try before you ramp up to any of the other multi-host options.
+
+
+
+   
 
 
     
