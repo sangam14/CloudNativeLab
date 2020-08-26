@@ -334,16 +334,16 @@ inactive
 ```   
 
 - for more details :- 
-   - Getting started with swarm mode tutorial: https://docs.docker.com/engine/swarm/swarm-tutorial/
-   - The docker swarm init command wiki doc: https://docs.docker.com/engine/reference/commandline/swarm_init/
-   - The docker swarm ca command wiki doc: https://docs.docker.com/engine/reference/commandline/swarm_ca/
-   - The docker swarm join-token command wiki doc: https://docs.docker.com/engine/reference/commandline/swarm_join-token/
-   - The docker swarm join command wiki doc: https://docs.docker.com/engine/reference/commandline/swarm_join/
-   - Thedocker swarm unlock command wiki doc: https://docs.docker.com/engine/reference/commandline/swarm_unlock/
-   - The docker swarm unlock-key command wiki doc: https://docs.docker.com/engine/reference/commandline/swarm_unlock-key/
-   - The docker swarm update command wiki doc: https://docs.docker.com/engine/reference/commandline/swarm_update/
-   - The docker swarm leave command wiki doc: https://docs.docker.com/engine/reference/commandline/swarm_leave/
-   - Learn more about Docker Secrets: https://docs.docker.com/engine/swarm/secrets/
+   - Getting started with swarm mode tutorial:(https://docs.docker.com/engine/swarm/swarm-tutorial/)
+   - The docker swarm init command wiki doc: (https://docs.docker.com/engine/reference/commandline/swarm_init/)
+   - The docker swarm ca command wiki doc: (https://docs.docker.com/engine/reference/commandline/swarm_ca/)
+   - The docker swarm join-token command wiki doc: (https://docs.docker.com/engine/reference/commandline/swarm_join-token/)
+   - The docker swarm join command wiki doc: (https://docs.docker.com/engine/reference/commandline/swarm_join/)
+   - Thedocker swarm unlock command wiki doc: (https://docs.docker.com/engine/reference/commandline/swarm_unlock/)
+   - The docker swarm unlock-key command wiki doc: (https://docs.docker.com/engine/reference/commandline/swarm_unlock-key/)
+   - The docker swarm update command wiki doc: (https://docs.docker.com/engine/reference/commandline/swarm_update/)
+   - The docker swarm leave command wiki doc: (https://docs.docker.com/engine/reference/commandline/swarm_leave/)
+   - Learn more about Docker Secrets: (https://docs.docker.com/engine/swarm/secrets/)
 
 
 
