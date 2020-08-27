@@ -8,11 +8,11 @@ nav_order: 5
 # Getting started with Docker Compose
 
 - Now for the advanced stuff. Docker Compose is a Docker tool used to define and run multi-container applications. With Compose, you use a YAML file to configure your application’s services and create all the app’s services from that configuration. Think of docker-compose as an automated multi-container workflow. Compose is an excellent tool for development, testing, CI workflows, and staging environments. According to the Docker documentation, the most popular features of Docker Compose are:
- -  Multiple isolated environments on a single host
- -  Preserve volume data when containers are created
- -  Only recreate containers that have changed
- -  Variables and moving a composition between environments
- -  Orchestrate multiple containers that work together
+    -  Multiple isolated environments on a single host
+    -  Preserve volume data when containers are created
+    -  Only recreate containers that have changed
+    -  Variables and moving a composition between environments
+    -  Orchestrate multiple containers that work together
  
 # How to use and install Docker Compose
 
