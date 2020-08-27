@@ -2,7 +2,7 @@
 layout: default
 title: Docker Swarm
 parent: Docker Fundamental
-nav_order: 5
+nav_order: 6
 ---
 
 # What is Docker swarm?
