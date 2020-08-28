@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Introduction to okteto   
-parent: okteto
+parent: Okteto
 nav_orde : 1
 ---
 
