@@ -1,3 +1,10 @@
+---
+layout: default
+title: History of Deployment Processes
+parent: Kubernetes For Beginner
+nav_order: 2
+---
+
 # History of Deployment Processes
 
 
