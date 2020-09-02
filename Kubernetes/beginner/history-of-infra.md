@@ -1,3 +1,11 @@
+---
+layout: default
+title: A History of Infrastructure Management
+parent: Kubernetes For Beginner
+nav_order: 1
+---
+
+
 # A History of Infrastructure Management
 
 # The Beginning 
