@@ -1,3 +1,11 @@
+---
+layout: default
+title: The Schedulers
+parent: Kubernetes For Beginner
+nav_order: 3
+---
+
+
 # The Schedulers
 
 # An Analogy 
