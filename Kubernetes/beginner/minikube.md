@@ -1,3 +1,10 @@
+---
+layout: default
+title: Installing Minikube
+parent: Kubernetes For Beginner
+nav_order: 6
+---
+
 # Installing Minikube
 
 
