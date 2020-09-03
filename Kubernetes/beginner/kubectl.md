@@ -1,4 +1,9 @@
-
+---
+layout: default
+title: Understanding kubectl 
+parent: Kubernetes For Beginner
+nav_order: 5
+---
 
 # Understanding kubectl 
 Kubernetes’ command-line tool, kubectl , is used to manage a cluster and applications running inside it. We’ll use kubectl a lot throughout the labs , 
