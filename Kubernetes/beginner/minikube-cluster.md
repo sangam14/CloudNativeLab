@@ -1,4 +1,9 @@
-
+---
+layout: default
+title: Starting Minikube to Create a Cluster 
+parent: Kubernetes For Beginner
+nav_order: 7
+---
 
 # Starting Minikube to Create a Cluster 
 
