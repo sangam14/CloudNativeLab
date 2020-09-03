@@ -78,6 +78,8 @@ container scheduler are:
 - They are making sure that the desired number of replicas are (almost) always running.
 - They are machines or, to be more precise, software running on top of them.
 
+![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/node-container-scheduler.png)
+
 All in all, they do what other schedulers do but with containers as the lowest and the only packaging unit. And that gives them a distinct advantage. 
 They do not care what’s inside. From a scheduler’s point of view, all containers are the same.
 
@@ -89,5 +91,7 @@ They do not care what’s inside. From a scheduler’s point of view, all contai
 whether that something will clash with other processes running on the same server.
 - Schedulers, combined with containers and virtual machines, provide the ultimate cluster management nirvana.
 - They allow us to combine the developer’s necessity for rapid and frequent deployments with a sysadmin’s goals of stability and reproducibility.
-And all that leads us to Kubernetes...
+
+
+## And all that leads us to Kubernetes...
 
