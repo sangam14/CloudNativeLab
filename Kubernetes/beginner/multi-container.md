@@ -21,6 +21,7 @@ We’ll explore storage and volumes in more depth later on. For now, let’s tak
 cat multicontainer-pod
 
 ```
+
 The output is as follows.
 
 ```
@@ -60,6 +61,7 @@ kubectl apply -f multicontainer-pod.yaml
 ```
  
 - Let's connect to our Pod...not specifying a name defaults to the first container in the configuration
+
 ```
 kubectl exec -it multicontainer-pod -- /bin/sh
 ls -la /var/log
@@ -75,13 +77,14 @@ ls -la /usr/share/nginx/html
 tail /usr/share/nginx/html/index.html
 exit
 ```
- 
 - This application listens on port 80, we'll forward from 8080->80
+
 ```
 kubectl port-forward multicontainer-pod 8080:80 
 curl http://localhost:8080
  ```
  - Kill our port-forward.
+ 
 ```
 fg
 ctrl+c
@@ -108,6 +111,7 @@ The get command that would filter the output and retrieve only the names of the 
 ```
 kubectl get -f multicontainer-pod.yaml \
     -o jsonpath="{.spec.containers[*].name}"
+    
 ```
 
 We used jsonpath as the output format and specified that we want to retrieve names of all the containers from the spec . The ability to 
@@ -123,6 +127,7 @@ so we need to be more specific.
 
 ```
 kubectl exec -it -c  webcontent 
+
 ```
 
 
