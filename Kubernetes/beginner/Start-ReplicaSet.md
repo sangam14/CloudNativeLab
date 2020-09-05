@@ -1,5 +1,11 @@
-# Getting Started with ReplicaSets
+---
+layout: default
+title: Getting Started with ReplicaSets
+parent: Kubernetes For Beginner
+nav_order: 16
+---
 
+# Getting Started with ReplicaSets
 
 ## Understanding ReplicaSets 
 
@@ -94,6 +100,7 @@ kubectl get pods --show-labels
 ```
 To be on the safe side, we used the `--show-labels` argument so that we can verify that the Pods in the cluster match those created by the ReplicaSet.
 
+![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/containerlabs-replicaset.png)
 
 
 
