@@ -1,3 +1,9 @@
+---
+layout: default
+title: Creating Services through Declarative Syntax
+parent: Kubernetes For Beginner
+nav_order: 18
+---
 
 
 # Creating Services through Declarative Syntax
