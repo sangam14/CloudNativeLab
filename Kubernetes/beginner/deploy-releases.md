@@ -1,3 +1,10 @@
+---
+layout: default
+title: Deploying New Releases
+parent: Kubernetes For Beginner
+nav_order: 21
+---
+
 # Deploying New Releases
 
 Just as we are not supposed to create Pods directly but using other controllers like ReplicaSet, we are not supposed to create ReplicaSets either. Kubernetes Deployments will create them for us. If you’re wondering why is this so? You’ll have to wait a little while longer to find out.
@@ -74,9 +81,7 @@ So far, from the functional point of view, there is no difference between a Repl
 
 The following figure summarizes the cascading effect of deployments resulting in the creation of pods, containers, and replicaSets.
 
-
-
-
+![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/Deployement-containerlabs.png)
 
 
 
