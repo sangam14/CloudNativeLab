@@ -14,7 +14,7 @@ sequence diagram. We won’t repeat the explanation of the events that happened 
 - The deployment controller is watching the API server for new events, and it detected that there is a new Deployment object.
 - The deployment controller creates a new ReplicaSet object.
 
-![](https://github.com/sangam14/ContainerLabs/blob/master/img/Deployement-Sequence.png)
+![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/Deployement-Sequence.png)
 
 The above illustration is self-explanatory with the sequence of the processes linked to the deployment process.
 
