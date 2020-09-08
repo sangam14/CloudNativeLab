@@ -1,3 +1,10 @@
+---
+layout: default
+title: sequential breakdown of the Kubernetes Deployment process
+parent: Kubernetes For Beginner
+nav_order: 22
+---
+
 # sequential breakdown of the Kubernetes Deployment process.
 
 efore we move onto Deployment updates, we’ll go through our usual ritual of seeing the process through a 
