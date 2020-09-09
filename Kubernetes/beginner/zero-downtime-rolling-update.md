@@ -1,4 +1,11 @@
-#  Zero Downtime with Rolling Updates
+---
+layout: default
+title: Zero Downtime with Rolling and Recreate Updates
+parent: Kubernetes For Beginner
+nav_order: 24
+---
+
+#  Zero Downtime with Rolling and Recreate Updates
 
 
 We create three Dockerfiles as follows:
