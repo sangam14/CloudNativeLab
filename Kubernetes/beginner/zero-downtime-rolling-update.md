@@ -233,3 +233,30 @@ mywebserver-77d979dbfb-ztpc8   1/1 	Running   0      	21s
 
 ```
 
+- maxSurge: the number of Pods that can be deployed temporarily in addition to the new replicas. Setting this to 1 means we can have a maximum total of five running Pods during the update process (the four replicas + 1).
+
+- maxUnavailable: the number of Pods that can be killed simultaneously during the update process. In our example, we can have at least three Pods running while the update is in progress (4 replicas - 1).
+
+![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/Rolling_update.png)
+
+- The RollingUpdate strategy is the default type, for a good reason. It allows us to deploy new releases without downtime. It creates a new ReplicaSet with
+zero replicas and, depending on other parameters, increases the replicas of  the new one, and decreases those from the old one. The process is finished when the replicas of the new ReplicaSet entirely replace those from the old one  
+
+- the new one, and decreases those from the old one. The process is finished when the replicas of the new ReplicaSet entirely replace those from the old one.
+
+- When RollingUpdate is the strategy of choice, it can be fine-tuned with the maxSurge and maxUnavailable fields. The former defines the maximum
+number of Pods that can exceed the desired number (set using replicas ). It can be set to an absolute number (e.g., 2 ) or a percentage (e.g., 35% )-. The total number of Pods will never exceed the desired number (set using replicas ) and the maxSurge combined. The default value is 25% 
+
+- maxUnavailable defines the maximum number of Pods that are not operational. If, for example, the number of replicas is set to 15 and this field is set to 4, the minimum number of Pods that would run at any given moment would be 11. Just as the maxSurge field, this one also defaults to 25%. If this field is not specified, there will always be at least 75% of the desired Pods.
+
+![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/Recreate-update.png)
+
+-  Recreate resembles the processes we used in the past when the typical strategy for deploying a new release was first to stop the existing one and then put a new one in its place. This approach inevitably leads to downtime. The only case when this strategy is useful is when applications are not designed for two releases to coexist. Unfortunately, that is still more common than it should be. If you’re in doubt whether your application is like that, ask yourself the following question. Would there be an adverse effect if two different versions of my application are running in parallel? If that’s the case, a Recreate strategy might be a good choice and you must be aware that you cannot accomplish zero-downtime deployments.
+
+
+
+
+
+
+
+
