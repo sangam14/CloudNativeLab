@@ -17,6 +17,8 @@ nav_orde : 1
 
 # How Okteto Works Under the hood 
 
+![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/how-its-work-okteto.png)
+
 - okteto use concept of syncthing . its continuous file synchronization program . which workes in real time to synchronizes file between two or more computers .
    
 - how this will help, well we have discussed that its don't need any kind of addition installation to run your kubernetes application because of syncthiing its will become much easier to run application .
