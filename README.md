@@ -24,5 +24,5 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
 
 
 Containerlabs Community Contribution [Website](https://containerlabs.github.io/)
-{: .label .label-blue }
+{: .label .label-yellow }
 ![](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/Contributor.png)
