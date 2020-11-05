@@ -156,9 +156,9 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
    <tr>
     <th> <a href="https://github.com/docker/classicswarm">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=docker&repo=classicswarm&theme=solarized-light"/>
-</a> </th>
+</a> 
+ </th>
     <th>
-     Container Operations
    <a href="https://github.com/icy/bocker">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=icy&repo=bocker&theme=solarized-light"/>
 </a>
