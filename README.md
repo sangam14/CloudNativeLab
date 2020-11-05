@@ -25,38 +25,42 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
 # Awesome Essential Container Technology Tools & Library 
 
 <details><summary>LXD and LXC Tools </summary>
-<p>
-  <a href="https://github.com/lxc/lxc">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=lxc&theme=solarized-light"/>
-</a>
-<a href="https://github.com/lxc/lxd">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=lxd&theme=solarized-light"/>
-</a>
- <a href="https://github.com/lxc/lxcfs">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=lxcfs&theme=solarized-light"/>
-</a>
- <a href="https://github.com/lxc/go-lxc">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=go-lxc&theme=solarized-light"/>
-</a>
- <a href="https://github.com/lxc/ruby-lxc">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=ruby-lxc&theme=solarized-light"/>
-</a>
-</p>
-
-
+ 
 <table style="width:100%">
   <tr>
-    <th>  <a href="https://github.com/anuraghazra/github-readme-stats">
-  <!-- Change the `github-readme-stats.anuraghazra1.vercel.app` to `github-readme-stats.vercel.app`  -->
-  <img align="center" src="https://github-readme-stats.anuraghazra1.vercel.app/api/pin/?username=anuraghazra&repo=github-readme-stats&theme=radical" />
+    <th> <a href="https://github.com/lxc/lxc">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=lxc&theme=solarized-light"/>
 </a> </th>
     <th>
-    <a href="https://github.com/anuraghazra/anuraghazra.github.io">
-  <!-- Change the `github-readme-stats.anuraghazra1.vercel.app` to `github-readme-stats.vercel.app`  -->
-  <img align="center" src="https://github-readme-stats.anuraghazra1.vercel.app/api/pin/?username=anuraghazra&repo=anuraghazra.github.io&theme=radical" />
+   <a href="https://github.com/lxc/lxd">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=lxd&theme=solarized-light"/>
 </a>
     </th> 
   </tr>
+  
+  <tr>
+    <th> <a href="https://github.com/lxc/lxcfs">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=lxcfs&theme=solarized-light"/>
+</a>
+   </th>
+    <th>
+       <a href="https://github.com/lxc/go-lxc">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=go-lxc&theme=solarized-light"/>
+</a>
+    </th>
+  </tr>
+   <th>
+    <a href="https://github.com/lxc/ruby-lxc">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=ruby-lxc&theme=solarized-light"/>
+</a>
+  </th> 
+  <tr>
+    <th>
+        <a href="https://github.com/lxc/python3-lxc">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=python3-lxc&theme=solarized-light"/>
+</a>  
+   </th>
+  </tr>
+  
 </table>
-
 </details>
