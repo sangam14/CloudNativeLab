@@ -39,7 +39,7 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=go-lxc&theme=solarized-light"/>
 </a>
  <a href="https://github.com/lxc/ruby-lxc">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=ruby-lxc&theme=solarized-light"/>
+  <img align="center" width="400" height="400" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=ruby-lxc&theme=solarized-light"/>
 </a>
 </p>
 </details>
