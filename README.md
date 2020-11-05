@@ -133,12 +133,34 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
  
 <table style="width:100%">
   <tr>
-    <th> <a href="https://github.com/lxc/lxc">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=lxc&theme=solarized-light"/>
+    <th> <a href="https://github.com/moby/moby">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=moby&repo=moby&theme=solarized-light"/>
 </a> </th>
     <th>
-   <a href="https://github.com/lxc/lxd">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=lxd&theme=solarized-light"/>
+   <a href="https://github.com/docker/compose/">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=docker&repo=compose&theme=solarized-light"/>
+</a>
+ </th> 
+  </tr>
+   <tr>
+    <th> <a href="https://github.com/docker/machine">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=docker&repo=machine&theme=solarized-light"/>
+</a> </th>
+    <th>
+   <a href="https://github.com/docker/distribution">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=docker&repo=distribution&theme=solarized-light"/>
+</a>
+   </th> 
+  </tr>
+    </tr>
+   <tr>
+    <th> <a href="https://github.com/docker/classicswarm">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=docker&repo=classicswarm&theme=solarized-light"/>
+</a> </th>
+    <th>
+     Container Operations
+   <a href="https://github.com/icy/bocker">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=icy&repo=bocker&theme=solarized-light"/>
 </a>
     </th> 
   </tr>
