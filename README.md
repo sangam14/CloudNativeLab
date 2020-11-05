@@ -62,6 +62,68 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
 </a>  
    </th>
   </tr>
+   <tr>
+    <th> <a href="https://github.com/lxc/distrobuilder">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=distrobuilder&theme=solarized-light"/>
+</a> </th>
+    <th>
+   <a href="https://github.com/fgrehm/vagrant-lxc">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=fgrehm&repo=vagrant-lxc&theme=solarized-light"/>
+</a>
+    </th> 
+  </tr>
+     <tr>
+    <th> <a href="https://github.com/lxc-webpanel/LXC-Web-Panel">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc-webpanel&repo=LXC-Web-Panel&theme=solarized-light"/>
+</a> </th>
+    <th>
+   <a href="https://github.com/lxdock/lxdock">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=lxdock&repo=lxdock&theme=solarized-light"/>
+</a>
+    </th> 
+  </tr>
+  <tr>
+    <th> <a href="https://github.com/flesueur/mi-lxc">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=flesueur&repo=mi-lxc&theme=solarized-light"/>
+</a> </th>
+    <th>
+   <a href="https://github.com/AdaptiveScale/lxdui">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=AdaptiveScale&repo=lxdui&theme=solarized-light"/>
+</a>
+    </th> 
+  </tr>
+   <tr>
+    <th> <a href="">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=lxc&theme=solarized-light"/>
+</a> </th>
+    <th>
+   <a href="https://github.com/corneliusweig/kubernetes-lxd">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=corneliusweig&repo=kubernetes-lxd&theme=solarized-light"/>
+</a>
+    </th> 
+  </tr>
+  <tr>
+    <th> <a href="">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=lxc&theme=solarized-light"/>
+</a> </th>
+    <th>
+   <a href="https://github.com/turtle0x1/LxdMosaic">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=turtle0x1&repo=LxdMosaic&theme=solarized-light"/>
+</a>
+    </th> 
+  </tr>
+  
+  <tr>
+    <th> <a href="https://github.com/automaticserver/lxe">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=automaticserver&repo=lxe&theme=solarized-light"/>
+</a> </th>
+    <th>
+   <a href="https://github.com/bravetools/bravetools">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=bravetools&repo=bravetools&theme=solarized-light"/>
+</a>
+    </th> 
+  </tr>
+
   
 </table>
 </details>
