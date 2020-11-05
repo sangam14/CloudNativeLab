@@ -26,13 +26,23 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
 
 <details><summary>LXD and LXC Tools </summary>
 <p>
-
-[![LXC](https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=lxc)](https://github.com/lxc/lxc)
-[![lxd](https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=lxd)](https://github.com/lxc/lxd)
-[![lxcfs](https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=lxcfs)](https://github.com/lxc/lxcfs)
-[![go-lxc](https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=go-lxc)](https://github.com/lxc/go-lxc)
-[![go-lxc](https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=ruby-lxc)](https://github.com/lxc/ruby-lxc)
-
+  <a href="https://github.com/lxc/lxc">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=lxc"/>
+</a>
+<a href="https://github.com/lxc/lxd">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=lxd"/>
+</a>
+ <a href="https://github.com/lxc/lxcfs">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=lxcfs"/>
+</a>
+</a>
+ <a href="https://github.com/lxc/go-lxc">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=go-lxc"/>
+</a>
+</a>
+ <a href="https://github.com/lxc/ruby-lxc">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=ruby-lxc"/>
+</a>
 </p>
 </details>
 
