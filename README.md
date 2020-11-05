@@ -27,19 +27,19 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
 <details><summary>LXD and LXC Tools </summary>
 <p>
   <a href="https://github.com/lxc/lxc">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=lxc&theme=solarized-light"/>
+  <img align="left" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=lxc&theme=solarized-light"/>
 </a>
 <a href="https://github.com/lxc/lxd">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=lxd&theme=solarized-light"/>
+  <img align="left" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=lxd&theme=solarized-light"/>
 </a>
  <a href="https://github.com/lxc/lxcfs">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=lxcfs&theme=solarized-light"/>
+  <img align="left" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=lxcfs&theme=solarized-light"/>
 </a>
  <a href="https://github.com/lxc/go-lxc">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=go-lxc&theme=solarized-light"/>
+  <img align="left" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=go-lxc&theme=solarized-light"/>
 </a>
  <a href="https://github.com/lxc/ruby-lxc">
-  <img align="center" width="400" height="400" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=ruby-lxc&theme=solarized-light"/>
+  <img align="left" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=ruby-lxc&theme=solarized-light"/>
 </a>
 </p>
 </details>
