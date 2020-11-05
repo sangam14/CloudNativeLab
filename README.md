@@ -42,7 +42,7 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=ruby-lxc&theme=solarized-light"/>
 </a>
 </p>
-</details>
+
 
 <table style="width:100%">
   <tr>
@@ -59,4 +59,4 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
   </tr>
 </table>
 
-
+</details>
