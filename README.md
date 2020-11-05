@@ -23,11 +23,19 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
 [Traefik](https://containerlabs.kubedaily.com/traefik/){: .btn .btn-purple .mr-2 } 
 
 # Awesome Essential Container Technology Tools & Library 
->LXD and LXC Tools 
+
+<details><summary>LXD and LXC Tools </summary>
+<p>
 
 [![LXC](https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=lxc)](https://github.com/lxc/lxc)
 [![lxd](https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=lxd)](https://github.com/lxc/lxd)
 [![lxcfs](https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=lxcfs)](https://github.com/lxc/lxcfs)
 [![go-lxc](https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=go-lxc)](https://github.com/lxc/go-lxc)
 [![go-lxc](https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=ruby-lxc)](https://github.com/lxc/ruby-lxc)
+
+</p>
+</details>
+
+
+
 
