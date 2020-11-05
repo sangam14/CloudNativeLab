@@ -35,10 +35,8 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
  <a href="https://github.com/lxc/lxcfs">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=lxcfs"/>
 </a>
-</a>
  <a href="https://github.com/lxc/go-lxc">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=go-lxc"/>
-</a>
 </a>
  <a href="https://github.com/lxc/ruby-lxc">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=lxc&repo=ruby-lxc"/>
