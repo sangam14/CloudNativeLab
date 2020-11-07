@@ -6,7 +6,7 @@ description: " Welcome To ContainerLabs "
 permalink: /
 ---
 
-[Join Containerlabs Community](https://discord.gg/rEvr7vq){: .btn .btn-green .mr-4 }  [![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/fold_left.svg?style=social&label=Follow%20%40KubeDaily)](https://twitter.com/KubeDaily)
+[Join Containerlabs Community](https://discord.gg/rEvr7vq){: .btn .btn-green .mr-4 } 
 
 ![Hits](https://hitcounter.pythonanywhere.com/count/tag.svg?url=http%3A%2F%2Fcontainerlabs.kubedaily.com%2F)[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/K3K0E60M)
 
@@ -331,15 +331,17 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
 <table style="width:100%">
 
   <tr>
-    <th> <a href="https://github.com/willfarrell/docker-autoheal">
+  <th> <a href="https://github.com/willfarrell/docker-autoheal">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=willfarrell&repo=docker-autoheal&theme=solarized-light"/>
-</a> </th>
-    <th>
+</a> 
+ </th>
+  <th>
    <a href="https://github.com/google/cadvisor">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=google&repo=cadvisor&theme=solarized-light"/>
 </a>
-    </th> 
+  </th> 
   </tr>
+  
  <tr>
     <th> <a href="https://github.com/stefanprodan/dockprom">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=stefanprodan&repo=dockprom&theme=solarized-light"/>
@@ -481,8 +483,6 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
 </a>
    </th> 
   </tr>
-  
-      
   <tr>
    <th> <a href="https://github.com/kubernetes-sigs/metrics-server">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=kubernetes-sigs&repo=metrics-server&theme=solarized-light"/>
@@ -506,13 +506,16 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
   <tr>
    <th> <a href="https://github.com/derailed/popeye">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=derailed&repo=popeye&theme=solarized-light"/>
-</a> </th>
-    <th>
-   <a href="https://github.com/salesforce/sloop">
+</a> 
+ </th>
+ <th>
+  <a href="https://github.com/salesforce/sloop">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=salesforce&repo=sloop&theme=solarized-light"/>
-</a>
-   </th> 
+ </a>
+  </th> 
   </tr>
 
 </table>
 </details>
+
+ [![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/fold_left.svg?style=social&label=Follow%20%40KubeDaily)](https://twitter.com/KubeDaily)
