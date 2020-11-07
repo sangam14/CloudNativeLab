@@ -6,9 +6,7 @@ description: " Welcome To ContainerLabs "
 permalink: /
 ---
 
-[Join Containerlabs Community](https://discord.gg/rEvr7vq){: .btn .btn-green .mr-4 } 
-
-![Hits](https://hitcounter.pythonanywhere.com/count/tag.svg?url=http%3A%2F%2Fcontainerlabs.kubedaily.com%2F)[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/K3K0E60M)
+[Join Containerlabs Community](https://discord.gg/rEvr7vq){: .btn .btn-green .mr-4 } ![Hits](https://hitcounter.pythonanywhere.com/count/tag.svg?url=http%3A%2F%2Fcontainerlabs.kubedaily.com%2F) [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/K3K0E60M)
 
 ![img](https://raw.githubusercontent.com/sangam14/ContainerLabs/master/img/ContainerLabs-official.png)
 
