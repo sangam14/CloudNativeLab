@@ -325,3 +325,31 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
 </table>
 </details>
 
+
+<details><summary> Monitoring </summary>
+<table style="width:100%">
+
+  <tr>
+    <th> <a href="https://github.com/willfarrell/docker-autoheal">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=willfarrell&repo=docker-autoheal&theme=solarized-light"/>
+</a> </th>
+    <th>
+   <a href="https://github.com/google/cadvisor">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=google&repo=cadvisor&theme=solarized-light"/>
+</a>
+    </th> 
+  </tr>
+ <tr>
+    <th> <a href="https://github.com/stefanprodan/dockprom">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=stefanprodan&repo=dockprom&theme=solarized-light"/>
+</a> </th>
+    <th>
+   <a href="https://github.com/jeffwillette/docker-alertd">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=jeffwillette&repo=docker-alertd&theme=solarized-light"/>
+</a>
+    </th> 
+  </tr>
+
+
+</table>
+</details>
