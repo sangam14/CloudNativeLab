@@ -122,7 +122,7 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=bravetools&repo=bravetools&theme=solarized-light"/>
 </a>
     </th> 
-  </tr>
+  
 
   
 </table>
