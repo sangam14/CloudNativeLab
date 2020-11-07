@@ -321,8 +321,7 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
     </th> 
   </tr>
   
- 
-   </tr>
+
 </table>
 </details>
 
