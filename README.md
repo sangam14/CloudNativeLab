@@ -269,8 +269,60 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
 </a> 
   </th>
   </tr>
- 
-
+  
   </tr>
 </table>
 </details>
+
+
+<details><summary> Deployment and Infrastructure </summary>
+ 
+<table style="width:100%">
+  <tr>
+    <th> <a href="https://github.com/newrelic/centurion">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=newrelic&repo=centurion&theme=solarized-light"/>
+</a> </th>
+    <th>
+   <a href="https://github.com/brooklyncentral/clocker">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=brooklyncentral&repo=clocker&theme=solarized-light"/>
+</a>
+    </th> 
+  </tr>
+ 
+   <tr>
+    <th> <a href="https://github.com/hasura/gitkube">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=hasura&repo=gitkube&theme=solarized-light"/>
+</a> </th>
+    <th>
+   <a href="https://github.com/ttiny/deploy">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=ttiny&repo=deploy&theme=solarized-light"/>
+</a>
+    </th> 
+  </tr>
+  
+   <tr>
+   <th> <a href="https://github.com/grafeas/grafeas">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=grafeas&repo=grafeas&theme=solarized-light"/>
+</a> </th>
+    <th>
+   <a href="https://github.com/longshoreman/longshoreman">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=longshoreman&repo=longshoreman&theme=solarized-light"/>
+</a>
+    </th> 
+  </tr>
+   <tr>
+   <th> <a href="https://github.com/DIPSAS/SwarmManagement">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=DIPSAS&repo=SwarmManagement&theme=solarized-light"/>
+</a> </th>
+    <th>
+   <a href="https://github.com/werf/werf">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=werf&repo=werf&theme=solarized-light"/>
+</a>
+    </th> 
+  </tr>
+  
+ 
+   </tr>
+</table>
+</details>
+
