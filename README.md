@@ -121,13 +121,12 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
    <a href="https://github.com/bravetools/bravetools">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=bravetools&repo=bravetools&theme=solarized-light"/>
 </a>
-    </th> 
-  
-
+    </th>   
+</tr>
   
 </table>
 </details>
-
+<br>
 
 <details><summary> Docker & related tools</summary>
  
@@ -135,7 +134,8 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
   <tr>
     <th> <a href="https://github.com/moby/moby">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=moby&repo=moby&theme=solarized-light"/>
-</a> </th>
+</a> 
+   </th>
     <th>
    <a href="https://github.com/docker/compose/">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=docker&repo=compose&theme=solarized-light"/>
