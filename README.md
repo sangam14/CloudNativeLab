@@ -326,7 +326,7 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
 </details>
 
 
-<details><summary> Monitoring </summary>
+<details><summary> Monitoring, Alerts, and Visualization</summary>
 <table style="width:100%">
 
   <tr>
@@ -374,11 +374,141 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
   
    <tr>
    <th> <a href="https://github.com/gliderlabs/logspout">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=gliderlab&repo=logspout&theme=solarized-light"/>
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=gliderlabs&repo=logspout&theme=solarized-light"/>
 </a> </th>
     <th>
    <a href="https://github.com/decryptus/monit-docker">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=decryptus&repo=monit-docker&theme=solarized-light"/>
+</a>
+   </th> 
+  </tr>
+
+<tr>
+   <th> <a href="https://github.com/NexClipper/NexClipper">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=NexClipper&repo=NexClipper&theme=solarized-light"/>
+</a> </th>
+    <th>
+   <a href="https://github.com/uschtwill/docker_monitoring_logging_alerting">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=uschtwill&repo=docker_monitoring_logging_alerting&theme=solarized-light"/>
+</a>
+   </th> 
+  </tr>
+  
+  <tr>
+   <th> <a href="https://github.com/gpulido/SwarmAlert">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=gpulido&repo=SwarmAlert&theme=solarized-light"/>
+</a> </th>
+    <th>
+   <a href="https://github.com/monitoringartist/Zabbix-Docker-Monitoring">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=monitoringartist&repo=Zabbix-Docker-Monitoring&theme=solarized-light"/>
+</a>
+   </th> 
+  </tr>
+<tr>
+   <th> <a href="https://github.com/thanos-io/thanos">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=thanos-io&repo=thanos&theme=solarized-light"/>
+</a> </th>
+    <th>
+   <a href="https://github.com/prometheus/prometheus">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=prometheus&repo=prometheus&theme=solarized-light"/>
+</a>
+   </th> 
+  </tr>
+  <tr>
+   <th> <a href="https://github.com/grafana/grafana">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=grafana&repo=grafana&theme=solarized-light"/>
+</a> </th>
+    <th>
+   <a href="https://github.com/johanhaleby/kubetail">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=johanhaleby&repo=kubetail&theme=solarized-light"/>
+</a>
+   </th> 
+  </tr>
+    </tr>
+  <tr>
+   <th> <a href="https://github.com/searchlight/searchlight">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=searchlight&repo=searchlight&theme=solarized-light"/>
+</a> </th>
+    <th>
+   <a href="https://github.com/andrew-waters/linkerd2-mixin">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=andrew-waters&repo=linkerd2-mixin&theme=solarized-light"/>
+</a>
+   </th> 
+  </tr>
+  
+<tr>
+   <th> <a href="https://github.com/stevelacy/kuberhaus">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=stevelacy&repo=kuberhaus&theme=solarized-light"/>
+</a> </th>
+    <th>
+   <a href="https://github.com/sukeesh/k8s-job-notify">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=sukeesh&repo=k8s-job-notify&theme=solarized-light"/>
+</a>
+   </th> 
+  </tr>
+  
+  <tr>
+   <th> <a href=" https://github.com/infracloudio/botkube">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=infracloudio&repo=botkube&theme=solarized-light"/>
+</a> </th>
+    <th>
+   <a href="  https://github.com/cortexproject/cortex">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=cortexproject&repo=cortex&theme=solarized-light"/>
+</a>
+   </th> 
+  </tr>
+  
+    
+  <tr>
+   <th> <a href="https://github.com/FairwindsOps/goldilocks">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=FairwindsOps&repo=goldilocks&theme=solarized-light"/>
+</a> </th>
+    <th>
+   <a href="https://github.com/kiali/kiali">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=kiali&repo=kiali&theme=solarized-light"/>
+</a>
+   </th> 
+  </tr>
+    
+  <tr>
+   <th> <a href="https://github.com/robscott/kube-capacity">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=robscott&repo=kube-capacity&theme=solarized-light"/>
+</a> </th>
+    <th>
+   <a href="https://github.com/kubernetes/kube-state-metrics">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=kubernetes&repo=kube-state-metrics&theme=solarized-light"/>
+</a>
+   </th> 
+  </tr>
+  
+      
+  <tr>
+   <th> <a href="https://github.com/kubernetes-sigs/metrics-server">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=kubernetes-sigs&repo=metrics-server&theme=solarized-light"/>
+</a> </th>
+    <th>
+   <a href="https://github.com/hjacobs/kube-ops-view">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=hjacobs&repo=kube-ops-view&theme=solarized-light"/>
+</a>
+   </th> 
+  </tr>
+    <tr>
+   <th> <a href="https://github.com/bitnami-labs/kubewatch">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=bitnami-labs&repo=kubewatch&theme=solarized-light"/>
+</a> </th>
+    <th>
+   <a href="https://github.com/lensapp/lens">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=lensapp&repo=lens&theme=solarized-light"/>
+</a>
+   </th> 
+  </tr>
+  <tr>
+   <th> <a href="https://github.com/derailed/popeye">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=derailed&repo=popeye&theme=solarized-light"/>
+</a> </th>
+    <th>
+   <a href="https://github.com/salesforce/sloop">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=salesforce&repo=sloop&theme=solarized-light"/>
 </a>
    </th> 
   </tr>
