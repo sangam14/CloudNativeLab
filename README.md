@@ -350,6 +350,38 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
     </th> 
   </tr>
 
+ <tr>
+   <th> <a href="https://github.com/amir20/dozzle">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=amir20&repo=dozzle&theme=solarized-light"/>
+</a> </th>
+    <th>
+   <a href="">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=google&repo=cadvisor&theme=solarized-light"/>
+</a>
+    </th> 
+  </tr>
+  
+   <tr>
+   <th> <a href="https://github.com/nicolargo/glances">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=nicolargo&repo=glances&theme=solarized-light"/>
+</a> </th>
+    <th>
+   <a href="https://github.com/vegasbrianc/docker-monitoring">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=vegasbrianc&repo=docker-monitoring&theme=solarized-light"/>
+</a>
+    </th> 
+  </tr>
+  
+   <tr>
+   <th> <a href="https://github.com/gliderlabs/logspout">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=gliderlab&repo=logspout&theme=solarized-light"/>
+</a> </th>
+    <th>
+   <a href="https://github.com/decryptus/monit-docker">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=decryptus&repo=monit-docker&theme=solarized-light"/>
+</a>
+   </th> 
+  </tr>
 
 </table>
 </details>
