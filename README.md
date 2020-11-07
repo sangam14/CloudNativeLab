@@ -127,7 +127,7 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
 </table>
 </details>
 
-<details><summary> Docker & related tools</summary>
+<details><summary> Docker Projects </summary>
  
 <table style="width:100%">
 <tr>
@@ -158,73 +158,90 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=docker&repo=classicswarm&theme=solarized-light"/>
 </a> 
  </th>
-    <th>
+ </tr>
+ </table>
+</details>
+ 
+ <details> <summary> Container Composition - (Docker) </summary>
+<table style="width:100%">
+  <tr>
+  <th>
    <a href="https://github.com/icy/bocker">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=icy&repo=bocker&theme=solarized-light"/>
 </a>
-   </th> 
-  </tr>
-  
-  <tr>
+ </th>
   <th> <a href="https://github.com/p8952/bocker">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=p8952&repo=bocker&theme=solarized-light"/>
 </a> 
   </th>
+  
+  <tr>
    <th>
    <a href="https://github.com/box-builder/box">
    <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=box-builder&repo=box&theme=solarized-light"/>
 </a>
  </th> 
- </tr>
- 
-   <tr>
+
   <th> <a href="https://github.com/byrnedo/capitan">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=byrnedo&repo=capitan&theme=solarized-light"/>
 </a> 
   </th>
+  </tr>
+  <tr>
    <th>
    <a href="https://github.com/funkwerk/compose_plantuml">
    <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=funkwerk&repo=compose_plantuml&theme=solarized-light"/>
 </a>
  </th> 
- </tr>
- 
-  <tr>
+
   <th> <a href="https://github.com/magicmark/composerize">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=magicmark&repo=composerize&theme=solarized-light"/>
 </a> 
   </th>
+  </tr>
+  <tr>
    <th>
    <a href="https://github.com/polonskiy/crowdr">
    <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=polonskiy&repo=crowdr&theme=solarized-light"/>
 </a>
  </th> 
- </tr>
- 
-  <tr>
+
   <th> <a href="https://github.com/abesto/docker-compose-graphviz">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=abesto&repo=docker-compose-graphviz&theme=solarized-light"/>
 </a> 
   </th>
+  </tr>
+  
+  <tr>
    <th>
    <a href="https://github.com/sudo-bmitch/docker-config-update">
    <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=sudo-bmitch&repo=docker-config-update&theme=solarized-light"/>
 </a>
  </th> 
- </tr>
- 
-   <tr>
   <th> <a href="https://github.com/Alexis-benoist/draw-compose">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=Alexis-benoist&repo=draw-compose&theme=solarized-light"/>
 </a> 
   </th>
+  </tr>
+  <tr>
    <th>
    <a href="https://github.com/cisco/elsy">
    <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=cisco&repo=elsy&theme=solarized-light"/>
 </a>
  </th> 
- </tr>
- 
-  
+
+  <th> <a href="">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=Alexis-benoist&repo=draw-compose&theme=solarized-light"/>
+</a> 
+  </th>
+   </tr>
+   <tr>
+   <th>
+   <a href="">
+   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=cisco&repo=elsy&theme=solarized-light"/>
+</a>
+ </th> 
+
+  </tr>
 </table>
 </details>
