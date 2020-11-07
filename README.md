@@ -162,7 +162,7 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
  </table>
 </details>
  
- <details> <summary> Container Composition - (Docker) </summary>
+ <details> <summary> Container Composition  </summary>
 <table style="width:100%">
   <tr>
   <th>
