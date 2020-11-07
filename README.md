@@ -229,18 +229,47 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
    <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=cisco&repo=elsy&theme=solarized-light"/>
 </a>
  </th> 
-
-  <th> <a href="">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=Alexis-benoist&repo=draw-compose&theme=solarized-light"/>
+  <th> <a href="https://github.com/cloud66-oss/habitus">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=cloud66-oss&repo=habitus&theme=solarized-light"/>
 </a> 
   </th>
    </tr>
+   
    <tr>
    <th>
-   <a href="">
-   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=cisco&repo=elsy&theme=solarized-light"/>
+   <a href="https://github.com/kubernetes/kompose">
+   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=kubernetes&repo=kompose&theme=solarized-light"/>
 </a>
  </th> 
+  <th> <a href="https://github.com/toscanini/maestro">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=toscanini&repo=maestro&theme=solarized-light"/>
+</a> 
+  </th>
+  </tr>
+   
+<tr>
+   <th>
+   <a href="https://github.com/ashmckenzie/percheron">
+   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=ashmckenzie&repo=percheron&theme=solarized-light"/>
+</a>
+ </th> 
+  <th> <a href="https://github.com/containers/podman-compose">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=containers&repo=podman-compose&theme=solarized-light"/>
+</a> 
+  </th>
+  </tr>
+  <tr>
+   <th>
+   <a href="https://github.com/ihucos/plash">
+   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=ihucos&repo=plash&theme=solarized-light"/>
+</a>
+ </th> 
+  <th> <a href="https://github.com/CenturyLinkLabs/zodiac">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=CenturyLinkLabs&repo=zodiac&theme=solarized-light"/>
+</a> 
+  </th>
+  </tr>
+ 
 
   </tr>
 </table>
