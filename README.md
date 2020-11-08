@@ -517,4 +517,34 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
 </table>
 </details>
 
- [![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/fold_left.svg?style=social&label=Follow%20%40KubeDaily)](https://twitter.com/KubeDaily)
+<details><summary> Networking </summary>
+<table style="width:100%">
+
+  <tr>
+   <th> <a href="https://github.com/projectcalico/calicoctl">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=projectcalico&repo=calicoctl&theme=solarized-light"/>
+</a>
+ </th>
+   <th>
+   <a href="https://github.com/coreos/flannel/">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=coreos&repo=flannel&theme=solarized-light"/>
+</a>
+  </th> 
+  </tr>
+  
+   <tr>
+   <th> <a href="https://github.com/Microsoft/Freeflow">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=Microsoft&repo=Freeflow&theme=solarized-light"/>
+</a>
+ </th>
+   <th>
+   <a href="https://github.com/nicolaka/netshoot">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=nicolaka&repo=netshoot&theme=solarized-light"/>
+</a>
+  </th> 
+  </tr>
+  
+</table>
+</details>
+ 
+[![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/fold_left.svg?style=social&label=Follow%20%40KubeDaily)](https://twitter.com/KubeDaily)
