@@ -463,12 +463,13 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
   <tr>
    <th> <a href="https://github.com/FairwindsOps/goldilocks">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=FairwindsOps&repo=goldilocks&theme=solarized-light"/>
-</a> </th>
-    <th>
+</a>
+ </th>
+   <th>
    <a href="https://github.com/kiali/kiali">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=kiali&repo=kiali&theme=solarized-light"/>
 </a>
-   </th> 
+  </th> 
   </tr>
     
   <tr>
