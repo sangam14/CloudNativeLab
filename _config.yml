@@ -46,5 +46,12 @@ gh_edit_repository: "https://github.com/sangam14/ContainerLabs/" # the github UR
 gh_edit_branch: "master" # the branch that your docs is served from
 gh_edit_view_mode: "tree" # "tree" or "edit" if you want the user to jump into the editor immediately
 
+# Google Analytics Tracking (optional)
+# e.g, UA-1234567-89
+ga_tracking: G-0JG3VWYTBM
+ga_tracking_anonymize_ip: true # Use GDPR compliant Google Analytics settings (true/nil by default)
+
+plugins:
+  - jekyll-seo-tag
     
    
