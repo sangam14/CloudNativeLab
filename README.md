@@ -544,6 +544,55 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
   </th> 
   </tr>
   
+  <tr>
+   <th> <a href="https://github.com/jpetazzo/pipework">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=jpetazzo&repo=pipework&theme=solarized-light"/>
+</a>
+ </th>
+   <th>
+   <a href="https://github.com/weaveworks/weave">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=weaveworks&repo=weave&theme=solarized-light"/>
+</a>
+  </th> 
+  </tr>
+  
+  <tr>
+   <th> <a href="https://github.com/projectcalico/calico">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=projectcalico&repo=calico&theme=solarized-light"/>
+</a>
+ </th>
+   <th>
+   <a href="https://github.com/jetstack/cert-manager">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=jetstack&repo=cert-manager&theme=solarized-light"/>
+</a>
+  </th> 
+  </tr>
+   <tr>
+   <th> <a href="https://github.com/coredns/coredns">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=coredns&repo=coredns&theme=solarized-light"/>
+</a>
+ </th>
+   <th>
+   <a href="https://github.com/kubernetes/ingress-nginx">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=kubernetes&repo=ingress-nginx&theme=solarized-light"/>
+</a>
+  </th> 
+  </tr>
+  
+   <tr>
+   <th> <a href="https://github.com/coredns/coredns">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=coredns&repo=coredns&theme=solarized-light"/>
+</a>
+ </th>
+   <th>
+   <a href="https://github.com/kubernetes/ingress-nginx">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=kubernetes&repo=ingress-nginx&theme=solarized-light"/>
+</a>
+  </th> 
+  </tr>
+  
+  
+  
 </table>
 </details>
  
