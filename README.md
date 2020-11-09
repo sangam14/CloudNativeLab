@@ -590,8 +590,61 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
 </a>
   </th> 
   </tr>
-  
-  
+   <tr>
+   <th> <a href="https://github.com/Kong/kubernetes-ingress-controller">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=Kong&repo=kubernetes-ingress-controller&theme=solarized-light"/>
+</a>
+ </th>
+   <th>
+   <a href="https://github.com/eldadru/ksniff">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=eldadru&repo=ksniff&theme=solarized-light"/>
+</a>
+  </th> 
+  </tr>
+    <tr>
+   <th> <a href="https://github.com/iovisor/kubectl-trace">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=iovisor&repo=kubectl-trace&theme=solarized-light"/>
+</a>
+ </th>
+   <th>
+   <a href="https://github.com/nginxinc/kubernetes-ingress">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=nginxinc&repo=kubernetes-ingress&theme=solarized-light"/>
+</a>
+  </th> 
+  </tr>
+   <tr>
+   <th> <a href="https://github.com/aporeto-inc/trireme-kubernetes">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=aporeto-inc&repo=trireme-kubernetes&theme=solarized-light"/>
+</a>
+ </th>
+   <th>
+   <a href="https://github.com/aporeto-inc/kubepox">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=aporeto-inc&repo=kubepox&theme=solarized-light"/>
+</a>
+  </th> 
+  </tr>
+  <tr>
+   <th> <a href="https://github.com/redhat-nfvpe/kokotap">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=redhat-nfvpe&repo=kokotap&theme=solarized-light"/>
+</a>
+ </th>
+   <th>
+   <a href="https://github.com/submariner-io/submariner">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=submariner-io&repo=submariner&theme=solarized-light"/>
+</a>
+  </th> 
+  </tr>
+   <tr>
+   <th> <a href="https://github.com/monzo/egress-operator">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=monzo&repo=egress-operator&theme=solarized-light"/>
+</a>
+ </th>
+   <th>
+   <a href="https://github.com/txn2/kubefwd">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=txn2&repo=kubefwd&theme=solarized-light"/>
+</a>
+  </th> 
+  </tr>
   
 </table>
 </details>
