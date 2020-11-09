@@ -686,8 +686,103 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
 </a>
   </th> 
   </tr>
+  <tr>
+   <th> <a href="https://github.com/mattallty/muguet">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=mattallty&repo=muguet&theme=solarized-light"/>
+</a>
+ </th>
+   <th>
+   <a href="https://github.com/nginx-proxy/nginx-proxy">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=nginx-proxy&repo=nginx-proxy&theme=solarized-light"/>
+</a>
+  </th> 
+  </tr>
+  <tr>
+   <th> <a href="https://github.com/jc21/nginx-proxy-manager">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=jc21&repo=nginx-proxy-manager&theme=solarized-light"/>
+</a>
+ </th>
+   <th>
+   <a href="https://github.com/tpbowden/swarm-ingress-router">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=tpbowden&repo=swarm-ingress-router&theme=solarized-light"/>
+</a>
+  </th> 
+  </tr>
+   <tr>
+   <th> <a href="https://github.com/flavioaiello/swarm-router">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=flavioaiello&repo=swarm-router&theme=solarized-light"/>
+</a>
+ </th>
+   <th>
+   <a href="https://github.com/traefik/traefik">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=traefik&repo=traefik&theme=solarized-light"/>
+</a>
+  </th> 
+  </tr>
   
-
+   <tr>
+   <th> <a href="github.com/envoyproxy/envoy">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=envoyproxy&repo=envoy&theme=solarized-light"/>
+</a>
+ </th>
+   <th>
+   <a href="github.com/projectcontour/contour">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=projectcontour&repo=contour&theme=solarized-light"/>
+</a>
+  </th> 
+  </tr>
+  
+    
+   <tr>
+   <th> <a href="github.com/bfenetworks/bfe ">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=envoyproxy&repo=envoy&theme=solarized-light"/>
+</a>
+ </th>
+   <th>
+   <a href="github.com/projectcontour/gimbal">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=projectcontour&repo=gimbal&theme=solarized-light"/>
+</a>
+  </th> 
+  </tr>
+  
+   <tr>
+   <th> <a href="github.com/haproxy/haproxy">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=haproxy&repo=haproxy&theme=solarized-light"/>
+</a>
+ </th>
+   <th>
+   <a href="github.com/inlets/inlets">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=inlets&repo=inlets&theme=solarized-light"/>
+</a>
+  </th> 
+  </tr>
+  
+  <tr>
+   <th> <a href="github.com/mosn/mosn">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=mosn&repo=mosn&theme=solarized-light"/>
+</a>
+ </th>
+   <th>
+   <a href="github.com/openresty/openresty">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=openresty&repo=openresty&theme=solarized-light"/>
+</a>
+  </th> 
+  </tr>
+  
+   <tr>
+   <th> <a href="github.com/zalando/skipper">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=zalando&repo=skipper&theme=solarized-light"/>
+</a>
+ </th>
+   <th>
+   <a href="github.com/alibaba/tengine">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=alibaba&repo=tengine&theme=solarized-light"/>
+</a>
+  </th> 
+  </tr>
+  
+  
+  
 </table>
 </details>
  
