@@ -656,12 +656,6 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=inlets&repo=inlets&theme=solarized-light"/>
 </a>
  </th>
- 
- <tr>
-   <th> <a href="https://github.com/moonbuggy/docker-dnsmasq-updater">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=moonbuggy&repo=docker-dnsmasq-updater&theme=solarized-light"/>
-</a>
- </th>
    <th>
    <a href="https://github.com/docker-flow/docker-flow-proxy">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=docker-flow&repo=docker-flow-proxy&theme=solarized-light"/>
