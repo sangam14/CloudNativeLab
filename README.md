@@ -651,6 +651,11 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
 
 <details><summary> Reverse Proxy </summary>
 <table style="width:100%">
+  <tr>
+   <th> <a href="https://github.com/inlets/inlets">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=inlets&repo=inlets&theme=solarized-light"/>
+</a>
+ </th>
  
  <tr>
    <th> <a href="https://github.com/moonbuggy/docker-dnsmasq-updater">
