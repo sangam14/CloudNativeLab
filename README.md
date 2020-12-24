@@ -21,6 +21,22 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
 [Kubernetes](https://containerlabs.kubedaily.com/Kubernetes/){: .btn .btn-purple .mr-2 } [Rancher Networking](https://containerlabs.kubedaily.com/rancher/Networking/){: .btn .btn-purple .mr-2 } [litmuschaos](https://dev.to/t/litmuschaos){: .btn .btn-purple .mr-2 } [Okteto](https://containerlabs.kubedaily.com/Okteto/){: .btn .btn-purple .mr-2 }  [Lightweight Kubernetes - K3s](){: .btn .btn-purple .mr-2 }  
 [Traefik](https://containerlabs.kubedaily.com/traefik/){: .btn .btn-purple .mr-2 } [OpenFaas](){: .btn .btn-purple .mr-2 } 
 
+
+
+
+# ContainerLabs Episodes Series 
+
+| title                                                                                 | videos  |
+|---------------------------------------------------------------------------------------|---------|
+| Episode 01 :- Okteto The Kubernetes Development platform  | [YouTube](https://www.youtube.com/watch?v=vZqT7UVP-6Y&t=2s)  |
+
+
+email if you want to be part of any episode :- kubedaily@gmail.com 
+
+
+
+
+
 # Awesome Essential Container Technology Tools & Library 
 
 <details><summary>LXD and LXC Tools </summary>
