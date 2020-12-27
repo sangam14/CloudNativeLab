@@ -26,10 +26,10 @@ The Ultimate Workshop Track Specially Designed For You - Select Learning Paths
 
 # ContainerLabs Episodes Series 
 
-| title                                                                                 | videos  |
-|---------------------------------------------------------------------------------------|---------|
-| Episode 01 :- Okteto The Kubernetes Development platform  | [YouTube](https://www.youtube.com/watch?v=vZqT7UVP-6Y&t=2s)  |
-| Episode 02 :- Building a DevOps HomeLab with k3s  | [YouTube](https://www.youtube.com/watch?v=ziZbAw6Oxrg)  |
+| title                                                                                 | videos  |  slides | 
+|---------------------------------------------------------------------------------------|---------|---------|
+| Episode 01 :- Okteto The Kubernetes Development platform  | [YouTube](https://www.youtube.com/watch?v=vZqT7UVP-6Y&t=2s)  | -  |
+| Episode 02 :- Building a DevOps HomeLab with k3s  | [YouTube](https://www.youtube.com/watch?v=ziZbAw6Oxrg)  |  [slides](https://github.com/lunarops/presentation-slides/blob/main/02-build-a-devops-homelab-with-k3s/presentation.pdf)   |
 
 
 email if you want to be part of any episode :- kubedaily@gmail.com 
