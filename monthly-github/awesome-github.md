@@ -43,6 +43,31 @@
 ## 28 days 28 OpenSource Projects - Feb 2021 
 
 
+| title                                                                                          | github                                                     |
+|------------------------------------------------------------------------------------------------|------------------------------------------------------------|
+|  Awesome Prometheus                                                                            | [link](https://github.com/roaldnefs/awesome-prometheus)    |
+| Docker Hub experimental CLI tool                                                               | [link](https://github.com/docker/hub-tool)                 |
+| gousb provides low-level interface for accessing USB devices                                   | [link](https://github.com/google/gousb)                    |
+| ZenML: Bring Zen to your ML with reproducible pipelines                                        | [link](https://github.com/maiot-io/zenml)                  |
+|   Security risk analysis for Kubernetes resources                                              | [link](https://github.com/controlplaneio/kubesec)          |
+| Work with remote images registries - retrieving information, images, signing content           | [link](https://github.com/containers/skopeo)               |
+| turn your applications and containers into micro virtual machines                              | [link](https://github.com/vorteil/vorteil)                 |
+| kubectl plugin to list allocations (cpu, memory, gpu,... X requested, limit, allocatable,...). | [link](https://github.com/davidB/kubectl-view-allocations) |
+| lightweight static analysis for many languages. Find bugs and enforce code standards           | [link](https://github.com/returntocorp/semgrep)            |
+| Bxog is a simple and fast HTTP router for Go (HTTP request multiplexer)                        |  [link](https://github.com/claygod/Bxog)                   |                                                                                                                      | Detect compliance and security violations across Infrastructure as Code to mitigate risk before provisioning cloud native infrastructure.| [link](https://github.com/accurics/terrascan)                    |
+| A simple CLI that provides an overview of the resource requests, limits, and utilization in a Kubernetes cluster           | [link](https://github.com/ahmetb/kubectx)                                                                                                 |
+|  A curated list of Falco related tools, frameworks and articles                   | [link](https://github.com/developer-guy/awesome-falco )  |                                                |
+| Sample app for Terraform workshops                                                                  | [link](https://github.com/hashicorp/hashicat-azure)                                                   | Autogenerate RBAC policies based on Kubernetes audit logs.      | [link](https://github.com/liggitt/audit2rbac)
+|                                                                                                | [link]                                                     |
+
+
+
+## 32 days 32 OpenSource Projects - Mar 2021 
+
+
+
+
+
 
 
 
